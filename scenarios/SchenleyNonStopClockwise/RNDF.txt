@@ -1,0 +1,3607 @@
+RNDF_name	RNDF.txt
+num_segments	85
+num_zones	0
+format_version	1.0
+creation_date	2015-Oct-10-21:35:04.850037
+segment	1
+num_lanes	3
+segment_name	defaultsegmentname
+lane	1.1
+num_waypoints	6
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+checkpoint	1.1.1	1
+exit	1.1.6	2.1.1
+exit	1.1.6	32.2.1
+1.1.1	40.437180	-79.963064
+1.1.2	40.437459	-79.962672
+1.1.3	40.437521	-79.962586
+1.1.4	40.437747	-79.962273
+1.1.5	40.438142	-79.961732
+1.1.6	40.438408	-79.961369
+end_lane
+lane	1.2
+num_waypoints	6
+lane_width	9
+left_boundary	broken_white
+right_boundary	broken_white
+exit	1.2.6	2.2.1
+1.2.1	40.437158	-79.963039
+1.2.2	40.437316	-79.962821
+1.2.3	40.437586	-79.962445
+1.2.4	40.437734	-79.962241
+1.2.5	40.437949	-79.961944
+1.2.6	40.438388	-79.961342
+end_lane
+lane	1.3
+num_waypoints	7
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	1.3.7	2.3.1
+1.3.1	40.437137	-79.963013
+1.3.2	40.437418	-79.962628
+1.3.3	40.437512	-79.962497
+1.3.4	40.437852	-79.962028
+1.3.5	40.438160	-79.961600
+1.3.6	40.438314	-79.961387
+1.3.7	40.438368	-79.961316
+end_lane
+end_segment
+segment	2
+num_lanes	3
+segment_name	defaultsegmentname
+lane	2.1
+num_waypoints	9
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	2.1.9	3.1.1
+exit	2.1.9	33.3.1
+2.1.1	40.438529	-79.961199
+2.1.2	40.438669	-79.961008
+2.1.3	40.438793	-79.960834
+2.1.4	40.438928	-79.960647
+2.1.5	40.439008	-79.960535
+2.1.6	40.439304	-79.960125
+2.1.7	40.439414	-79.959973
+2.1.8	40.439594	-79.959723
+2.1.9	40.439717	-79.959555
+end_lane
+lane	2.2
+num_waypoints	7
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	2.2.7	3.2.1
+2.2.1	40.438509	-79.961175
+2.2.2	40.438642	-79.960991
+2.2.3	40.438836	-79.960721
+2.2.4	40.439167	-79.960260
+2.2.5	40.439295	-79.960086
+2.2.6	40.439502	-79.959798
+2.2.7	40.439697	-79.959530
+end_lane
+lane	2.3
+num_waypoints	6
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	2.3.6	3.3.1
+exit	2.3.6	53.2.1
+2.3.1	40.438488	-79.961151
+2.3.2	40.438902	-79.960577
+2.3.3	40.439091	-79.960313
+2.3.4	40.439397	-79.959892
+2.3.5	40.439562	-79.959663
+2.3.6	40.439677	-79.959506
+end_lane
+end_segment
+segment	3
+num_lanes	3
+segment_name	defaultsegmentname
+lane	3.1
+num_waypoints	5
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	3.1.5	4.1.1
+exit	3.1.5	34.2.1
+3.1.1	40.439847	-79.959373
+3.1.2	40.439955	-79.959223
+3.1.3	40.440070	-79.959066
+3.1.4	40.440433	-79.958573
+3.1.5	40.440533	-79.958437
+end_lane
+lane	3.2
+num_waypoints	5
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	3.2.5	4.2.1
+3.2.1	40.439827	-79.959348
+3.2.2	40.439934	-79.959200
+3.2.3	40.440050	-79.959042
+3.2.4	40.440412	-79.958549
+3.2.5	40.440514	-79.958412
+end_lane
+lane	3.3
+num_waypoints	5
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	3.3.5	4.3.1
+exit	3.3.5	54.2.1
+3.3.1	40.439807	-79.959324
+3.3.2	40.439914	-79.959176
+3.3.3	40.440030	-79.959017
+3.3.4	40.440391	-79.958525
+3.3.5	40.440494	-79.958386
+end_lane
+end_segment
+segment	4
+num_lanes	3
+segment_name	defaultsegmentname
+lane	4.1
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	4.1.2	5.1.1
+exit	4.1.2	35.1.1
+4.1.1	40.440639	-79.958280
+4.1.2	40.441041	-79.957724
+end_lane
+lane	4.2
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	4.2.2	5.2.1
+4.2.1	40.440619	-79.958255
+4.2.2	40.441021	-79.957699
+end_lane
+lane	4.3
+num_waypoints	4
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	4.3.4	5.3.1
+4.3.1	40.440600	-79.958229
+4.3.2	40.440667	-79.958136
+4.3.3	40.440730	-79.958048
+4.3.4	40.441002	-79.957674
+end_lane
+end_segment
+segment	5
+num_lanes	3
+segment_name	defaultsegmentname
+lane	5.1
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	5.1.2	6.1.1
+exit	5.1.2	36.1.1
+5.1.1	40.441149	-79.957575
+5.1.2	40.441511	-79.957074
+end_lane
+lane	5.2
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	5.2.2	6.2.1
+5.2.1	40.441129	-79.957551
+5.2.2	40.441492	-79.957050
+end_lane
+lane	5.3
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	5.3.2	6.3.1
+5.3.1	40.441109	-79.957525
+5.3.2	40.441472	-79.957025
+end_lane
+end_segment
+segment	6
+num_lanes	3
+segment_name	defaultsegmentname
+lane	6.1
+num_waypoints	3
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	6.1.3	7.1.1
+6.1.1	40.441624	-79.956920
+6.1.2	40.441727	-79.956776
+6.1.3	40.441892	-79.956552
+end_lane
+lane	6.2
+num_waypoints	3
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	6.2.3	7.2.1
+6.2.1	40.441604	-79.956895
+6.2.2	40.441706	-79.956753
+6.2.3	40.441873	-79.956526
+end_lane
+lane	6.3
+num_waypoints	3
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	6.3.3	7.3.1
+exit	6.3.3	57.2.1
+6.3.1	40.441584	-79.956870
+6.3.2	40.441686	-79.956728
+6.3.3	40.441854	-79.956500
+end_lane
+end_segment
+segment	7
+num_lanes	3
+segment_name	defaultsegmentname
+lane	7.1
+num_waypoints	8
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	7.1.8	8.1.1
+exit	7.1.8	38.3.1
+7.1.1	40.442020	-79.956376
+7.1.2	40.442151	-79.956191
+7.1.3	40.442613	-79.955558
+7.1.4	40.442695	-79.955423
+7.1.5	40.442747	-79.955290
+7.1.6	40.442790	-79.955137
+7.1.7	40.442894	-79.954729
+7.1.8	40.443136	-79.953814
+end_lane
+lane	7.2
+num_waypoints	9
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	7.2.9	8.2.1
+7.2.1	40.442000	-79.956351
+7.2.2	40.442467	-79.955705
+7.2.3	40.442592	-79.955535
+7.2.4	40.442667	-79.955398
+7.2.5	40.442716	-79.955276
+7.2.6	40.442755	-79.955141
+7.2.7	40.442803	-79.954956
+7.2.8	40.442942	-79.954421
+7.2.9	40.443104	-79.953799
+end_lane
+lane	7.3
+num_waypoints	13
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	7.3.13	8.3.1
+7.3.1	40.441981	-79.956325
+7.3.2	40.442032	-79.956254
+7.3.3	40.442124	-79.956127
+7.3.4	40.442218	-79.955996
+7.3.5	40.442311	-79.955869
+7.3.6	40.442406	-79.955738
+7.3.7	40.442526	-79.955573
+7.3.8	40.442591	-79.955478
+7.3.9	40.442648	-79.955365
+7.3.10	40.442703	-79.955217
+7.3.11	40.442738	-79.955090
+7.3.12	40.442830	-79.954730
+7.3.13	40.443076	-79.953786
+end_lane
+end_segment
+segment	8
+num_lanes	3
+segment_name	defaultsegmentname
+lane	8.1
+num_waypoints	2
+lane_width	12
+left_boundary	broken_white
+right_boundary	broken_white
+exit	8.1.2	9.2.1
+8.1.1	40.443255	-79.953389
+8.1.2	40.443520	-79.952391
+end_lane
+lane	8.2
+num_waypoints	3
+lane_width	12
+left_boundary	broken_white
+right_boundary	broken_white
+exit	8.2.3	9.3.1
+8.2.1	40.443224	-79.953375
+8.2.2	40.443414	-79.952656
+8.2.3	40.443487	-79.952377
+end_lane
+lane	8.3
+num_waypoints	2
+lane_width	12
+left_boundary	broken_white
+right_boundary	broken_white
+exit	8.3.2	9.4.1
+exit	8.3.2	59.2.1
+8.3.1	40.443193	-79.953361
+8.3.2	40.443455	-79.952362
+end_lane
+end_segment
+segment	9
+num_lanes	4
+segment_name	defaultsegmentname
+lane	9.1
+num_waypoints	3
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	9.1.3	39.1.1
+9.1.1	40.443733	-79.951683
+9.1.2	40.443815	-79.951365
+9.1.3	40.443929	-79.950929
+end_lane
+lane	9.2
+num_waypoints	4
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	9.2.2	9.1.1
+exit	9.2.4	39.2.1
+9.2.1	40.443614	-79.952032
+9.2.2	40.443624	-79.951994
+9.2.3	40.443780	-79.951388
+9.2.4	40.443903	-79.950917
+end_lane
+lane	9.3
+num_waypoints	3
+lane_width	12
+left_boundary	broken_white
+right_boundary	broken_white
+exit	9.3.3	10.3.1
+9.3.1	40.443581	-79.952017
+9.3.2	40.443685	-79.951620
+9.3.3	40.443859	-79.950898
+end_lane
+lane	9.4
+num_waypoints	3
+lane_width	12
+left_boundary	broken_white
+right_boundary	broken_white
+exit	9.4.3	10.4.1
+9.4.1	40.443550	-79.952003
+9.4.2	40.443653	-79.951611
+9.4.3	40.443828	-79.950884
+end_lane
+end_segment
+segment	10
+num_lanes	4
+segment_name	defaultsegmentname
+lane	10.1
+num_waypoints	4
+lane_width	13
+left_boundary	broken_white
+right_boundary	broken_white
+exit	10.1.2	74.2.1
+exit	10.1.4	39.2.1
+10.1.1	40.444194	-79.949836
+10.1.2	40.444144	-79.950027
+10.1.3	40.444058	-79.950382
+10.1.4	40.444009	-79.950593
+end_lane
+lane	10.2
+num_waypoints	5
+lane_width	11
+left_boundary	broken_white
+right_boundary	broken_white
+exit	10.2.3	10.1.1
+exit	10.2.5	39.1.1
+10.2.1	40.444408	-79.948883
+10.2.2	40.444365	-79.949047
+10.2.3	40.444262	-79.949435
+10.2.4	40.444112	-79.950013
+10.2.5	40.443976	-79.950579
+end_lane
+lane	10.3
+num_waypoints	6
+lane_width	11
+left_boundary	broken_white
+right_boundary	broken_white
+exit	10.3.6	11.3.1
+exit	10.3.6	31.1.1
+10.3.1	40.443936	-79.950565
+10.3.2	40.444083	-79.950001
+10.3.3	40.444151	-79.949737
+10.3.4	40.444233	-79.949424
+10.3.5	40.444336	-79.949036
+10.3.6	40.444379	-79.948870
+end_lane
+lane	10.4
+num_waypoints	5
+lane_width	11
+left_boundary	broken_white
+right_boundary	broken_white
+exit	10.4.5	11.4.1
+10.4.1	40.443906	-79.950553
+10.4.2	40.444053	-79.949992
+10.4.3	40.444205	-79.949411
+10.4.4	40.444307	-79.949024
+10.4.5	40.444350	-79.948857
+end_lane
+end_segment
+segment	11
+num_lanes	4
+segment_name	defaultsegmentname
+lane	11.1
+num_waypoints	10
+lane_width	14
+left_boundary	broken_white
+right_boundary	broken_white
+exit	11.1.10	31.1.1
+11.1.1	40.444598	-79.945791
+11.1.2	40.444594	-79.946035
+11.1.3	40.444588	-79.946285
+11.1.4	40.444576	-79.946567
+11.1.5	40.444568	-79.946759
+11.1.6	40.444559	-79.947021
+11.1.7	40.444551	-79.947417
+11.1.8	40.444538	-79.947848
+11.1.9	40.444526	-79.948140
+11.1.10	40.444512	-79.948537
+end_lane
+lane	11.2
+num_waypoints	10
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+checkpoint	11.2.10	8
+exit	11.2.10	10.2.1
+11.2.1	40.444570	-79.945791
+11.2.2	40.444562	-79.946027
+11.2.3	40.444556	-79.946282
+11.2.4	40.444547	-79.946563
+11.2.5	40.444537	-79.946755
+11.2.6	40.444528	-79.947015
+11.2.7	40.444517	-79.947413
+11.2.8	40.444504	-79.947849
+11.2.9	40.444496	-79.948138
+11.2.10	40.444481	-79.948536
+end_lane
+lane	11.3
+num_waypoints	6
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	11.3.6	12.4.1
+11.3.1	40.444451	-79.948520
+11.3.2	40.444470	-79.948094
+11.3.3	40.444483	-79.947683
+11.3.4	40.444502	-79.947153
+11.3.5	40.444526	-79.946414
+11.3.6	40.444546	-79.945788
+end_lane
+lane	11.4
+num_waypoints	5
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	11.4.5	12.5.1
+11.4.1	40.444424	-79.948518
+11.4.2	40.444443	-79.948095
+11.4.3	40.444455	-79.947682
+11.4.4	40.444475	-79.947153
+11.4.5	40.444519	-79.945787
+end_lane
+end_segment
+segment	12
+num_lanes	5
+segment_name	defaultsegmentname
+lane	12.1
+num_waypoints	9
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	12.1.9	11.1.1
+12.1.1	40.444695	-79.943183
+12.1.2	40.444700	-79.943596
+12.1.3	40.444692	-79.943853
+12.1.4	40.444673	-79.944182
+12.1.5	40.444653	-79.944481
+12.1.6	40.444642	-79.944704
+12.1.7	40.444636	-79.944878
+12.1.8	40.444624	-79.945179
+12.1.9	40.444612	-79.945504
+end_lane
+lane	12.2
+num_waypoints	9
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+checkpoint	12.2.2	11
+exit	12.2.9	11.2.1
+12.2.1	40.444668	-79.943200
+12.2.2	40.444672	-79.943596
+12.2.3	40.444665	-79.943852
+12.2.4	40.444646	-79.944179
+12.2.5	40.444625	-79.944487
+12.2.6	40.444615	-79.944707
+12.2.7	40.444608	-79.944878
+12.2.8	40.444596	-79.945178
+12.2.9	40.444585	-79.945502
+end_lane
+lane	12.3
+num_waypoints	3
+lane_width	11
+left_boundary	broken_white
+right_boundary	broken_white
+exit	12.3.3	13.3.1
+12.3.1	40.444635	-79.943850
+12.3.2	40.444643	-79.943595
+12.3.3	40.444639	-79.943200
+end_lane
+lane	12.4
+num_waypoints	7
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	12.4.7	30.3.1
+exit	12.4.4	12.3.1
+12.4.1	40.444557	-79.945500
+12.4.2	40.444572	-79.945079
+12.4.3	40.444584	-79.944790
+12.4.4	40.444587	-79.944706
+12.4.5	40.444605	-79.943841
+12.4.6	40.444613	-79.943561
+12.4.7	40.444610	-79.943201
+end_lane
+lane	12.5
+num_waypoints	6
+lane_width	11
+left_boundary	broken_white
+right_boundary	broken_white
+exit	12.5.6	30.4.1
+12.5.1	40.444529	-79.945499
+12.5.2	40.444554	-79.944791
+12.5.3	40.444567	-79.944214
+12.5.4	40.444574	-79.943839
+12.5.5	40.444583	-79.943562
+12.5.6	40.444581	-79.943201
+end_lane
+end_segment
+segment	13
+num_lanes	4
+segment_name	defaultsegmentname
+lane	13.1
+num_waypoints	10
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	13.1.7	13.2.1
+exit	13.1.10	12.1.1
+exit	13.1.10	12.2.1
+13.1.1	40.447175	-79.942441
+13.1.2	40.446345	-79.942324
+13.1.3	40.446125	-79.942306
+13.1.4	40.446005	-79.942305
+13.1.5	40.445899	-79.942321
+13.1.6	40.445825	-79.942347
+13.1.7	40.445777	-79.942377
+13.1.8	40.445710	-79.942431
+13.1.9	40.445403	-79.942612
+13.1.10	40.444787	-79.942970
+end_lane
+lane	13.2
+num_waypoints	3
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	13.2.3	30.3.1
+13.2.1	40.445701	-79.942396
+13.2.2	40.445395	-79.942578
+13.2.3	40.444869	-79.942883
+end_lane
+lane	13.3
+num_waypoints	9
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	13.3.9	14.2.1
+exit	13.3.9	68.3.1
+exit	13.3.7	13.4.1
+13.3.1	40.444797	-79.942885
+13.3.2	40.445384	-79.942545
+13.3.3	40.445686	-79.942365
+13.3.4	40.445840	-79.942281
+13.3.5	40.445958	-79.942254
+13.3.6	40.446031	-79.942260
+13.3.7	40.446158	-79.942271
+13.3.8	40.446347	-79.942288
+13.3.9	40.447178	-79.942406
+end_lane
+lane	13.4
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	13.4.2	67.4.1
+13.4.1	40.446351	-79.942252
+13.4.2	40.447269	-79.942383
+end_lane
+end_segment
+segment	14
+num_lanes	4
+segment_name	defaultsegmentname
+lane	14.1
+num_waypoints	9
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	14.1.9	15.1.1
+exit	14.1.6	72.1.1
+exit	14.1.3	73.1.1
+exit	14.1.9	65.3.1
+14.1.1	40.447460	-79.942580
+14.1.2	40.447368	-79.943844
+14.1.3	40.447350	-79.944082
+14.1.4	40.447337	-79.944271
+14.1.5	40.447314	-79.944591
+14.1.6	40.447259	-79.945269
+14.1.7	40.447176	-79.946394
+14.1.8	40.447146	-79.946826
+14.1.9	40.447124	-79.947156
+end_lane
+lane	14.2
+num_waypoints	7
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	14.2.7	15.2.1
+14.2.1	40.447433	-79.942577
+14.2.2	40.447340	-79.943843
+14.2.3	40.447286	-79.944592
+14.2.4	40.447232	-79.945267
+14.2.5	40.447148	-79.946395
+14.2.6	40.447119	-79.946824
+14.2.7	40.447097	-79.947152
+end_lane
+lane	14.3
+num_waypoints	8
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	14.3.8	67.3.1
+exit	14.3.8	68.3.1
+14.3.1	40.447070	-79.947149
+14.3.2	40.447091	-79.946822
+14.3.3	40.447120	-79.946393
+14.3.4	40.447204	-79.945266
+14.3.5	40.447258	-79.944590
+14.3.6	40.447313	-79.943841
+14.3.7	40.447370	-79.943084
+14.3.8	40.447405	-79.942574
+end_lane
+lane	14.4
+num_waypoints	8
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+checkpoint	14.4.6	10
+exit	14.4.8	82.1.1
+14.4.1	40.447043	-79.947146
+14.4.2	40.447064	-79.946820
+14.4.3	40.447093	-79.946391
+14.4.4	40.447177	-79.945263
+14.4.5	40.447231	-79.944590
+14.4.6	40.447286	-79.943839
+14.4.7	40.447343	-79.943082
+14.4.8	40.447378	-79.942571
+end_lane
+end_segment
+segment	15
+num_lanes	4
+segment_name	defaultsegmentname
+lane	15.1
+num_waypoints	6
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	15.1.6	16.1.1
+exit	15.1.6	64.3.1
+15.1.1	40.447110	-79.947439
+15.1.2	40.447104	-79.947590
+15.1.3	40.447087	-79.948017
+15.1.4	40.447071	-79.948317
+15.1.5	40.447061	-79.948423
+15.1.6	40.447021	-79.948805
+end_lane
+lane	15.2
+num_waypoints	5
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	15.2.5	16.2.1
+exit	15.2.5	31.2.1
+15.2.1	40.447082	-79.947438
+15.2.2	40.447059	-79.948017
+15.2.3	40.447043	-79.948315
+15.2.4	40.447034	-79.948419
+15.2.5	40.446994	-79.948800
+end_lane
+lane	15.3
+num_waypoints	5
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	15.3.5	65.3.1
+exit	15.3.5	14.3.1
+15.3.1	40.446966	-79.948795
+15.3.2	40.447006	-79.948418
+15.3.3	40.447016	-79.948314
+15.3.4	40.447032	-79.948015
+15.3.5	40.447055	-79.947436
+end_lane
+lane	15.4
+num_waypoints	5
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	15.4.5	66.1.1
+exit	15.4.5	14.4.1
+15.4.1	40.446939	-79.948790
+15.4.2	40.446978	-79.948415
+15.4.3	40.446989	-79.948314
+15.4.4	40.447005	-79.948013
+15.4.5	40.447027	-79.947434
+end_lane
+end_segment
+segment	16
+num_lanes	4
+segment_name	defaultsegmentname
+lane	16.1
+num_waypoints	4
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	16.1.4	17.1.1
+exit	16.1.4	63.1.1
+16.1.1	40.446962	-79.949198
+16.1.2	40.446913	-79.949607
+16.1.3	40.446892	-79.949825
+16.1.4	40.446859	-79.950419
+end_lane
+lane	16.2
+num_waypoints	6
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	16.2.6	17.2.1
+16.2.1	40.446935	-79.949193
+16.2.2	40.446906	-79.949428
+16.2.3	40.446885	-79.949606
+16.2.4	40.446865	-79.949822
+16.2.5	40.446849	-79.950092
+16.2.6	40.446832	-79.950416
+end_lane
+lane	16.3
+num_waypoints	6
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	16.3.6	15.3.1
+16.3.1	40.446804	-79.950414
+16.3.2	40.446821	-79.950090
+16.3.3	40.446837	-79.949820
+16.3.4	40.446858	-79.949601
+16.3.5	40.446879	-79.949426
+16.3.6	40.446908	-79.949187
+end_lane
+lane	16.4
+num_waypoints	6
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	16.4.6	31.2.1
+exit	16.4.6	15.4.1
+16.4.1	40.446777	-79.950413
+16.4.2	40.446794	-79.950090
+16.4.3	40.446810	-79.949819
+16.4.4	40.446831	-79.949597
+16.4.5	40.446851	-79.949421
+16.4.6	40.446881	-79.949180
+end_lane
+end_segment
+segment	17
+num_lanes	4
+segment_name	defaultsegmentname
+lane	17.1
+num_waypoints	6
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	17.1.6	61.1.1
+exit	17.1.6	18.1.1
+17.1.1	40.446842	-79.950787
+17.1.2	40.446830	-79.951023
+17.1.3	40.446813	-79.951236
+17.1.4	40.446785	-79.951405
+17.1.5	40.446742	-79.951562
+17.1.6	40.446679	-79.951720
+end_lane
+lane	17.2
+num_waypoints	6
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	17.2.6	18.2.1
+exit	17.2.6	18.3.1
+17.2.1	40.446815	-79.950784
+17.2.2	40.446803	-79.951021
+17.2.3	40.446786	-79.951231
+17.2.4	40.446759	-79.951395
+17.2.5	40.446717	-79.951546
+17.2.6	40.446655	-79.951702
+end_lane
+lane	17.3
+num_waypoints	6
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+checkpoint	17.3.2	12
+exit	17.3.6	16.3.1
+17.3.1	40.446630	-79.951686
+17.3.2	40.446691	-79.951534
+17.3.3	40.446731	-79.951390
+17.3.4	40.446758	-79.951224
+17.3.5	40.446776	-79.951019
+17.3.6	40.446787	-79.950782
+end_lane
+lane	17.4
+num_waypoints	6
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	17.4.6	62.1.1
+exit	17.4.6	16.4.1
+17.4.1	40.446605	-79.951670
+17.4.2	40.446667	-79.951519
+17.4.3	40.446704	-79.951383
+17.4.4	40.446731	-79.951218
+17.4.5	40.446749	-79.951017
+17.4.6	40.446760	-79.950778
+end_lane
+end_segment
+segment	18
+num_lanes	5
+segment_name	defaultsegmentname
+lane	18.1
+num_waypoints	5
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	18.1.5	19.4.1
+exit	18.1.5	46.1.1
+exit	18.1.2	45.1.1
+18.1.1	40.446461	-79.952042
+18.1.2	40.446240	-79.952350
+18.1.3	40.446103	-79.952539
+18.1.4	40.445884	-79.952840
+18.1.5	40.445720	-79.953071
+end_lane
+lane	18.2
+num_waypoints	5
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	18.2.5	19.3.1
+18.2.1	40.446434	-79.952028
+18.2.2	40.446220	-79.952325
+18.2.3	40.446083	-79.952514
+18.2.4	40.445862	-79.952818
+18.2.5	40.445700	-79.953046
+end_lane
+lane	18.3
+num_waypoints	5
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	18.3.5	19.2.1
+18.3.1	40.446384	-79.952046
+18.3.2	40.446200	-79.952300
+18.3.3	40.446063	-79.952489
+18.3.4	40.445844	-79.952791
+18.3.5	40.445679	-79.953022
+end_lane
+lane	18.4
+num_waypoints	5
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	18.4.5	19.1.1
+18.4.1	40.446349	-79.952042
+18.4.2	40.446180	-79.952276
+18.4.3	40.446043	-79.952464
+18.4.4	40.445823	-79.952767
+18.4.5	40.445659	-79.952998
+end_lane
+lane	18.5
+num_waypoints	5
+lane_width	12
+left_boundary	broken_white
+right_boundary	broken_white
+exit	18.5.5	17.4.1
+18.5.1	40.445637	-79.952971
+18.5.2	40.445799	-79.952742
+18.5.3	40.446019	-79.952439
+18.5.4	40.446158	-79.952250
+18.5.5	40.446305	-79.952045
+end_lane
+end_segment
+segment	19
+num_lanes	4
+segment_name	defaultsegmentname
+lane	19.1
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	19.1.2	20.1.1
+19.1.1	40.445481	-79.953243
+19.1.2	40.445086	-79.953789
+end_lane
+lane	19.2
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	19.2.2	20.2.1
+19.2.1	40.445501	-79.953269
+19.2.2	40.445106	-79.953814
+end_lane
+lane	19.3
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	19.3.2	20.3.1
+19.3.1	40.445521	-79.953294
+19.3.2	40.445125	-79.953839
+end_lane
+lane	19.4
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	19.4.2	20.4.1
+exit	19.4.2	47.1.1
+19.4.1	40.445541	-79.953318
+19.4.2	40.445145	-79.953864
+end_lane
+end_segment
+segment	20
+num_lanes	4
+segment_name	defaultsegmentname
+lane	20.1
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+checkpoint	20.1.2	3
+exit	20.1.2	21.1.1
+exit	20.1.2	38.2.1
+20.1.1	40.444941	-79.953987
+20.1.2	40.444499	-79.954602
+end_lane
+lane	20.2
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	20.2.2	21.2.1
+20.2.1	40.444961	-79.954012
+20.2.2	40.444519	-79.954627
+end_lane
+lane	20.3
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	20.3.2	21.3.1
+20.3.1	40.444981	-79.954037
+20.3.2	40.444539	-79.954652
+end_lane
+lane	20.4
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	20.4.2	21.4.1
+exit	20.4.2	40.1.1
+20.4.1	40.445001	-79.954061
+20.4.2	40.444559	-79.954677
+end_lane
+end_segment
+segment	21
+num_lanes	4
+segment_name	defaultsegmentname
+lane	21.1
+num_waypoints	7
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	21.1.7	22.1.1
+21.1.1	40.444316	-79.954866
+21.1.2	40.443854	-79.955536
+21.1.3	40.443705	-79.955749
+21.1.4	40.443559	-79.955951
+21.1.5	40.443465	-79.956080
+21.1.6	40.443341	-79.956246
+21.1.7	40.443201	-79.956447
+end_lane
+lane	21.2
+num_waypoints	7
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	21.2.7	22.2.1
+21.2.1	40.444336	-79.954890
+21.2.2	40.443875	-79.955560
+21.2.3	40.443726	-79.955772
+21.2.4	40.443583	-79.955970
+21.2.5	40.443485	-79.956104
+21.2.6	40.443362	-79.956270
+21.2.7	40.443221	-79.956471
+end_lane
+lane	21.3
+num_waypoints	7
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	21.3.7	22.3.1
+21.3.1	40.444356	-79.954914
+21.3.2	40.443896	-79.955584
+21.3.3	40.443745	-79.955797
+21.3.4	40.443608	-79.955988
+21.3.5	40.443506	-79.956128
+21.3.6	40.443382	-79.956294
+21.3.7	40.443241	-79.956496
+end_lane
+lane	21.4
+num_waypoints	7
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	21.4.7	22.4.1
+exit	21.4.2	48.2.1
+21.4.1	40.444376	-79.954939
+21.4.2	40.443916	-79.955607
+21.4.3	40.443746	-79.955848
+21.4.4	40.443629	-79.956011
+21.4.5	40.443527	-79.956152
+21.4.6	40.443402	-79.956319
+21.4.7	40.443262	-79.956520
+end_lane
+end_segment
+segment	22
+num_lanes	4
+segment_name	defaultsegmentname
+lane	22.1
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	22.1.2	23.1.1
+exit	22.1.2	37.1.1
+22.1.1	40.443051	-79.956650
+22.1.2	40.442577	-79.957305
+end_lane
+lane	22.2
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	22.2.2	23.2.1
+22.2.1	40.443071	-79.956675
+22.2.2	40.442597	-79.957330
+end_lane
+lane	22.3
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	22.3.2	23.3.1
+22.3.1	40.443091	-79.956700
+22.3.2	40.442616	-79.957355
+end_lane
+lane	22.4
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	22.4.2	23.4.1
+22.4.1	40.443111	-79.956725
+22.4.2	40.442636	-79.957379
+end_lane
+end_segment
+segment	23
+num_lanes	4
+segment_name	defaultsegmentname
+lane	23.1
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	23.1.2	24.1.1
+23.1.1	40.442444	-79.957484
+23.1.2	40.442279	-79.957713
+end_lane
+lane	23.2
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	23.2.2	24.2.1
+23.2.1	40.442464	-79.957508
+23.2.2	40.442299	-79.957738
+end_lane
+lane	23.3
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	23.3.2	24.3.1
+23.3.1	40.442484	-79.957533
+23.3.2	40.442319	-79.957762
+end_lane
+lane	23.4
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	23.4.2	24.4.1
+exit	23.4.2	49.1.1
+23.4.1	40.442504	-79.957558
+23.4.2	40.442340	-79.957787
+end_lane
+end_segment
+segment	24
+num_lanes	4
+segment_name	defaultsegmentname
+lane	24.1
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	24.1.2	25.1.1
+24.1.1	40.442124	-79.957918
+24.1.2	40.441809	-79.958354
+end_lane
+lane	24.2
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	24.2.2	25.2.1
+24.2.1	40.442144	-79.957942
+24.2.2	40.441829	-79.958379
+end_lane
+lane	24.3
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	24.3.2	25.3.1
+24.3.1	40.442164	-79.957967
+24.3.2	40.441848	-79.958403
+end_lane
+lane	24.4
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	24.4.2	25.4.1
+24.4.1	40.442073	-79.958145
+24.4.2	40.441868	-79.958427
+end_lane
+end_segment
+segment	25
+num_lanes	4
+segment_name	defaultsegmentname
+lane	25.1
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	25.1.2	26.1.1
+exit	25.1.2	34.1.1
+25.1.1	40.441673	-79.958545
+25.1.2	40.441302	-79.959053
+end_lane
+lane	25.2
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	25.2.2	26.2.1
+25.2.1	40.441693	-79.958570
+25.2.2	40.441322	-79.959078
+end_lane
+lane	25.3
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	25.3.2	26.3.1
+25.3.1	40.441713	-79.958595
+25.3.2	40.441342	-79.959103
+end_lane
+lane	25.4
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	25.4.2	26.4.1
+25.4.1	40.441733	-79.958620
+25.4.2	40.441362	-79.959128
+end_lane
+end_segment
+segment	26
+num_lanes	4
+segment_name	defaultsegmentname
+lane	26.1
+num_waypoints	3
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	26.1.3	27.1.1
+exit	26.1.3	33.2.1
+26.1.1	40.441171	-79.959232
+26.1.2	40.440847	-79.959686
+26.1.3	40.440591	-79.960040
+end_lane
+lane	26.2
+num_waypoints	3
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	26.2.3	27.2.1
+26.2.1	40.441191	-79.959257
+26.2.2	40.440868	-79.959709
+26.2.3	40.440611	-79.960065
+end_lane
+lane	26.3
+num_waypoints	3
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	26.3.3	27.3.1
+26.3.1	40.441211	-79.959281
+26.3.2	40.440889	-79.959733
+26.3.3	40.440631	-79.960090
+end_lane
+lane	26.4
+num_waypoints	4
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	26.4.4	50.1.1
+exit	26.4.2	51.1.1
+26.4.1	40.441231	-79.959305
+26.4.2	40.441208	-79.959338
+26.4.3	40.441081	-79.959516
+26.4.4	40.440665	-79.960131
+end_lane
+end_segment
+segment	27
+num_lanes	3
+segment_name	defaultsegmentname
+lane	27.1
+num_waypoints	4
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	27.1.4	28.1.1
+exit	27.1.4	32.1.1
+27.1.1	40.440375	-79.960341
+27.1.2	40.440125	-79.960682
+27.1.3	40.439995	-79.960866
+27.1.4	40.439195	-79.961968
+end_lane
+lane	27.2
+num_waypoints	4
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	27.2.4	28.2.1
+27.2.1	40.440395	-79.960365
+27.2.2	40.440145	-79.960706
+27.2.3	40.440016	-79.960888
+27.2.4	40.439215	-79.961993
+end_lane
+lane	27.3
+num_waypoints	7
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	27.3.7	28.3.1
+27.3.1	40.440415	-79.960390
+27.3.2	40.440163	-79.960733
+27.3.3	40.440036	-79.960912
+27.3.4	40.439710	-79.961362
+27.3.5	40.439459	-79.961708
+27.3.6	40.439337	-79.961876
+27.3.7	40.439235	-79.962018
+end_lane
+end_segment
+segment	28
+num_lanes	3
+segment_name	defaultsegmentname
+lane	28.1
+num_waypoints	7
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	28.1.7	29.2.1
+28.1.1	40.439095	-79.962112
+28.1.2	40.438919	-79.962357
+28.1.3	40.438455	-79.962956
+28.1.4	40.438192	-79.963284
+28.1.5	40.438051	-79.963484
+28.1.6	40.437972	-79.963624
+28.1.7	40.437908	-79.963765
+end_lane
+lane	28.2
+num_waypoints	7
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	28.2.7	70.2.1
+28.2.1	40.439115	-79.962137
+28.2.2	40.438940	-79.962380
+28.2.3	40.438476	-79.962978
+28.2.4	40.438211	-79.963309
+28.2.5	40.438073	-79.963507
+28.2.6	40.437993	-79.963646
+28.2.7	40.437932	-79.963783
+end_lane
+lane	28.3
+num_waypoints	7
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	28.3.7	70.1.1
+28.3.1	40.439135	-79.962161
+28.3.2	40.438959	-79.962406
+28.3.3	40.438497	-79.963002
+28.3.4	40.438234	-79.963330
+28.3.5	40.438094	-79.963530
+28.3.6	40.438016	-79.963665
+28.3.7	40.437956	-79.963801
+end_lane
+end_segment
+segment	29
+num_lanes	3
+segment_name	defaultsegmentname
+lane	29.1
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	29.1.2	43.1.1
+29.1.1	40.437708	-79.963889
+29.1.2	40.437242	-79.963313
+end_lane
+lane	29.2
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	29.2.2	1.1.1
+29.2.1	40.437726	-79.963863
+29.2.2	40.437261	-79.963287
+end_lane
+lane	29.3
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	29.3.2	70.2.1
+29.3.1	40.437280	-79.963261
+29.3.2	40.437703	-79.963784
+end_lane
+end_segment
+segment	30
+num_lanes	4
+segment_name	defaultsegmentname
+lane	30.1
+num_waypoints	18
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	30.1.18	13.3.1
+exit	30.1.18	12.1.1
+30.1.1	40.444023	-79.939080
+30.1.2	40.444046	-79.939220
+30.1.3	40.444066	-79.939349
+30.1.4	40.444088	-79.939498
+30.1.5	40.444109	-79.939638
+30.1.6	40.444134	-79.939778
+30.1.7	40.444159	-79.939923
+30.1.8	40.444183	-79.940055
+30.1.9	40.444206	-79.940186
+30.1.10	40.444233	-79.940339
+30.1.11	40.444283	-79.940623
+30.1.12	40.444332	-79.940911
+30.1.13	40.444370	-79.941156
+30.1.14	40.444401	-79.941340
+30.1.15	40.444473	-79.941744
+30.1.16	40.444554	-79.942148
+30.1.17	40.444638	-79.942589
+30.1.18	40.444666	-79.942772
+end_lane
+lane	30.2
+num_waypoints	17
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	30.2.17	12.2.1
+30.2.1	40.443997	-79.939108
+30.2.2	40.444030	-79.939313
+30.2.3	40.444059	-79.939518
+30.2.4	40.444086	-79.939694
+30.2.5	40.444129	-79.939952
+30.2.6	40.444163	-79.940143
+30.2.7	40.444197	-79.940326
+30.2.8	40.444232	-79.940527
+30.2.9	40.444266	-79.940720
+30.2.10	40.444301	-79.940915
+30.2.11	40.444331	-79.941094
+30.2.12	40.444351	-79.941208
+30.2.13	40.444375	-79.941348
+30.2.14	40.444448	-79.941762
+30.2.15	40.444520	-79.942153
+30.2.16	40.444584	-79.942493
+30.2.17	40.444628	-79.942785
+end_lane
+lane	30.3
+num_waypoints	18
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	30.3.18	79.2.1
+30.3.1	40.444590	-79.942796
+30.3.2	40.444576	-79.942696
+30.3.3	40.444549	-79.942510
+30.3.4	40.444493	-79.942157
+30.3.5	40.444421	-79.941771
+30.3.6	40.444348	-79.941356
+30.3.7	40.444333	-79.941269
+30.3.8	40.444303	-79.941093
+30.3.9	40.444267	-79.940877
+30.3.10	40.444235	-79.940695
+30.3.11	40.444196	-79.940484
+30.3.12	40.444163	-79.940305
+30.3.13	40.444128	-79.940130
+30.3.14	40.444080	-79.939893
+30.3.15	40.444040	-79.939686
+30.3.16	40.444007	-79.939508
+30.3.17	40.443973	-79.939318
+30.3.18	40.443942	-79.939132
+end_lane
+lane	30.4
+num_waypoints	18
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	30.4.18	79.2.1
+30.4.1	40.444552	-79.942805
+30.4.2	40.444540	-79.942703
+30.4.3	40.444516	-79.942518
+30.4.4	40.444463	-79.942164
+30.4.5	40.444395	-79.941781
+30.4.6	40.444321	-79.941364
+30.4.7	40.444306	-79.941277
+30.4.8	40.444276	-79.941101
+30.4.9	40.444240	-79.940885
+30.4.10	40.444208	-79.940704
+30.4.11	40.444169	-79.940493
+30.4.12	40.444136	-79.940314
+30.4.13	40.444101	-79.940139
+30.4.14	40.444053	-79.939902
+30.4.15	40.444013	-79.939695
+30.4.16	40.443980	-79.939516
+30.4.17	40.443946	-79.939326
+30.4.18	40.443914	-79.939141
+end_lane
+end_segment
+segment	31
+num_lanes	2
+segment_name	defaultsegmentname
+lane	31.1
+num_waypoints	9
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	31.1.9	16.2.1
+exit	31.1.9	64.3.1
+exit	31.1.9	15.4.1
+31.1.1	40.444589	-79.948658
+31.1.2	40.444809	-79.948692
+31.1.3	40.445047	-79.948716
+31.1.4	40.445243	-79.948742
+31.1.5	40.445431	-79.948764
+31.1.6	40.445766	-79.948810
+31.1.7	40.446048	-79.948848
+31.1.8	40.446460	-79.948899
+31.1.9	40.446781	-79.948945
+end_lane
+lane	31.2
+num_waypoints	9
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	31.2.9	11.3.1
+exit	31.2.9	60.1.1
+31.2.1	40.446779	-79.948988
+31.2.2	40.446456	-79.948942
+31.2.3	40.446047	-79.948885
+31.2.4	40.445763	-79.948850
+31.2.5	40.445428	-79.948807
+31.2.6	40.445240	-79.948781
+31.2.7	40.445042	-79.948757
+31.2.8	40.444805	-79.948728
+31.2.9	40.444587	-79.948707
+end_lane
+end_segment
+segment	32
+num_lanes	2
+segment_name	defaultsegmentname
+lane	32.1
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	32.1.2	2.1.1
+exit	32.1.2	44.1.1
+32.1.1	40.439051	-79.961978
+32.1.2	40.438565	-79.961380
+end_lane
+lane	32.2
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	32.2.2	28.1.1
+32.2.1	40.438584	-79.961351
+32.2.2	40.439070	-79.961951
+end_lane
+end_segment
+segment	33
+num_lanes	4
+segment_name	defaultsegmentname
+lane	33.1
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	33.1.2	53.2.1
+33.1.1	40.440337	-79.960204
+33.1.2	40.439837	-79.959580
+end_lane
+lane	33.2
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	33.2.2	3.1.1
+33.2.1	40.440355	-79.960178
+33.2.2	40.439856	-79.959554
+end_lane
+lane	33.3
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	33.3.2	27.1.1
+33.3.1	40.439875	-79.959528
+33.3.2	40.440374	-79.960151
+end_lane
+lane	33.4
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+33.4.1	40.439894	-79.959502
+33.4.2	40.440392	-79.960125
+end_lane
+end_segment
+segment	34
+num_lanes	2
+segment_name	defaultsegmentname
+lane	34.1
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	34.1.2	4.1.1
+exit	34.1.2	54.2.1
+34.1.1	40.441163	-79.959055
+34.1.2	40.440635	-79.958412
+end_lane
+lane	34.2
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	34.2.2	26.1.1
+34.2.1	40.440654	-79.958386
+34.2.2	40.441181	-79.959028
+end_lane
+end_segment
+segment	35
+num_lanes	1
+segment_name	defaultsegmentname
+lane	35.1
+num_waypoints	2
+lane_width	11
+left_boundary	broken_white
+right_boundary	broken_white
+exit	35.1.2	25.1.1
+35.1.1	40.441154	-79.957700
+35.1.2	40.441676	-79.958354
+end_lane
+end_segment
+segment	36
+num_lanes	1
+segment_name	defaultsegmentname
+lane	36.1
+num_waypoints	2
+lane_width	11
+left_boundary	broken_white
+right_boundary	broken_white
+exit	36.1.2	24.1.1
+36.1.1	40.441629	-79.957071
+36.1.2	40.442137	-79.957692
+end_lane
+end_segment
+segment	37
+num_lanes	1
+segment_name	defaultsegmentname
+lane	37.1
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	37.1.2	7.1.1
+exit	37.1.2	57.2.1
+37.1.1	40.442436	-79.957304
+37.1.2	40.442013	-79.956543
+end_lane
+end_segment
+segment	38
+num_lanes	4
+segment_name	defaultsegmentname
+lane	38.1
+num_waypoints	6
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	38.1.6	58.1.1
+38.1.1	40.444269	-79.954699
+38.1.2	40.443680	-79.953978
+38.1.3	40.443562	-79.953841
+38.1.4	40.443479	-79.953759
+38.1.5	40.443430	-79.953726
+38.1.6	40.443301	-79.953665
+end_lane
+lane	38.2
+num_waypoints	6
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	38.2.6	8.1.1
+38.2.1	40.444288	-79.954673
+38.2.2	40.443620	-79.953842
+38.2.3	40.443547	-79.953769
+38.2.4	40.443493	-79.953723
+38.2.5	40.443428	-79.953684
+38.2.6	40.443311	-79.953626
+end_lane
+lane	38.3
+num_waypoints	6
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	38.3.6	21.1.1
+38.3.1	40.443321	-79.953591
+38.3.2	40.443435	-79.953648
+38.3.3	40.443506	-79.953690
+38.3.4	40.443570	-79.953743
+38.3.5	40.443653	-79.953834
+38.3.6	40.444307	-79.954647
+end_lane
+lane	38.4
+num_waypoints	6
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	38.4.6	40.1.1
+38.4.1	40.443329	-79.953560
+38.4.2	40.443454	-79.953618
+38.4.3	40.443527	-79.953662
+38.4.4	40.443580	-79.953708
+38.4.5	40.443675	-79.953812
+38.4.6	40.444326	-79.954620
+end_lane
+end_segment
+segment	39
+num_lanes	3
+segment_name	defaultsegmentname
+lane	39.1
+num_waypoints	5
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+checkpoint	39.1.1	2
+exit	39.1.5	18.4.1
+39.1.1	40.444048	-79.950853
+39.1.2	40.444603	-79.951104
+39.1.3	40.444842	-79.951212
+39.1.4	40.445446	-79.951482
+39.1.5	40.446318	-79.951879
+end_lane
+lane	39.2
+num_waypoints	6
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+checkpoint	39.2.2	9
+exit	39.2.5	39.3.1
+exit	39.2.6	61.1.1
+exit	39.2.6	17.3.1
+39.2.1	40.444056	-79.950819
+39.2.2	40.444614	-79.951071
+39.2.3	40.444853	-79.951180
+39.2.4	40.445458	-79.951450
+39.2.5	40.446097	-79.951739
+39.2.6	40.446339	-79.951850
+end_lane
+lane	39.3
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	39.3.2	17.4.1
+39.3.1	40.446192	-79.951744
+39.3.2	40.446361	-79.951821
+end_lane
+end_segment
+segment	40
+num_lanes	3
+segment_name	defaultsegmentname
+lane	40.1
+num_waypoints	3
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+40.1.1	40.444542	-79.954910
+40.1.2	40.445152	-79.955640
+40.1.3	40.445643	-79.956249
+end_lane
+lane	40.2
+num_waypoints	4
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	40.2.3	40.3.1
+exit	40.2.4	38.2.1
+40.2.1	40.445621	-79.956273
+40.2.2	40.445136	-79.955666
+40.2.3	40.445010	-79.955519
+40.2.4	40.444524	-79.954938
+end_lane
+lane	40.3
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	40.3.2	21.4.1
+exit	40.3.2	38.1.1
+40.3.1	40.444914	-79.955454
+40.3.2	40.444505	-79.954965
+end_lane
+end_segment
+segment	41
+num_lanes	1
+segment_name	defaultsegmentname
+lane	41.1
+num_waypoints	2
+lane_width	14
+left_boundary	broken_white
+right_boundary	broken_white
+exit	41.1.2	22.4.1
+41.1.1	40.443486	-79.956961
+41.1.2	40.443238	-79.956660
+end_lane
+end_segment
+segment	42
+num_lanes	3
+segment_name	defaultsegmentname
+lane	42.1
+num_waypoints	2
+lane_width	13
+left_boundary	broken_white
+right_boundary	broken_white
+exit	42.1.2	1.1.1
+exit	42.1.2	29.3.1
+42.1.1	40.436546	-79.963971
+42.1.2	40.437065	-79.963246
+end_lane
+lane	42.2
+num_waypoints	2
+lane_width	13
+left_boundary	broken_white
+right_boundary	broken_white
+exit	42.2.2	1.2.1
+42.2.1	40.436521	-79.963937
+42.2.2	40.437039	-79.963214
+end_lane
+lane	42.3
+num_waypoints	2
+lane_width	12
+left_boundary	broken_white
+right_boundary	broken_white
+exit	42.3.2	1.3.1
+exit	42.3.2	43.1.1
+42.3.1	40.436496	-79.963907
+42.3.2	40.437014	-79.963183
+end_lane
+end_segment
+segment	43
+num_lanes	3
+segment_name	defaultsegmentname
+lane	43.1
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+43.1.1	40.437021	-79.963039
+43.1.2	40.436565	-79.962478
+end_lane
+lane	43.2
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+43.2.1	40.437040	-79.963013
+43.2.2	40.436584	-79.962452
+end_lane
+lane	43.3
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	43.3.2	1.3.1
+exit	43.3.2	29.3.1
+43.3.1	40.436603	-79.962426
+43.3.2	40.437059	-79.962987
+end_lane
+end_segment
+segment	44
+num_lanes	2
+segment_name	defaultsegmentname
+lane	44.1
+num_waypoints	4
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+44.1.1	40.438347	-79.961141
+44.1.2	40.438063	-79.960790
+44.1.3	40.437819	-79.960489
+44.1.4	40.437710	-79.960354
+end_lane
+lane	44.2
+num_waypoints	3
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	44.2.3	2.3.1
+exit	44.2.3	32.2.1
+44.2.1	40.437731	-79.960331
+44.2.2	40.438084	-79.960764
+44.2.3	40.438377	-79.961092
+end_lane
+end_segment
+segment	45
+num_lanes	2
+segment_name	defaultsegmentname
+lane	45.1
+num_waypoints	2
+lane_width	7
+left_boundary	broken_white
+right_boundary	broken_white
+45.1.1	40.446232	-79.952518
+45.1.2	40.446747	-79.953159
+end_lane
+lane	45.2
+num_waypoints	2
+lane_width	7
+left_boundary	broken_white
+right_boundary	broken_white
+exit	45.2.2	18.1.3
+45.2.1	40.446733	-79.953178
+45.2.2	40.446219	-79.952536
+end_lane
+end_segment
+segment	46
+num_lanes	2
+segment_name	defaultsegmentname
+lane	46.1
+num_waypoints	2
+lane_width	8
+left_boundary	broken_white
+right_boundary	broken_white
+46.1.1	40.445699	-79.953288
+46.1.2	40.446004	-79.953680
+end_lane
+lane	46.2
+num_waypoints	2
+lane_width	8
+left_boundary	broken_white
+right_boundary	broken_white
+exit	46.2.2	19.4.1
+46.2.1	40.445989	-79.953700
+46.2.2	40.445683	-79.953309
+end_lane
+end_segment
+segment	47
+num_lanes	2
+segment_name	defaultsegmentname
+lane	47.1
+num_waypoints	2
+lane_width	8
+left_boundary	broken_white
+right_boundary	broken_white
+47.1.1	40.445167	-79.954068
+47.1.2	40.445502	-79.954481
+end_lane
+lane	47.2
+num_waypoints	2
+lane_width	8
+left_boundary	broken_white
+right_boundary	broken_white
+exit	47.2.2	20.4.1
+47.2.1	40.445488	-79.954503
+47.2.2	40.445153	-79.954089
+end_lane
+end_segment
+segment	48
+num_lanes	2
+segment_name	defaultsegmentname
+lane	48.1
+num_waypoints	3
+lane_width	8
+left_boundary	broken_white
+right_boundary	broken_white
+exit	48.1.3	21.4.3
+48.1.1	40.444256	-79.956300
+48.1.2	40.444115	-79.956121
+48.1.3	40.443889	-79.955846
+end_lane
+lane	48.2
+num_waypoints	2
+lane_width	8
+left_boundary	broken_white
+right_boundary	broken_white
+48.2.1	40.443910	-79.955820
+48.2.2	40.444273	-79.956281
+end_lane
+end_segment
+segment	49
+num_lanes	2
+segment_name	defaultsegmentname
+lane	49.1
+num_waypoints	6
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+49.1.1	40.442304	-79.958048
+49.1.2	40.442370	-79.958260
+49.1.3	40.442431	-79.958455
+49.1.4	40.442484	-79.958600
+49.1.5	40.442556	-79.958743
+49.1.6	40.442751	-79.959102
+end_lane
+lane	49.2
+num_waypoints	7
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	49.2.7	24.4.1
+49.2.1	40.442729	-79.959124
+49.2.2	40.442534	-79.958766
+49.2.3	40.442461	-79.958622
+49.2.4	40.442368	-79.958374
+49.2.5	40.442327	-79.958261
+49.2.6	40.442289	-79.958204
+49.2.7	40.442229	-79.958155
+end_lane
+end_segment
+segment	50
+num_lanes	2
+segment_name	defaultsegmentname
+lane	50.1
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+50.1.1	40.440644	-79.960301
+50.1.2	40.440829	-79.960632
+end_lane
+lane	50.2
+num_waypoints	4
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	50.2.4	27.3.1
+50.2.1	40.440807	-79.960654
+50.2.2	40.440714	-79.960485
+50.2.3	40.440657	-79.960388
+50.2.4	40.440618	-79.960335
+end_lane
+end_segment
+segment	51
+num_lanes	2
+segment_name	defaultsegmentname
+lane	51.1
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+51.1.1	40.441219	-79.959513
+51.1.2	40.441486	-79.960051
+end_lane
+lane	51.2
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	51.2.2	26.4.3
+51.2.1	40.441462	-79.960072
+51.2.2	40.441196	-79.959532
+end_lane
+end_segment
+segment	52
+num_lanes	1
+segment_name	defaultsegmentname
+lane	52.1
+num_waypoints	2
+lane_width	8
+left_boundary	broken_white
+right_boundary	broken_white
+exit	52.1.2	27.3.6
+52.1.1	40.439806	-79.962313
+52.1.2	40.439438	-79.961866
+end_lane
+end_segment
+segment	53
+num_lanes	2
+segment_name	defaultsegmentname
+lane	53.1
+num_waypoints	2
+lane_width	8
+left_boundary	broken_white
+right_boundary	broken_white
+exit	53.1.2	3.3.1
+exit	53.1.2	33.3.1
+53.1.1	40.439275	-79.958781
+53.1.2	40.439691	-79.959306
+end_lane
+lane	53.2
+num_waypoints	2
+lane_width	8
+left_boundary	broken_white
+right_boundary	broken_white
+53.2.1	40.439676	-79.959327
+53.2.2	40.439259	-79.958803
+end_lane
+end_segment
+segment	54
+num_lanes	2
+segment_name	defaultsegmentname
+lane	54.1
+num_waypoints	2
+lane_width	8
+left_boundary	broken_white
+right_boundary	broken_white
+exit	54.1.2	4.3.1
+exit	54.1.2	34.2.1
+54.1.1	40.440086	-79.957705
+54.1.2	40.440519	-79.958245
+end_lane
+lane	54.2
+num_waypoints	2
+lane_width	8
+left_boundary	broken_white
+right_boundary	broken_white
+54.2.1	40.440503	-79.958265
+54.2.2	40.440070	-79.957727
+end_lane
+end_segment
+segment	55
+num_lanes	1
+segment_name	defaultsegmentname
+lane	55.1
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	55.1.2	5.3.1
+exit	55.1.2	35.1.1
+55.1.1	40.440602	-79.957017
+55.1.2	40.441026	-79.957555
+end_lane
+end_segment
+segment	56
+num_lanes	1
+segment_name	defaultsegmentname
+lane	56.1
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	56.1.2	6.3.1
+exit	56.1.2	36.1.1
+56.1.1	40.441008	-79.956278
+56.1.2	40.441502	-79.956896
+end_lane
+end_segment
+segment	57
+num_lanes	2
+segment_name	defaultsegmentname
+lane	57.1
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	57.1.2	7.3.1
+57.1.1	40.441542	-79.955635
+57.1.2	40.441902	-79.956291
+end_lane
+lane	57.2
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+57.2.1	40.441880	-79.956312
+57.2.2	40.441520	-79.955655
+end_lane
+end_segment
+segment	58
+num_lanes	3
+segment_name	defaultsegmentname
+lane	58.1
+num_waypoints	2
+lane_width	12
+left_boundary	broken_white
+right_boundary	broken_white
+58.1.1	40.443007	-79.953498
+58.1.2	40.442399	-79.953225
+end_lane
+lane	58.2
+num_waypoints	2
+lane_width	12
+left_boundary	broken_white
+right_boundary	broken_white
+exit	58.2.2	38.3.1
+58.2.1	40.442409	-79.953185
+58.2.2	40.443018	-79.953457
+end_lane
+lane	58.3
+num_waypoints	2
+lane_width	11
+left_boundary	broken_white
+right_boundary	broken_white
+exit	58.3.2	8.3.1
+58.3.1	40.442838	-79.953332
+58.3.2	40.443028	-79.953418
+end_lane
+end_segment
+segment	59
+num_lanes	2
+segment_name	defaultsegmentname
+lane	59.1
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	59.1.2	9.4.1
+59.1.1	40.442514	-79.951665
+59.1.2	40.443418	-79.952071
+end_lane
+lane	59.2
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	59.2.2	77.1.1
+59.2.1	40.443409	-79.952106
+59.2.2	40.442545	-79.951717
+end_lane
+end_segment
+segment	60
+num_lanes	3
+segment_name	defaultsegmentname
+lane	60.1
+num_waypoints	3
+lane_width	11
+left_boundary	broken_white
+right_boundary	broken_white
+60.1.1	40.444292	-79.948673
+60.1.2	40.444175	-79.948640
+60.1.3	40.444059	-79.948602
+end_lane
+lane	60.2
+num_waypoints	3
+lane_width	11
+left_boundary	broken_white
+right_boundary	broken_white
+exit	60.2.3	31.1.1
+60.2.1	40.444066	-79.948563
+60.2.2	40.444183	-79.948602
+60.2.3	40.444299	-79.948634
+end_lane
+lane	60.3
+num_waypoints	3
+lane_width	11
+left_boundary	broken_white
+right_boundary	broken_white
+exit	60.3.3	11.4.1
+60.3.1	40.444073	-79.948525
+60.3.2	40.444191	-79.948563
+60.3.3	40.444336	-79.948603
+end_lane
+end_segment
+segment	61
+num_lanes	2
+segment_name	defaultsegmentname
+lane	61.1
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+61.1.1	40.446705	-79.951948
+61.1.2	40.447135	-79.952143
+end_lane
+lane	61.2
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	61.2.2	18.1.1
+61.2.1	40.447125	-79.952177
+61.2.2	40.446673	-79.951972
+end_lane
+end_segment
+segment	62
+num_lanes	3
+segment_name	defaultsegmentname
+lane	62.1
+num_waypoints	4
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+62.1.1	40.446654	-79.950591
+62.1.2	40.446507	-79.950573
+62.1.3	40.446417	-79.950530
+62.1.4	40.446318	-79.950513
+end_lane
+lane	62.2
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	62.2.2	17.2.1
+62.2.1	40.446516	-79.950537
+62.2.2	40.446656	-79.950555
+end_lane
+lane	62.3
+num_waypoints	3
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	62.3.2	62.2.1
+exit	62.3.3	16.4.1
+exit	62.3.3	63.1.1
+62.3.1	40.446321	-79.950477
+62.3.2	40.446399	-79.950487
+62.3.3	40.446659	-79.950519
+end_lane
+end_segment
+segment	63
+num_lanes	1
+segment_name	defaultsegmentname
+lane	63.1
+num_waypoints	2
+lane_width	12
+left_boundary	broken_white
+right_boundary	broken_white
+63.1.1	40.446961	-79.950617
+63.1.2	40.447487	-79.950931
+end_lane
+end_segment
+segment	64
+num_lanes	3
+segment_name	defaultsegmentname
+lane	64.1
+num_waypoints	2
+lane_width	12
+left_boundary	broken_white
+right_boundary	broken_white
+exit	64.1.2	16.1.1
+64.1.1	40.447358	-79.949273
+64.1.2	40.447110	-79.949120
+end_lane
+lane	64.2
+num_waypoints	2
+lane_width	12
+left_boundary	broken_white
+right_boundary	broken_white
+exit	64.2.2	31.2.1
+exit	64.2.2	15.3.1
+64.2.1	40.447651	-79.949405
+64.2.2	40.447124	-79.949080
+end_lane
+lane	64.3
+num_waypoints	2
+lane_width	12
+left_boundary	broken_white
+right_boundary	broken_white
+64.3.1	40.447138	-79.949041
+64.3.2	40.447665	-79.949366
+end_lane
+end_segment
+segment	65
+num_lanes	3
+segment_name	defaultsegmentname
+lane	65.1
+num_waypoints	4
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	65.1.4	15.1.2
+65.1.1	40.447448	-79.947495
+65.1.2	40.447359	-79.947454
+65.1.3	40.447260	-79.947421
+65.1.4	40.447217	-79.947430
+end_lane
+lane	65.2
+num_waypoints	3
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	65.2.3	66.1.1
+exit	65.2.3	14.3.1
+65.2.1	40.447829	-79.947635
+65.2.2	40.447529	-79.947495
+65.2.3	40.447340	-79.947407
+end_lane
+lane	65.3
+num_waypoints	2
+lane_width	12
+left_boundary	broken_white
+right_boundary	broken_white
+65.3.1	40.447350	-79.947368
+65.3.2	40.447839	-79.947598
+end_lane
+end_segment
+segment	66
+num_lanes	2
+segment_name	defaultsegmentname
+lane	66.1
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+66.1.1	40.446983	-79.947247
+66.1.2	40.446670	-79.947109
+end_lane
+lane	66.2
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	66.2.2	65.3.1
+exit	66.2.2	14.4.1
+66.2.1	40.446679	-79.947075
+66.2.2	40.446977	-79.947207
+end_lane
+end_segment
+segment	67
+num_lanes	4
+segment_name	defaultsegmentname
+lane	67.1
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	67.1.2	68.3.1
+exit	67.1.2	14.1.1
+67.1.1	40.447533	-79.941605
+67.1.2	40.447485	-79.942321
+end_lane
+lane	67.2
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	67.2.2	14.2.1
+67.2.1	40.447505	-79.941602
+67.2.2	40.447458	-79.942318
+end_lane
+lane	67.3
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+67.3.1	40.447430	-79.942315
+67.3.2	40.447478	-79.941599
+end_lane
+lane	67.4
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+67.4.1	40.447403	-79.942311
+67.4.2	40.447451	-79.941595
+end_lane
+end_segment
+segment	68
+num_lanes	3
+segment_name	defaultsegmentname
+lane	68.1
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	68.1.2	14.1.1
+exit	68.1.2	13.1.1
+68.1.1	40.447917	-79.942571
+68.1.2	40.447556	-79.942525
+end_lane
+lane	68.2
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	68.2.2	67.3.1
+68.2.1	40.447920	-79.942535
+68.2.2	40.447655	-79.942501
+end_lane
+lane	68.3
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+68.3.1	40.447584	-79.942456
+68.3.2	40.447923	-79.942500
+end_lane
+end_segment
+segment	69
+num_lanes	2
+segment_name	defaultsegmentname
+lane	69.1
+num_waypoints	2
+lane_width	12
+left_boundary	broken_white
+right_boundary	broken_white
+exit	69.1.2	11.1.1
+69.1.1	40.444755	-79.945687
+69.1.2	40.444655	-79.945687
+end_lane
+lane	69.2
+num_waypoints	2
+lane_width	12
+left_boundary	broken_white
+right_boundary	broken_white
+exit	69.2.2	12.4.1
+69.2.1	40.444755	-79.945644
+69.2.2	40.444655	-79.945644
+end_lane
+end_segment
+segment	70
+num_lanes	3
+segment_name	defaultsegmentname
+lane	70.1
+num_waypoints	6
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+70.1.1	40.437854	-79.964146
+70.1.2	40.437809	-79.964405
+70.1.3	40.437764	-79.964719
+70.1.4	40.437742	-79.964834
+70.1.5	40.437695	-79.964988
+70.1.6	40.437630	-79.965153
+end_lane
+lane	70.2
+num_waypoints	6
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+70.2.1	40.437826	-79.964138
+70.2.2	40.437782	-79.964398
+70.2.3	40.437737	-79.964714
+70.2.4	40.437714	-79.964829
+70.2.5	40.437669	-79.964976
+70.2.6	40.437605	-79.965136
+end_lane
+lane	70.3
+num_waypoints	6
+lane_width	12
+left_boundary	broken_white
+right_boundary	broken_white
+70.3.1	40.437578	-79.965119
+70.3.2	40.437641	-79.964958
+70.3.3	40.437684	-79.964805
+70.3.4	40.437719	-79.964564
+70.3.5	40.437748	-79.964280
+70.3.6	40.437772	-79.964114
+end_lane
+end_segment
+segment	71
+num_lanes	2
+segment_name	defaultsegmentname
+lane	71.1
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	71.1.2	13.3.6
+71.1.1	40.445971	-79.942528
+71.1.2	40.445940	-79.942391
+end_lane
+lane	71.2
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	71.2.2	13.1.6
+71.2.1	40.445945	-79.942539
+71.2.2	40.445914	-79.942402
+end_lane
+end_segment
+segment	72
+num_lanes	1
+segment_name	defaultsegmentname
+lane	72.1
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+72.1.1	40.447340	-79.945379
+72.1.2	40.447797	-79.945432
+end_lane
+end_segment
+segment	73
+num_lanes	2
+segment_name	defaultsegmentname
+lane	73.1
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+73.1.1	40.447400	-79.944166
+73.1.2	40.447591	-79.944177
+end_lane
+lane	73.2
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	73.2.2	14.1.4
+73.2.1	40.447590	-79.944185
+73.2.2	40.447406	-79.944190
+end_lane
+end_segment
+segment	74
+num_lanes	2
+segment_name	defaultsegmentname
+lane	74.1
+num_waypoints	2
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	74.1.2	10.1.3
+74.1.1	40.444437	-79.950278
+74.1.2	40.444166	-79.950260
+end_lane
+lane	74.2
+num_waypoints	3
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+74.2.1	40.444178	-79.950177
+74.2.2	40.444255	-79.950216
+74.2.3	40.444439	-79.950255
+end_lane
+end_segment
+segment	75
+num_lanes	2
+segment_name	defaultsegmentname
+lane	75.1
+num_waypoints	238
+lane_width	12
+checkpoint	75.1.238	7
+exit	75.1.238	76.1.1
+75.1.1	40.438708	-79.946205
+75.1.2	40.438703	-79.946132
+75.1.3	40.438694	-79.946061
+75.1.4	40.438687	-79.946027
+75.1.5	40.438677	-79.945975
+75.1.6	40.438667	-79.945916
+75.1.7	40.438662	-79.945884
+75.1.8	40.438657	-79.945840
+75.1.9	40.438653	-79.945799
+75.1.10	40.438651	-79.945757
+75.1.11	40.438649	-79.945697
+75.1.12	40.438650	-79.945637
+75.1.13	40.438653	-79.945577
+75.1.14	40.438658	-79.945518
+75.1.15	40.438666	-79.945459
+75.1.16	40.438675	-79.945400
+75.1.17	40.438685	-79.945342
+75.1.18	40.438695	-79.945283
+75.1.19	40.438706	-79.945226
+75.1.20	40.438717	-79.945168
+75.1.21	40.438728	-79.945111
+75.1.22	40.438740	-79.945052
+75.1.23	40.438752	-79.944995
+75.1.24	40.438764	-79.944938
+75.1.25	40.438776	-79.944880
+75.1.26	40.438789	-79.944823
+75.1.27	40.438802	-79.944765
+75.1.28	40.438815	-79.944707
+75.1.29	40.438828	-79.944651
+75.1.30	40.438843	-79.944595
+75.1.31	40.438858	-79.944538
+75.1.32	40.438876	-79.944483
+75.1.33	40.438895	-79.944428
+75.1.34	40.438917	-79.944376
+75.1.35	40.438941	-79.944326
+75.1.36	40.438968	-79.944277
+75.1.37	40.438996	-79.944231
+75.1.38	40.439026	-79.944186
+75.1.39	40.439058	-79.944144
+75.1.40	40.439092	-79.944104
+75.1.41	40.439127	-79.944065
+75.1.42	40.439163	-79.944028
+75.1.43	40.439200	-79.943992
+75.1.44	40.439236	-79.943957
+75.1.45	40.439273	-79.943922
+75.1.46	40.439309	-79.943886
+75.1.47	40.439345	-79.943851
+75.1.48	40.439382	-79.943815
+75.1.49	40.439418	-79.943780
+75.1.50	40.439455	-79.943744
+75.1.51	40.439491	-79.943708
+75.1.52	40.439528	-79.943672
+75.1.53	40.439564	-79.943637
+75.1.54	40.439601	-79.943601
+75.1.55	40.439637	-79.943565
+75.1.56	40.439674	-79.943529
+75.1.57	40.439711	-79.943494
+75.1.58	40.439747	-79.943458
+75.1.59	40.439784	-79.943422
+75.1.60	40.439820	-79.943386
+75.1.61	40.439856	-79.943350
+75.1.62	40.439891	-79.943312
+75.1.63	40.439926	-79.943272
+75.1.64	40.439958	-79.943230
+75.1.65	40.439988	-79.943185
+75.1.66	40.440016	-79.943138
+75.1.67	40.440042	-79.943088
+75.1.68	40.440065	-79.943037
+75.1.69	40.440086	-79.942985
+75.1.70	40.440105	-79.942931
+75.1.71	40.440121	-79.942875
+75.1.72	40.440135	-79.942819
+75.1.73	40.440147	-79.942762
+75.1.74	40.440157	-79.942703
+75.1.75	40.440163	-79.942643
+75.1.76	40.440166	-79.942584
+75.1.77	40.440167	-79.942524
+75.1.78	40.440164	-79.942464
+75.1.79	40.440159	-79.942405
+75.1.80	40.440151	-79.942346
+75.1.81	40.440140	-79.942288
+75.1.82	40.440127	-79.942230
+75.1.83	40.440111	-79.942174
+75.1.84	40.440093	-79.942119
+75.1.85	40.440073	-79.942066
+75.1.86	40.440051	-79.942014
+75.1.87	40.440026	-79.941963
+75.1.88	40.440000	-79.941914
+75.1.89	40.439972	-79.941866
+75.1.90	40.439944	-79.941820
+75.1.91	40.439916	-79.941774
+75.1.92	40.439886	-79.941728
+75.1.93	40.439856	-79.941683
+75.1.94	40.439826	-79.941638
+75.1.95	40.439795	-79.941594
+75.1.96	40.439764	-79.941551
+75.1.97	40.439731	-79.941510
+75.1.98	40.439697	-79.941470
+75.1.99	40.439662	-79.941432
+75.1.100	40.439626	-79.941396
+75.1.101	40.439588	-79.941363
+75.1.102	40.439550	-79.941331
+75.1.103	40.439511	-79.941301
+75.1.104	40.439472	-79.941270
+75.1.105	40.439433	-79.941240
+75.1.106	40.439393	-79.941210
+75.1.107	40.439354	-79.941180
+75.1.108	40.439314	-79.941150
+75.1.109	40.439275	-79.941121
+75.1.110	40.439235	-79.941090
+75.1.111	40.439195	-79.941060
+75.1.112	40.439157	-79.941031
+75.1.113	40.439117	-79.941001
+75.1.114	40.439078	-79.940971
+75.1.115	40.439039	-79.940940
+75.1.116	40.439000	-79.940908
+75.1.117	40.438963	-79.940874
+75.1.118	40.438928	-79.940836
+75.1.119	40.438895	-79.940795
+75.1.120	40.438864	-79.940750
+75.1.121	40.438837	-79.940702
+75.1.122	40.438813	-79.940651
+75.1.123	40.438790	-79.940599
+75.1.124	40.438768	-79.940547
+75.1.125	40.438747	-79.940493
+75.1.126	40.438728	-79.940439
+75.1.127	40.438712	-79.940384
+75.1.128	40.438699	-79.940327
+75.1.129	40.438690	-79.940268
+75.1.130	40.438685	-79.940209
+75.1.131	40.438684	-79.940149
+75.1.132	40.438685	-79.940089
+75.1.133	40.438688	-79.940030
+75.1.134	40.438690	-79.939970
+75.1.135	40.438690	-79.939911
+75.1.136	40.438690	-79.939851
+75.1.137	40.438688	-79.939791
+75.1.138	40.438685	-79.939731
+75.1.139	40.438679	-79.939672
+75.1.140	40.438672	-79.939612
+75.1.141	40.438663	-79.939554
+75.1.142	40.438652	-79.939495
+75.1.143	40.438641	-79.939438
+75.1.144	40.438628	-79.939381
+75.1.145	40.438615	-79.939323
+75.1.146	40.438602	-79.939266
+75.1.147	40.438588	-79.939208
+75.1.148	40.438573	-79.939152
+75.1.149	40.438559	-79.939095
+75.1.150	40.438544	-79.939038
+75.1.151	40.438529	-79.938982
+75.1.152	40.438514	-79.938925
+75.1.153	40.438498	-79.938868
+75.1.154	40.438483	-79.938813
+75.1.155	40.438467	-79.938757
+75.1.156	40.438450	-79.938700
+75.1.157	40.438434	-79.938644
+75.1.158	40.438417	-79.938587
+75.1.159	40.438400	-79.938532
+75.1.160	40.438383	-79.938478
+75.1.161	40.438365	-79.938423
+75.1.162	40.438348	-79.938368
+75.1.163	40.438330	-79.938313
+75.1.164	40.438311	-79.938258
+75.1.165	40.438293	-79.938203
+75.1.166	40.438274	-79.938148
+75.1.167	40.438255	-79.938094
+75.1.168	40.438236	-79.938039
+75.1.169	40.438216	-79.937985
+75.1.170	40.438196	-79.937931
+75.1.171	40.438176	-79.937877
+75.1.172	40.438156	-79.937823
+75.1.173	40.438135	-79.937770
+75.1.174	40.438114	-79.937717
+75.1.175	40.438094	-79.937664
+75.1.176	40.438073	-79.937611
+75.1.177	40.438052	-79.937559
+75.1.178	40.438031	-79.937506
+75.1.179	40.438011	-79.937453
+75.1.180	40.437990	-79.937401
+75.1.181	40.437970	-79.937348
+75.1.182	40.437950	-79.937295
+75.1.183	40.437930	-79.937240
+75.1.184	40.437910	-79.937185
+75.1.185	40.437890	-79.937130
+75.1.186	40.437871	-79.937075
+75.1.187	40.437852	-79.937020
+75.1.188	40.437833	-79.936965
+75.1.189	40.437814	-79.936911
+75.1.190	40.437796	-79.936856
+75.1.191	40.437778	-79.936800
+75.1.192	40.437760	-79.936745
+75.1.193	40.437743	-79.936690
+75.1.194	40.437725	-79.936634
+75.1.195	40.437708	-79.936579
+75.1.196	40.437691	-79.936523
+75.1.197	40.437675	-79.936467
+75.1.198	40.437659	-79.936411
+75.1.199	40.437643	-79.936355
+75.1.200	40.437628	-79.936300
+75.1.201	40.437613	-79.936243
+75.1.202	40.437599	-79.936185
+75.1.203	40.437586	-79.936128
+75.1.204	40.437575	-79.936070
+75.1.205	40.437565	-79.936012
+75.1.206	40.437558	-79.935954
+75.1.207	40.437551	-79.935895
+75.1.208	40.437547	-79.935836
+75.1.209	40.437544	-79.935777
+75.1.210	40.437543	-79.935718
+75.1.211	40.437543	-79.935658
+75.1.212	40.437545	-79.935599
+75.1.213	40.437548	-79.935539
+75.1.214	40.437553	-79.935481
+75.1.215	40.437559	-79.935421
+75.1.216	40.437567	-79.935361
+75.1.217	40.437577	-79.935303
+75.1.218	40.437587	-79.935244
+75.1.219	40.437598	-79.935186
+75.1.220	40.437609	-79.935129
+75.1.221	40.437621	-79.935070
+75.1.222	40.437632	-79.935012
+75.1.223	40.437643	-79.934954
+75.1.224	40.437652	-79.934896
+75.1.225	40.437660	-79.934838
+75.1.226	40.437666	-79.934779
+75.1.227	40.437671	-79.934719
+75.1.228	40.437675	-79.934660
+75.1.229	40.437678	-79.934600
+75.1.230	40.437680	-79.934540
+75.1.231	40.437682	-79.934480
+75.1.232	40.437683	-79.934420
+75.1.233	40.437684	-79.934361
+75.1.234	40.437685	-79.934161
+75.1.235	40.437684	-79.933836
+75.1.236	40.437689	-79.933400
+75.1.237	40.437693	-79.933292
+75.1.238	40.437707	-79.933217
+end_lane
+lane	75.2
+num_waypoints	234
+lane_width	10
+checkpoint	75.2.7	4
+checkpoint	75.2.234	2
+exit	75.2.234	77.2.1
+exit	75.2.155	83.1.1
+75.2.1	40.437814	-79.933266
+75.2.2	40.437770	-79.933319
+75.2.3	40.437741	-79.933402
+75.2.4	40.437725	-79.933577
+75.2.5	40.437720	-79.933841
+75.2.6	40.437719	-79.934158
+75.2.7	40.437717	-79.934361
+75.2.8	40.437716	-79.934421
+75.2.9	40.437715	-79.934481
+75.2.10	40.437713	-79.934542
+75.2.11	40.437711	-79.934602
+75.2.12	40.437708	-79.934663
+75.2.13	40.437704	-79.934723
+75.2.14	40.437699	-79.934784
+75.2.15	40.437692	-79.934844
+75.2.16	40.437684	-79.934903
+75.2.17	40.437675	-79.934962
+75.2.18	40.437664	-79.935022
+75.2.19	40.437653	-79.935081
+75.2.20	40.437641	-79.935140
+75.2.21	40.437629	-79.935197
+75.2.22	40.437619	-79.935255
+75.2.23	40.437609	-79.935312
+75.2.24	40.437600	-79.935370
+75.2.25	40.437592	-79.935428
+75.2.26	40.437585	-79.935487
+75.2.27	40.437581	-79.935544
+75.2.28	40.437578	-79.935602
+75.2.29	40.437576	-79.935660
+75.2.30	40.437576	-79.935718
+75.2.31	40.437577	-79.935776
+75.2.32	40.437580	-79.935834
+75.2.33	40.437584	-79.935891
+75.2.34	40.437590	-79.935948
+75.2.35	40.437598	-79.936005
+75.2.36	40.437607	-79.936061
+75.2.37	40.437618	-79.936117
+75.2.38	40.437631	-79.936173
+75.2.39	40.437644	-79.936230
+75.2.40	40.437659	-79.936286
+75.2.41	40.437674	-79.936341
+75.2.42	40.437689	-79.936396
+75.2.43	40.437706	-79.936451
+75.2.44	40.437722	-79.936507
+75.2.45	40.437739	-79.936563
+75.2.46	40.437756	-79.936618
+75.2.47	40.437773	-79.936674
+75.2.48	40.437791	-79.936729
+75.2.49	40.437808	-79.936784
+75.2.50	40.437827	-79.936839
+75.2.51	40.437845	-79.936894
+75.2.52	40.437863	-79.936948
+75.2.53	40.437882	-79.937003
+75.2.54	40.437901	-79.937057
+75.2.55	40.437920	-79.937112
+75.2.56	40.437940	-79.937167
+75.2.57	40.437960	-79.937222
+75.2.58	40.437980	-79.937276
+75.2.59	40.438000	-79.937329
+75.2.60	40.438020	-79.937381
+75.2.61	40.438040	-79.937434
+75.2.62	40.438061	-79.937486
+75.2.63	40.438081	-79.937539
+75.2.64	40.438102	-79.937591
+75.2.65	40.438123	-79.937644
+75.2.66	40.438144	-79.937697
+75.2.67	40.438164	-79.937751
+75.2.68	40.438185	-79.937804
+75.2.69	40.438205	-79.937858
+75.2.70	40.438226	-79.937912
+75.2.71	40.438246	-79.937966
+75.2.72	40.438265	-79.938021
+75.2.73	40.438285	-79.938076
+75.2.74	40.438304	-79.938130
+75.2.75	40.438323	-79.938185
+75.2.76	40.438341	-79.938241
+75.2.77	40.438360	-79.938296
+75.2.78	40.438378	-79.938351
+75.2.79	40.438396	-79.938406
+75.2.80	40.438413	-79.938461
+75.2.81	40.438430	-79.938516
+75.2.82	40.438447	-79.938571
+75.2.83	40.438464	-79.938628
+75.2.84	40.438481	-79.938685
+75.2.85	40.438498	-79.938741
+75.2.86	40.438514	-79.938798
+75.2.87	40.438529	-79.938854
+75.2.88	40.438545	-79.938911
+75.2.89	40.438560	-79.938968
+75.2.90	40.438575	-79.939024
+75.2.91	40.438590	-79.939081
+75.2.92	40.438604	-79.939138
+75.2.93	40.438619	-79.939195
+75.2.94	40.438633	-79.939252
+75.2.95	40.438647	-79.939310
+75.2.96	40.438660	-79.939368
+75.2.97	40.438673	-79.939426
+75.2.98	40.438684	-79.939485
+75.2.99	40.438695	-79.939544
+75.2.100	40.438704	-79.939604
+75.2.101	40.438712	-79.939665
+75.2.102	40.438717	-79.939726
+75.2.103	40.438721	-79.939787
+75.2.104	40.438723	-79.939849
+75.2.105	40.438723	-79.939910
+75.2.106	40.438723	-79.939971
+75.2.107	40.438721	-79.940032
+75.2.108	40.438718	-79.940091
+75.2.109	40.438717	-79.940150
+75.2.110	40.438718	-79.940208
+75.2.111	40.438723	-79.940263
+75.2.112	40.438731	-79.940319
+75.2.113	40.438743	-79.940372
+75.2.114	40.438758	-79.940424
+75.2.115	40.438777	-79.940475
+75.2.116	40.438797	-79.940527
+75.2.117	40.438818	-79.940579
+75.2.118	40.438841	-79.940629
+75.2.119	40.438865	-79.940678
+75.2.120	40.438891	-79.940724
+75.2.121	40.438919	-79.940766
+75.2.122	40.438950	-79.940805
+75.2.123	40.438984	-79.940840
+75.2.124	40.439019	-79.940873
+75.2.125	40.439057	-79.940904
+75.2.126	40.439095	-79.940934
+75.2.127	40.439134	-79.940964
+75.2.128	40.439173	-79.940993
+75.2.129	40.439212	-79.941023
+75.2.130	40.439252	-79.941053
+75.2.131	40.439291	-79.941083
+75.2.132	40.439331	-79.941113
+75.2.133	40.439370	-79.941142
+75.2.134	40.439410	-79.941172
+75.2.135	40.439449	-79.941203
+75.2.136	40.439489	-79.941233
+75.2.137	40.439528	-79.941264
+75.2.138	40.439567	-79.941294
+75.2.139	40.439606	-79.941326
+75.2.140	40.439645	-79.941360
+75.2.141	40.439682	-79.941397
+75.2.142	40.439718	-79.941437
+75.2.143	40.439753	-79.941478
+75.2.144	40.439787	-79.941521
+75.2.145	40.439819	-79.941564
+75.2.146	40.439850	-79.941609
+75.2.147	40.439881	-79.941654
+75.2.148	40.439911	-79.941699
+75.2.149	40.439941	-79.941746
+75.2.150	40.439970	-79.941793
+75.2.151	40.439998	-79.941840
+75.2.152	40.440026	-79.941888
+75.2.153	40.440053	-79.941938
+75.2.154	40.440079	-79.941991
+75.2.155	40.440102	-79.942045
+75.2.156	40.440123	-79.942100
+75.2.157	40.440142	-79.942157
+75.2.158	40.440158	-79.942216
+75.2.159	40.440172	-79.942276
+75.2.160	40.440183	-79.942336
+75.2.161	40.440191	-79.942398
+75.2.162	40.440197	-79.942459
+75.2.163	40.440200	-79.942522
+75.2.164	40.440199	-79.942584
+75.2.165	40.440196	-79.942647
+75.2.166	40.440189	-79.942709
+75.2.167	40.440180	-79.942770
+75.2.168	40.440167	-79.942830
+75.2.169	40.440152	-79.942889
+75.2.170	40.440135	-79.942946
+75.2.171	40.440116	-79.943003
+75.2.172	40.440094	-79.943057
+75.2.173	40.440070	-79.943110
+75.2.174	40.440044	-79.943162
+75.2.175	40.440014	-79.943211
+75.2.176	40.439983	-79.943258
+75.2.177	40.439949	-79.943303
+75.2.178	40.439913	-79.943344
+75.2.179	40.439877	-79.943383
+75.2.180	40.439840	-79.943421
+75.2.181	40.439803	-79.943457
+75.2.182	40.439766	-79.943493
+75.2.183	40.439730	-79.943528
+75.2.184	40.439694	-79.943564
+75.2.185	40.439657	-79.943600
+75.2.186	40.439620	-79.943636
+75.2.187	40.439584	-79.943671
+75.2.188	40.439548	-79.943707
+75.2.189	40.439511	-79.943742
+75.2.190	40.439475	-79.943778
+75.2.191	40.439438	-79.943814
+75.2.192	40.439401	-79.943850
+75.2.193	40.439365	-79.943885
+75.2.194	40.439329	-79.943921
+75.2.195	40.439292	-79.943956
+75.2.196	40.439256	-79.943991
+75.2.197	40.439219	-79.944027
+75.2.198	40.439183	-79.944063
+75.2.199	40.439148	-79.944099
+75.2.200	40.439113	-79.944137
+75.2.201	40.439080	-79.944176
+75.2.202	40.439050	-79.944217
+75.2.203	40.439021	-79.944260
+75.2.204	40.438993	-79.944304
+75.2.205	40.438968	-79.944351
+75.2.206	40.438945	-79.944399
+75.2.207	40.438924	-79.944449
+75.2.208	40.438905	-79.944501
+75.2.209	40.438889	-79.944554
+75.2.210	40.438874	-79.944609
+75.2.211	40.438860	-79.944665
+75.2.212	40.438847	-79.944720
+75.2.213	40.438833	-79.944777
+75.2.214	40.438821	-79.944835
+75.2.215	40.438808	-79.944892
+75.2.216	40.438795	-79.944950
+75.2.217	40.438783	-79.945007
+75.2.218	40.438771	-79.945064
+75.2.219	40.438760	-79.945122
+75.2.220	40.438749	-79.945179
+75.2.221	40.438738	-79.945236
+75.2.222	40.438727	-79.945293
+75.2.223	40.438717	-79.945352
+75.2.224	40.438707	-79.945409
+75.2.225	40.438698	-79.945468
+75.2.226	40.438691	-79.945525
+75.2.227	40.438686	-79.945582
+75.2.228	40.438683	-79.945640
+75.2.229	40.438691	-79.945815
+75.2.230	40.438705	-79.945938
+75.2.231	40.438729	-79.946053
+75.2.232	40.438758	-79.946161
+75.2.233	40.438794	-79.946255
+75.2.234	40.438831	-79.946328
+end_lane
+end_segment
+segment	76
+num_lanes	2
+lane	76.1
+num_waypoints	9
+lane_width	10
+left_boundary	broken_white
+right_boundary	broken_white
+exit	76.1.9	79.1.1
+exit	76.1.9	80.1.1
+76.1.1	40.437961	-79.933228
+76.1.2	40.438581	-79.933797
+76.1.3	40.439286	-79.934456
+76.1.4	40.439973	-79.935087
+76.1.5	40.440250	-79.935346
+76.1.6	40.440633	-79.935701
+76.1.7	40.441317	-79.936326
+76.1.8	40.441946	-79.936908
+76.1.9	40.442598	-79.937512
+end_lane
+lane	76.2
+num_waypoints	8
+lane_width	9
+left_boundary	double_yellow
+right_boundary	none
+exit	76.2.8	75.2.1
+76.2.1	40.442582	-79.937540
+76.2.2	40.441924	-79.936930
+76.2.3	40.441302	-79.936355
+76.2.4	40.440617	-79.935729
+76.2.5	40.439958	-79.935115
+76.2.6	40.439271	-79.934484
+76.2.7	40.438565	-79.933824
+76.2.8	40.437945	-79.933257
+end_lane
+end_segment
+segment	77
+num_lanes	2
+segment_name	defaultsegmentname
+lane	77.1
+num_waypoints	32
+lane_width	12
+exit	77.1.32	75.1.1
+exit	77.1.32	78.1.1
+77.1.1	40.442299	-79.951510
+77.1.2	40.442229	-79.951255
+77.1.3	40.442169	-79.951031
+77.1.4	40.442097	-79.950769
+77.1.5	40.441927	-79.950349
+77.1.6	40.441793	-79.950109
+77.1.7	40.441655	-79.949862
+77.1.8	40.441428	-79.949450
+77.1.9	40.441213	-79.949050
+77.1.10	40.441094	-79.948832
+77.1.11	40.440954	-79.948576
+77.1.12	40.440818	-79.948327
+77.1.13	40.440699	-79.948120
+77.1.14	40.440547	-79.947867
+77.1.15	40.440395	-79.947633
+77.1.16	40.440259	-79.947447
+77.1.17	40.440099	-79.947240
+77.1.18	40.439948	-79.947066
+77.1.19	40.439916	-79.947029
+77.1.20	40.439885	-79.946998
+77.1.21	40.439831	-79.946950
+77.1.22	40.439704	-79.946857
+77.1.23	40.439603	-79.946806
+77.1.24	40.439250	-79.946687
+77.1.25	40.439226	-79.946677
+77.1.26	40.439202	-79.946664
+77.1.27	40.439027	-79.946574
+77.1.28	40.438904	-79.946508
+77.1.29	40.438860	-79.946489
+77.1.30	40.438835	-79.946480
+77.1.31	40.438786	-79.946467
+77.1.32	40.438757	-79.946462
+end_lane
+lane	77.2
+num_waypoints	52
+lane_width	14
+checkpoint	77.2.1	5
+checkpoint	77.2.52	6
+exit	77.2.52	59.1.1
+77.2.1	40.438878	-79.946393
+77.2.2	40.438966	-79.946474
+77.2.3	40.439052	-79.946527
+77.2.4	40.439146	-79.946578
+77.2.5	40.439256	-79.946628
+77.2.6	40.439370	-79.946668
+77.2.7	40.439472	-79.946698
+77.2.8	40.439562	-79.946721
+77.2.9	40.439667	-79.946744
+77.2.10	40.439767	-79.946766
+77.2.11	40.439857	-79.946792
+77.2.12	40.439976	-79.946839
+77.2.13	40.440071	-79.946887
+77.2.14	40.440152	-79.946949
+77.2.15	40.440234	-79.947037
+77.2.16	40.440313	-79.947160
+77.2.17	40.440367	-79.947264
+77.2.18	40.440418	-79.947362
+77.2.19	40.440472	-79.947465
+77.2.20	40.440543	-79.947602
+77.2.21	40.440602	-79.947715
+77.2.22	40.440656	-79.947818
+77.2.23	40.440709	-79.947924
+77.2.24	40.440767	-79.948042
+77.2.25	40.440816	-79.948146
+77.2.26	40.440864	-79.948253
+77.2.27	40.440914	-79.948361
+77.2.28	40.440965	-79.948468
+77.2.29	40.441034	-79.948609
+77.2.30	40.441095	-79.948731
+77.2.31	40.441149	-79.948835
+77.2.32	40.441209	-79.948950
+77.2.33	40.441272	-79.949071
+77.2.34	40.441332	-79.949184
+77.2.35	40.441386	-79.949287
+77.2.36	40.441515	-79.949529
+77.2.37	40.441568	-79.949628
+77.2.38	40.441620	-79.949726
+77.2.39	40.441690	-79.949851
+77.2.40	40.441774	-79.950001
+77.2.41	40.441841	-79.950119
+77.2.42	40.441897	-79.950218
+77.2.43	40.441951	-79.950316
+77.2.44	40.442003	-79.950419
+77.2.45	40.442052	-79.950533
+77.2.46	40.442093	-79.950643
+77.2.47	40.442128	-79.950754
+77.2.48	40.442196	-79.950993
+77.2.49	40.442229	-79.951103
+77.2.50	40.442277	-79.951212
+77.2.51	40.442334	-79.951326
+77.2.52	40.442386	-79.951500
+end_lane
+end_segment
+segment	78
+num_lanes	2
+segment_name	defaultsegmentname
+lane	78.1
+num_waypoints	3
+lane_width	10
+78.1.1	40.438575	-79.946599
+78.1.2	40.438474	-79.946727
+78.1.3	40.438416	-79.946803
+end_lane
+lane	78.2
+num_waypoints	3
+lane_width	10
+exit	78.2.3	75.1.1
+exit	78.2.3	77.2.1
+78.2.1	40.438398	-79.946777
+78.2.2	40.438453	-79.946704
+78.2.3	40.438556	-79.946573
+end_lane
+end_segment
+segment	79
+num_lanes	3
+segment_name	defaultsegmentname
+lane	79.1
+num_waypoints	4
+lane_width	9
+exit	79.1.4	30.1.1
+exit	79.1.4	30.2.1
+exit	79.1.4	81.2.1
+79.1.1	40.442760	-79.937664
+79.1.2	40.442911	-79.937802
+79.1.3	40.443311	-79.938174
+79.1.4	40.443812	-79.938649
+end_lane
+lane	79.2
+num_waypoints	11
+lane_width	9
+exit	79.2.7	79.3.1
+exit	79.2.11	76.2.1
+79.2.1	40.443796	-79.938676
+79.2.2	40.443549	-79.938441
+79.2.3	40.443458	-79.938356
+79.2.4	40.443371	-79.938270
+79.2.5	40.443275	-79.938182
+79.2.6	40.443186	-79.938096
+79.2.7	40.443119	-79.938035
+79.2.8	40.443089	-79.938007
+79.2.9	40.443026	-79.937947
+79.2.10	40.442874	-79.937808
+79.2.11	40.442747	-79.937692
+end_lane
+lane	79.3
+num_waypoints	3
+lane_width	9
+exit	79.3.3	80.1.1
+79.3.1	40.443015	-79.937979
+79.3.2	40.442854	-79.937830
+79.3.3	40.442733	-79.937717
+end_lane
+end_segment
+segment	80
+num_lanes	2
+segment_name	defaultsegmentname
+lane	80.1
+num_waypoints	33
+lane_width	9
+left_boundary	double_yellow
+right_boundary	broken_white
+exit	80.1.33	85.2.1
+80.1.1	40.442601	-79.937783
+80.1.2	40.442578	-79.937835
+80.1.3	40.442555	-79.937888
+80.1.4	40.442533	-79.937940
+80.1.5	40.442510	-79.937991
+80.1.6	40.442488	-79.938043
+80.1.7	40.442466	-79.938094
+80.1.8	40.442443	-79.938148
+80.1.9	40.442420	-79.938200
+80.1.10	40.442397	-79.938253
+80.1.11	40.442375	-79.938305
+80.1.12	40.442352	-79.938357
+80.1.13	40.442330	-79.938409
+80.1.14	40.442307	-79.938464
+80.1.15	40.442286	-79.938515
+80.1.16	40.442264	-79.938567
+80.1.17	40.442242	-79.938620
+80.1.18	40.442220	-79.938672
+80.1.19	40.442198	-79.938725
+80.1.20	40.442174	-79.938780
+80.1.21	40.442151	-79.938835
+80.1.22	40.442130	-79.938887
+80.1.23	40.442107	-79.938939
+80.1.24	40.442085	-79.938992
+80.1.25	40.442060	-79.939050
+80.1.26	40.442039	-79.939103
+80.1.27	40.442017	-79.939157
+80.1.28	40.441994	-79.939210
+80.1.29	40.441972	-79.939264
+80.1.30	40.441950	-79.939316
+80.1.31	40.441929	-79.939368
+80.1.32	40.441907	-79.939421
+80.1.33	40.441889	-79.939463
+end_lane
+lane	80.2
+num_waypoints	33
+lane_width	9
+left_boundary	double_yellow
+right_boundary	broken_white
+stop	80.2.33
+exit	80.2.33	76.2.1
+exit	80.2.33	79.1.1
+80.2.1	40.441861	-79.939444
+80.2.2	40.441884	-79.939391
+80.2.3	40.441907	-79.939339
+80.2.4	40.441930	-79.939287
+80.2.5	40.441953	-79.939234
+80.2.6	40.441977	-79.939181
+80.2.7	40.441999	-79.939129
+80.2.8	40.442022	-79.939077
+80.2.9	40.442044	-79.939023
+80.2.10	40.442066	-79.938971
+80.2.11	40.442087	-79.938919
+80.2.12	40.442109	-79.938866
+80.2.13	40.442131	-79.938814
+80.2.14	40.442161	-79.938744
+80.2.15	40.442183	-79.938691
+80.2.16	40.442205	-79.938638
+80.2.17	40.442227	-79.938586
+80.2.18	40.442250	-79.938532
+80.2.19	40.442272	-79.938480
+80.2.20	40.442294	-79.938428
+80.2.21	40.442316	-79.938376
+80.2.22	40.442339	-79.938321
+80.2.23	40.442361	-79.938268
+80.2.24	40.442384	-79.938215
+80.2.25	40.442406	-79.938163
+80.2.26	40.442428	-79.938110
+80.2.27	40.442450	-79.938058
+80.2.28	40.442473	-79.938003
+80.2.29	40.442495	-79.937951
+80.2.30	40.442516	-79.937899
+80.2.31	40.442538	-79.937847
+80.2.32	40.442560	-79.937794
+80.2.33	40.442577	-79.937754
+end_lane
+end_segment
+segment	81
+num_lanes	2
+segment_name	defaultsegmentname
+lane	81.1
+num_waypoints	2
+lane_width	14
+exit	81.1.2	30.1.1
+exit	81.1.2	30.2.1
+exit	81.1.2	79.2.1
+81.1.1	40.444146	-79.938326
+81.1.2	40.444004	-79.938654
+end_lane
+lane	81.2
+num_waypoints	2
+lane_width	14
+81.2.1	40.443968	-79.938629
+81.2.2	40.444110	-79.938298
+end_lane
+end_segment
+segment	82
+num_lanes	1
+segment_name	defaultsegmentname
+lane	82.1
+num_waypoints	2
+lane_width	10
+exit	82.1.2	67.4.1
+exit	82.1.2	13.1.1
+82.1.1	40.447379	-79.942559
+82.1.2	40.447382	-79.942528
+end_lane
+end_segment
+segment	83
+num_lanes	2
+segment_name	defaultsegmentname
+lane	83.1
+num_waypoints	31
+lane_width	10
+stop	83.1.31
+exit	83.1.31	84.1.1
+83.1.1	40.440292	-79.942182
+83.1.2	40.440331	-79.942164
+83.1.3	40.440377	-79.942145
+83.1.4	40.440420	-79.942126
+83.1.5	40.440465	-79.942106
+83.1.6	40.440509	-79.942086
+83.1.7	40.440553	-79.942067
+83.1.8	40.440596	-79.942048
+83.1.9	40.440639	-79.942030
+83.1.10	40.440683	-79.942010
+83.1.11	40.440733	-79.941988
+83.1.12	40.440782	-79.941967
+83.1.13	40.440826	-79.941947
+83.1.14	40.440874	-79.941926
+83.1.15	40.440918	-79.941907
+83.1.16	40.440961	-79.941889
+83.1.17	40.441004	-79.941871
+83.1.18	40.441052	-79.941851
+83.1.19	40.441097	-79.941831
+83.1.20	40.441140	-79.941813
+83.1.21	40.441184	-79.941794
+83.1.22	40.441229	-79.941774
+83.1.23	40.441272	-79.941756
+83.1.24	40.441316	-79.941737
+83.1.25	40.441362	-79.941716
+83.1.26	40.441405	-79.941697
+83.1.27	40.441449	-79.941677
+83.1.28	40.441492	-79.941657
+83.1.29	40.441537	-79.941635
+83.1.30	40.441579	-79.941615
+83.1.31	40.441621	-79.941593
+end_lane
+lane	83.2
+num_waypoints	31
+lane_width	10
+exit	83.2.31	75.1.84
+83.2.1	40.441617	-79.941644
+83.2.2	40.441574	-79.941664
+83.2.3	40.441531	-79.941683
+83.2.4	40.441482	-79.941704
+83.2.5	40.441437	-79.941723
+83.2.6	40.441393	-79.941741
+83.2.7	40.441348	-79.941760
+83.2.8	40.441305	-79.941779
+83.2.9	40.441259	-79.941798
+83.2.10	40.441215	-79.941817
+83.2.11	40.441173	-79.941836
+83.2.12	40.441128	-79.941855
+83.2.13	40.441083	-79.941874
+83.2.14	40.441040	-79.941893
+83.2.15	40.440996	-79.941912
+83.2.16	40.440953	-79.941931
+83.2.17	40.440909	-79.941951
+83.2.18	40.440866	-79.941971
+83.2.19	40.440822	-79.941992
+83.2.20	40.440780	-79.942012
+83.2.21	40.440737	-79.942031
+83.2.22	40.440694	-79.942051
+83.2.23	40.440651	-79.942071
+83.2.24	40.440608	-79.942090
+83.2.25	40.440564	-79.942111
+83.2.26	40.440521	-79.942131
+83.2.27	40.440479	-79.942152
+83.2.28	40.440437	-79.942174
+83.2.29	40.440394	-79.942194
+83.2.30	40.440351	-79.942214
+83.2.31	40.440309	-79.942235
+end_lane
+end_segment
+segment	84
+num_lanes	2
+segment_name	defaultsegmentname
+lane	84.1
+num_waypoints	20
+lane_width	10
+stop	84.1.20
+checkpoint	84.1.10	13
+exit	84.1.20	85.1.1
+84.1.1	40.441695	-79.941406
+84.1.2	40.441683	-79.941340
+84.1.3	40.441671	-79.941275
+84.1.4	40.441659	-79.941218
+84.1.5	40.441647	-79.941161
+84.1.6	40.441635	-79.941097
+84.1.7	40.441623	-79.941039
+84.1.8	40.441610	-79.940977
+84.1.9	40.441596	-79.940919
+84.1.10	40.441583	-79.940861
+84.1.11	40.441567	-79.940795
+84.1.12	40.441554	-79.940738
+84.1.13	40.441541	-79.940681
+84.1.14	40.441528	-79.940624
+84.1.15	40.441516	-79.940566
+84.1.16	40.441503	-79.940508
+84.1.17	40.441491	-79.940451
+84.1.18	40.441483	-79.940393
+84.1.19	40.441490	-79.940335
+84.1.20	40.441511	-79.940282
+end_lane
+lane	84.2
+num_waypoints	19
+lane_width	10
+exit	84.2.19	83.2.1
+84.2.1	40.441536	-79.940297
+84.2.2	40.441524	-79.940355
+84.2.3	40.441525	-79.940415
+84.2.4	40.441534	-79.940476
+84.2.5	40.441546	-79.940534
+84.2.6	40.441559	-79.940595
+84.2.7	40.441571	-79.940653
+84.2.8	40.441583	-79.940711
+84.2.9	40.441595	-79.940768
+84.2.10	40.441609	-79.940831
+84.2.11	40.441622	-79.940893
+84.2.12	40.441633	-79.940950
+84.2.13	40.441646	-79.941014
+84.2.14	40.441659	-79.941078
+84.2.15	40.441671	-79.941136
+84.2.16	40.441682	-79.941194
+84.2.17	40.441694	-79.941252
+84.2.18	40.441705	-79.941309
+84.2.19	40.441722	-79.941397
+end_lane
+end_segment
+segment	85
+num_lanes	2
+segment_name	defaultsegmentname
+lane	85.1
+num_waypoints	13
+lane_width	9
+left_boundary	double_yellow
+right_boundary	broken_white
+exit	85.1.13	80.2.1
+85.1.1	40.441559	-79.940172
+85.1.2	40.441580	-79.940120
+85.1.3	40.441602	-79.940067
+85.1.4	40.441623	-79.940015
+85.1.5	40.441646	-79.939959
+85.1.6	40.441671	-79.939898
+85.1.7	40.441693	-79.939844
+85.1.8	40.441716	-79.939786
+85.1.9	40.441739	-79.939735
+85.1.10	40.441761	-79.939682
+85.1.11	40.441783	-79.939631
+85.1.12	40.441805	-79.939578
+85.1.13	40.441826	-79.939526
+end_lane
+lane	85.2
+num_waypoints	13
+lane_width	10
+exit	85.2.13	84.2.1
+85.2.1	40.441853	-79.939551
+85.2.2	40.441831	-79.939604
+85.2.3	40.441807	-79.939659
+85.2.4	40.441785	-79.939712
+85.2.5	40.441762	-79.939764
+85.2.6	40.441738	-79.939818
+85.2.7	40.441715	-79.939870
+85.2.8	40.441692	-79.939922
+85.2.9	40.441669	-79.939974
+85.2.10	40.441647	-79.940026
+85.2.11	40.441625	-79.940079
+85.2.12	40.441604	-79.940131
+85.2.13	40.441582	-79.940183
+end_lane
+end_segment
+end_file
