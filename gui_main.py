@@ -16,7 +16,7 @@ class WorldviewWidget(Widget):
         
         with self.canvas:
             Color(1, 0, 0, 1, mode='rgba')
-            self.rect = Rectangle(size=???, pos=???)
+            self.rect = Rectangle(size=(640, 480), pos=(200,200))
 
 
 class JFROCS_App(App):
