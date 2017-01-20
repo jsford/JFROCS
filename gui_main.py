@@ -12,12 +12,19 @@ class WorldviewWidget(Widget):
         super(WorldviewWidget, self).__init__(**kwargs)
 
         self.canvas.clear()
-        print self.size, self.pos
-        
+
         with self.canvas:
             Color(1, 0, 0, 1, mode='rgba')
-            self.rect = Rectangle(size=(640, 480), pos=(200,200))
+            self.rect = Rectangle(size=self.size, pos=self.pos)    
 
+    def update_size(self, instance, new_size):
+        print "UPDATING SIZE", instance, new_size
+        self.size[0] = new_size[0] * 0.7
+        self.size[1] = new_size[1] * 0.8
+        self.rect.size = self.size
+        self.pos[0] = self.parent.size[0] * 0.2
+        self.pos[1] = self.parent.size[1] * 0.1
+        self.rect.pos = self.pos
 
 class JFROCS_App(App):
 
@@ -25,19 +32,23 @@ class JFROCS_App(App):
         Window.clearcolor = [1,1,1,1]
         parent = FloatLayout(size=Window.size)
 
-        worldview = WorldviewWidget(size_hint=(0.4, 0.4), pos_hint = {'x':0.2, 'y':0.2})
+        # *changed* ##################################################
+        worldview = WorldviewWidget(size=(0.7*parent.size[0], 0.8*parent.size[1]),
+                                    pos =(0.2*parent.size[0], 0.1*parent.size[1]))
+        # makes sure that the widget gets updated when parent's size changes:
+        parent.bind(size=worldview.update_size)
         parent.add_widget(worldview)
-        
 
-        start_btn = Button(text='Start', size_hint=(0.1, 0.1), pos_hint={'x':.02, 'y':.7}, background_color=[0,1,0,1])
+
+        start_btn = Button(text='Start', size_hint=(0.1, 0.1), pos_hint={'x':.05, 'y':.7}, background_color=[0,1,0,1])
         start_btn.bind(on_release=self.start_simulation)
         parent.add_widget(start_btn)
- 
-        pause_btn = Button(text='Pause', size_hint=(0.1,0.1), pos_hint={'x':.02, 'y':.6}, background_color=[1,1,0,1])
+
+        pause_btn = Button(text='Pause', size_hint=(0.1,0.1), pos_hint={'x':.05, 'y':.6}, background_color=[1,1,0,1])
         pause_btn.bind(on_release=self.pause_simulation)
         parent.add_widget(pause_btn)
 
-        stop_btn = Button(text='Stop', size_hint=(0.1,0.1), pos_hint={'x':.02, 'y':.5}, background_color=[1,0,0,1])
+        stop_btn  = Button(text='Stop',  size_hint=(0.1,0.1), pos_hint={'x':.05, 'y':.5}, background_color=[1,0,0,1])
         stop_btn.bind(on_release=self.stop_simulation)
         parent.add_widget(stop_btn)
 
@@ -49,6 +60,6 @@ class JFROCS_App(App):
         print "You pushed the pause button!"
     def stop_simulation(self, obj):
         print "You pushed the stop button!"
-     
+
 if __name__ == '__main__':
     JFROCS_App().run()
