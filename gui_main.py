@@ -1,65 +1,118 @@
-#! /usr/bin/python
-from kivy.app import App
-from kivy.graphics import *
-from kivy.core.window import Window
-from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.widget import Widget
-from kivy.uix.button import Button
+#!/usr/bin/python
+
+from Tkinter import *
+import tkMessageBox as messagebox
+from PIL import Image, ImageTk
+from math import *
+import time
+import random
+
+from  Planner import *
+
+# Colors
+LIGHT_BLUE    = "#0092CB"
+SKY_BLUE      = "#2375DB"
+CHARCOAL      = "#1E1E1E"
+DARK_GREY     = "#282828"
+LIGHT_GREY    = "#3C3C3C"
+
+PASTEL_RED    = "#E80531"
+PASTEL_BLUE   = "#3843FF"
+PASTEL_GREEN  = "#46D150"
+BABY_BLUE     = "#90CDFF"
+PASTEL_YELLOW = "#F9FF11"
 
 
-class WorldviewWidget(Widget):
-    def __init__(self, **kwargs):
-        super(WorldviewWidget, self).__init__(**kwargs)
+class JFROCS_gui:
+    def __init__(self, width, height):
+        # Init the planner
+        self.planner = Planner()
 
-        self.canvas.clear()
+        # Init the TK Window
+        self.top = Tk()
+        self.top.title("Jordan Ford Racing")
+        self.width = width
+        self.height = height
 
-        with self.canvas:
-            Color(1, 0, 0, 1, mode='rgba')
-            self.rect = Rectangle(size=self.size, pos=self.pos)    
+        win_size_str = str(width) + "x" + str(height)
+        self.top.geometry(win_size_str)
+        
+        self.top.configure(background=CHARCOAL)
 
-    def update_size(self, instance, new_size):
-        print "UPDATING SIZE", instance, new_size
-        self.size[0] = new_size[0] * 0.7
-        self.size[1] = new_size[1] * 0.8
-        self.rect.size = self.size
-        self.pos[0] = self.parent.size[0] * 0.2
-        self.pos[1] = self.parent.size[1] * 0.1
-        self.rect.pos = self.pos
+        # Add Start Button
+        self.start_button = Button(self.top, text = "Start", command = self.start_callback,
+                                   background=PASTEL_GREEN, borderwidth=0, highlightthickness=0)
+        self.start_button.place(x=20,y=150)
+        self.start_button.config( height=1, width=4);
 
-class JFROCS_App(App):
+        # Add Pause Button
+        self.pause_button = Button(self.top, text = "Pause", command = self.pause_callback,
+                                   background=SKY_BLUE, borderwidth=0, highlightthickness=0)
+        self.pause_button.place(x=20,y=200)
+        self.pause_button.config( height=1, width=4);
 
-    def build(self):
-        Window.clearcolor = [1,1,1,1]
-        parent = FloatLayout(size=Window.size)
+        # Add Stop Button
+        self.stop_button = Button(self.top, text = "Stop", command = self.stop_callback,
+                                  background=PASTEL_RED, borderwidth=0, highlightthickness=0)
+        self.stop_button.place(x=20,y=250)
+        self.stop_button.config( height=1, width=4);
 
-        # *changed* ##################################################
-        worldview = WorldviewWidget(size=(0.7*parent.size[0], 0.8*parent.size[1]),
-                                    pos =(0.2*parent.size[0], 0.1*parent.size[1]))
-        # makes sure that the widget gets updated when parent's size changes:
-        parent.bind(size=worldview.update_size)
-        parent.add_widget(worldview)
+        # Add Canvas
+        self.canvas = Canvas(self.top, width=814, height=440,
+                             background=LIGHT_GREY, borderwidth=0, highlightthickness=0)
+        self.canvas.place(x=100, y=50)
+
+        # Add Freq. Display
+        self.freq_disp = Text(self.top, height=1, width=7, borderwidth=0, highlightthickness=0,
+                              background=LIGHT_GREY)
+        self.freq_disp.place(x=860, y=55)
+
+        # Add text display box
+        self.text_out = Text(self.top, height=10, width=116, borderwidth=0, highlightthickness=0,
+                             background=LIGHT_GREY)
+        self.text_out.insert('3.0', 'Jordan Ford Racing Operator Control Station\n', 'WHITE')
+        self.text_out.tag_config("WHITE", foreground='white')
+        self.text_out.place(x=100, y=500)
+        
+        # Add Jeep Logo (Just for fun!)
+        jeep_logo = Image.open("jeep_logo.png")
+        jeep_logo  = jeep_logo.resize((100,100), Image.ANTIALIAS)
+        jeep_logo = ImageTk.PhotoImage(jeep_logo)
+        self.logo = Label(self.top, image=jeep_logo, borderwidth=0)
+        self.logo.image = jeep_logo
+        self.logo.place(x=0, y=self.height-100)
+
+    # Callback for the START button
+    def start_callback(self):
+        msg = messagebox.showinfo("Hello Python", "Hello World1")
+
+    # Callback for the PAUSE button
+    def pause_callback(self):
+        msg = messagebox.showinfo("Hello Python", "Hello World2")
+
+    # Callback for the STOP button
+    def stop_callback(self): 
+        msg = messagebox.showinfo("Hello Python", "Hello World3")
+
+    # Run the tk mainloop.
+    def mainloop(self):
+        self.top.after(0, self.execute)
+        self.top.mainloop();
+
+    # Calls the planner and reschedules itself
+    def execute(self):
+        tic = time.clock()
+        self.planner.execute()
+        toc = time.clock()
+        period = max(0, 20-int(floor(toc-tic)))
+        self.top.after(period, self.execute)
+        self.freq_disp.delete('1.0', END)
+        self.freq_disp.insert('1.0', str(1000/period)+" Hz\n", "WHITE")
+        self.freq_disp.tag_config("WHITE", foreground='white')
+        
 
 
-        start_btn = Button(text='Start', size_hint=(0.1, 0.1), pos_hint={'x':.05, 'y':.7}, background_color=[0,1,0,1])
-        start_btn.bind(on_release=self.start_simulation)
-        parent.add_widget(start_btn)
+if __name__ == "__main__":
+    jfrocs_gui = JFROCS_gui(960, 700)
+    jfrocs_gui.mainloop() 
 
-        pause_btn = Button(text='Pause', size_hint=(0.1,0.1), pos_hint={'x':.05, 'y':.6}, background_color=[1,1,0,1])
-        pause_btn.bind(on_release=self.pause_simulation)
-        parent.add_widget(pause_btn)
-
-        stop_btn  = Button(text='Stop',  size_hint=(0.1,0.1), pos_hint={'x':.05, 'y':.5}, background_color=[1,0,0,1])
-        stop_btn.bind(on_release=self.stop_simulation)
-        parent.add_widget(stop_btn)
-
-        return parent
-
-    def start_simulation(self, obj):
-        print "You pushed the start button!"
-    def pause_simulation(self, obj):
-        print "You pushed the pause button!"
-    def stop_simulation(self, obj):
-        print "You pushed the stop button!"
-
-if __name__ == '__main__':
-    JFROCS_App().run()
