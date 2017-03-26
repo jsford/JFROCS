@@ -28,6 +28,9 @@ class JFROCS_gui:
         # Init the planner
         self.planner = Planner()
 
+        # Load car model
+        self.car = Image.open("car_smallest.png")
+
         # Init the TK Window
         self.top = Tk()
         self.top.title("Jordan Ford Racing")
@@ -81,6 +84,8 @@ class JFROCS_gui:
         self.logo = Label(self.top, image=jeep_logo, borderwidth=0)
         self.logo.image = jeep_logo
         self.logo.place(x=0, y=self.height-100)
+    
+        self.i = 0
 
     # Callback for the START button
     def start_callback(self):
@@ -109,6 +114,17 @@ class JFROCS_gui:
         self.freq_disp.delete('1.0', END)
         self.freq_disp.insert('1.0', str(1000/period)+" Hz\n", "WHITE")
         self.freq_disp.tag_config("WHITE", foreground='white')
+
+        self.i += 1 
+        self.canvas.delete("car")
+        rot_car = self.car.rotate(self.i, expand=True)
+        rot_car = ImageTk.PhotoImage(rot_car)
+        self.canvas.rot_car = rot_car
+        self.canvas.create_image((814/2,440/2), image=rot_car, tag="car")
+        self.canvas.create_line(0,0,814,440)
+        self.canvas.create_line(814,0,0,440)
+        
+        
         
 
 

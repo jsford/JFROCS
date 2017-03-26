@@ -1,6 +1,6 @@
 class Planner:
     def __init__(self):
-        print "Hello!\n"
+        pass
     
     def execute(self): 
-        print "Howdy\n"
+        pass
