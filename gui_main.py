@@ -7,25 +7,14 @@ from math import *
 import time
 import random
 
-import matplotlib
-matplotlib.use("TkAgg")
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from matplotlib.figure import Figure
+#import matplotlib
+#matplotlib.use("TkAgg")
+#from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+#from matplotlib.figure import Figure
 
+from custom_colors import *
 from  planner import *
 
-# Colors
-LIGHT_BLUE    = "#0092CB"
-SKY_BLUE      = "#2375DB"
-CHARCOAL      = "#1E1E1E"
-DARK_GREY     = "#282828"
-LIGHT_GREY    = "#3C3C3C"
-
-PASTEL_RED    = "#E80531"
-PASTEL_BLUE   = "#3843FF"
-PASTEL_GREEN  = "#46D150"
-BABY_BLUE     = "#90CDFF"
-PASTEL_YELLOW = "#F9FF11"
 
 
 class JFROCS_gui:
@@ -141,9 +130,10 @@ class JFROCS_gui:
         # Render the obstacles
         self.canvas.delete('obstacle')
         for o in obstacles:
-            rad = o.rad * zl
-            pos = (canvas_hw+o.pos[0]*zl, canvas_hh+o.pos[1]*zl)
-            self.canvas.create_oval(pos[0]-rad, pos[1]-rad, pos[0]+rad, pos[1]+rad, outline=PASTEL_RED, tag="obstacle")
+            o.render(self.canvas, zl)
+            #rad = o.rad * zl
+            #pos = (canvas_hw+o.center_pos[0]*zl, canvas_hh+o.center_pos[1]*zl)
+            #self.canvas.create_oval(pos[0]-rad, pos[1]-rad, pos[0]+rad, pos[1]+rad, outline=PASTEL_RED, tag="obstacle")
 
         self.canvas.delete('line')
         for l in lines:

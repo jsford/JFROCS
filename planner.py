@@ -1,8 +1,6 @@
-class Obstacle:
-    def __init__(self, rad, pos):
-        self.rad = rad
-        self.pos = pos
-
+import Tkinter as tk
+from custom_colors import *
+from obstacle import *
 
 class Planner:
     def __init__(self, gui):
@@ -12,9 +10,10 @@ class Planner:
         self.car_theta = 0
         self.car_pos = (100,-100)
         
-        o1 = Obstacle(15, (100,100))
-        o2 = Obstacle(25, (200,100))
-        self.obs = [o1, o2]
+        o1 = CircleObstacle((100,100), 15, color=SKY_BLUE)
+        o2 = CircleObstacle((200,100), 25, color=SKY_BLUE)
+        r1 = RectangleObstacle((-50,-100), (50,30), color=SKY_BLUE)
+        self.obs = [o1, o2, r1]
 
         l1 = (0,0,100,100)
         l2 = (0,0,-400,30)
@@ -28,13 +27,16 @@ class Planner:
 
     def start_callback(self):
         self.active = True
-        self.gui.text_out.insert('2.0', 'STARTING\n', 'WHITE')
+        self.gui.text_out.delete(3.0,tk.END)
+        self.gui.text_out.insert(3.0, 'STARTING\n', 'WHITE')
 
     def pause_callback(self):
         self.active = False
-        self.gui.text_out.insert('2.0', 'PAUSING\n', 'WHITE')
+        self.gui.text_out.delete(3.0,tk.END)
+        self.gui.text_out.insert(3.0, 'PAUSING\n', 'WHITE')
 
     def stop_callback(self):
         self.active = False
-        self.gui.text_out.insert('2.0', 'STOPPING\n', 'WHITE')
+        self.gui.text_out.delete(3.0,tk.END)
+        self.gui.text_out.insert(3.0, 'STOPPING\n', 'WHITE')
         
