@@ -1,6 +1,7 @@
 import Tkinter as tk
-from custom_colors import *
+
 from obstacle import *
+from custom_colors import *
 
 class Planner:
     def __init__(self, gui):
@@ -10,9 +11,9 @@ class Planner:
         self.car_theta = 0
         self.car_pos = (100,-100)
         
-        o1 = CircleObstacle((100,100), 15, color=SKY_BLUE)
-        o2 = CircleObstacle((200,100), 25, color=SKY_BLUE)
-        r1 = RectangleObstacle((-50,-100), (50,30), color=SKY_BLUE)
+        o1 = CircleObstacle((100,100), 15, color=PASTEL_RED)
+        o2 = CircleObstacle((200,100), 25, color=PASTEL_RED)
+        r1 = RectangleObstacle((-50,-100), (50,30), color=PASTEL_RED)
         self.obs = [o1, o2, r1]
 
         l1 = (0,0,100,100)

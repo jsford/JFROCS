@@ -7,11 +7,6 @@ from math import *
 import time
 import random
 
-#import matplotlib
-#matplotlib.use("TkAgg")
-#from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-#from matplotlib.figure import Figure
-
 from custom_colors import *
 from  planner import *
 
@@ -24,7 +19,7 @@ class JFROCS_gui:
 
         # Load car model
         self.car_original = Image.open("car_small.png")
-
+       
         # Init the TK Window
         self.top = Tk()
         self.top.title("Jordan Ford Racing")
@@ -67,6 +62,7 @@ class JFROCS_gui:
         self.canvas.bind("<B1-Motion>", self.move_move)
         self.canvas.bind("<Button-4>", self.zoomerM)
         self.canvas.bind("<Button-5>", self.zoomerP)
+        self.canvas.old_zoom_level = 0.0
         self.canvas.zoom_level = 1.0
         self.canvas.zoom_center = (self.canvas.winfo_width()/2, self.canvas.winfo_height()/2)
 
@@ -118,8 +114,10 @@ class JFROCS_gui:
     def render(self, theta, pos, obstacles, lines):
         # Render the car
         zl = self.canvas.zoom_level
-        car = self.car_original.resize((int(zl*50), int(zl*50*self.car_original.size[1]/self.car_original.size[0])), Image.ANTIALIAS)
-        car = car.rotate(theta, expand=True)
+        if(zl != self.canvas.old_zoom_level):
+            self.car = self.car_original.resize((int(zl*50), int(zl*50*self.car_original.size[1]/self.car_original.size[0])), Image.ANTIALIAS)
+
+        car = self.car.rotate(theta, expand=True)
         car = ImageTk.PhotoImage(car) 
         self.canvas.car = car   # Keep a reference
         canvas_hw = self.canvas.winfo_width()/2
@@ -131,9 +129,6 @@ class JFROCS_gui:
         self.canvas.delete('obstacle')
         for o in obstacles:
             o.render(self.canvas, zl)
-            #rad = o.rad * zl
-            #pos = (canvas_hw+o.center_pos[0]*zl, canvas_hh+o.center_pos[1]*zl)
-            #self.canvas.create_oval(pos[0]-rad, pos[1]-rad, pos[0]+rad, pos[1]+rad, outline=PASTEL_RED, tag="obstacle")
 
         self.canvas.delete('line')
         for l in lines:
@@ -146,15 +141,13 @@ class JFROCS_gui:
     def move_move(self, event):
         self.canvas.scan_dragto(event.x, event.y, gain=1)
 
-    # Zoom using...something 
+    # Zoom using mouse scrollwheel 
     def zoomerP(self,event):
+        self.canvas.old_zoom_level = self.canvas.zoom_level
         self.canvas.zoom_level *= 1.1
     def zoomerM(self,event):
+        self.canvas.old_zoom_level = self.canvas.zoom_level
         self.canvas.zoom_level *= 0.9 
-        
-        
-        
-        
 
 
 if __name__ == "__main__":

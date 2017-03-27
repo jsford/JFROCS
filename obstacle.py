@@ -29,3 +29,5 @@ class RectangleObstacle(Obstacle):
         rect_hh = self.dim[1]/2
         pos = (canvas_hw+self.center_pos[0]*zl, canvas_hh+self.center_pos[1]*zl)
         canvas.create_rectangle(pos[0]-rect_hw*zl, pos[1]-rect_hh*zl, pos[0]+rect_hw*zl, pos[1]+rect_hh*zl, outline=self.color, tag='obstacle')
+        canvas.create_line(pos[0]-rect_hw*zl, pos[1]-rect_hh*zl, pos[0]+rect_hw*zl, pos[1]+rect_hh*zl, fill=self.color, tag='obstacle')
+        canvas.create_line(pos[0]+rect_hw*zl, pos[1]-rect_hh*zl, pos[0]-rect_hw*zl, pos[1]+rect_hh*zl, fill=self.color, tag='obstacle')
