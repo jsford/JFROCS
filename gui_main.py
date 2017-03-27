@@ -7,7 +7,7 @@ from math import *
 import time
 import random
 
-from  Planner import *
+from  planner import *
 
 # Colors
 LIGHT_BLUE    = "#0092CB"
@@ -43,19 +43,19 @@ class JFROCS_gui:
         self.top.configure(background=CHARCOAL)
 
         # Add Start Button
-        self.start_button = Button(self.top, text = "Start", command = self.start_callback,
+        self.start_button = Button(self.top, text = "Start", command = self.planner.start_callback,
                                    background=PASTEL_GREEN, borderwidth=0, highlightthickness=0)
         self.start_button.place(x=20,y=150)
         self.start_button.config( height=1, width=4);
 
         # Add Pause Button
-        self.pause_button = Button(self.top, text = "Pause", command = self.pause_callback,
+        self.pause_button = Button(self.top, text = "Pause", command = self.planner.pause_callback,
                                    background=SKY_BLUE, borderwidth=0, highlightthickness=0)
         self.pause_button.place(x=20,y=200)
         self.pause_button.config( height=1, width=4);
 
         # Add Stop Button
-        self.stop_button = Button(self.top, text = "Stop", command = self.stop_callback,
+        self.stop_button = Button(self.top, text = "Stop", command = self.planner.stop_callback,
                                   background=PASTEL_RED, borderwidth=0, highlightthickness=0)
         self.stop_button.place(x=20,y=250)
         self.stop_button.config( height=1, width=4);
@@ -84,20 +84,6 @@ class JFROCS_gui:
         self.logo = Label(self.top, image=jeep_logo, borderwidth=0)
         self.logo.image = jeep_logo
         self.logo.place(x=0, y=self.height-100)
-    
-        self.i = 0
-
-    # Callback for the START button
-    def start_callback(self):
-        msg = messagebox.showinfo("Hello Python", "Hello World1")
-
-    # Callback for the PAUSE button
-    def pause_callback(self):
-        msg = messagebox.showinfo("Hello Python", "Hello World2")
-
-    # Callback for the STOP button
-    def stop_callback(self): 
-        msg = messagebox.showinfo("Hello Python", "Hello World3")
 
     # Run the tk mainloop.
     def mainloop(self):
@@ -107,7 +93,7 @@ class JFROCS_gui:
     # Calls the planner and reschedules itself
     def execute(self):
         tic = time.clock()
-        self.planner.execute()
+        self.planner.execute(self)
         toc = time.clock()
         period = max(0, 20-int(floor(toc-tic)))
         self.top.after(period, self.execute)
@@ -115,15 +101,9 @@ class JFROCS_gui:
         self.freq_disp.insert('1.0', str(1000/period)+" Hz\n", "WHITE")
         self.freq_disp.tag_config("WHITE", foreground='white')
 
-        self.i += 1 
-        self.canvas.delete("car")
-        rot_car = self.car.rotate(self.i, expand=True)
-        rot_car = ImageTk.PhotoImage(rot_car)
-        self.canvas.rot_car = rot_car
-        self.canvas.create_image((814/2,440/2), image=rot_car, tag="car")
-        self.canvas.create_line(0,0,814,440)
-        self.canvas.create_line(814,0,0,440)
-        
+    # Is called by the planner to draw the world 
+    def render(self):
+        self.canvas.create_line(0,0,200,200,fill='red')
         
         
 
