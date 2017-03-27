@@ -1,5 +1,7 @@
 #! /usr/bin/python
 
+from pyproj import Proj         # Used to convert lat/lon to UTM
+
 class Lane():
     def __init__(self, lane_num):
         self.lane_num = lane_num 
@@ -43,10 +45,12 @@ class Segment():
         
 
 class RNDF:
-    def __init__(self, filename):
+    def __init__(self, filename, zone=17):
         self.filename = filename
         f = open(self.filename)
         
+        self.UTM_zone = zone
+
         self.lines = []
         for line in f.readlines():
             self.lines.append(line.split())
@@ -93,7 +97,9 @@ class RNDF:
                     elif self.lines[idx][0] == 'stop':
                          new_lane.stops.append(self.lines[idx][1])
                     else:
-                         new_lane.waypoints.append( (1000*float(self.lines[idx][1]), 1000*float(self.lines[idx][2]), self.lines[idx][0]) )
+                         lonlat2UTM = Proj(proj='utm', zone=self.UTM_zone, ellps='WGS84')
+                         UTMx, UTMy = lonlat2UTM(float(self.lines[idx][2]), float(self.lines[idx][1]))
+                         new_lane.waypoints.append( (UTMx, UTMy, self.lines[idx][0]) )
                     idx = idx + 1
                 self.segments[-1].lanes.append(new_lane) 
             else:
