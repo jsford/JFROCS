@@ -31,7 +31,7 @@ PASTEL_YELLOW = "#F9FF11"
 class JFROCS_gui:
     def __init__(self, width, height):
         # Init the planner
-        self.planner = Planner()
+        self.planner = Planner(self)
 
         # Load car model
         self.car_original = Image.open("car_small.png")
@@ -80,7 +80,6 @@ class JFROCS_gui:
         self.canvas.bind("<Button-5>", self.zoomerP)
         self.canvas.zoom_level = 1.0
         self.canvas.zoom_center = (self.canvas.winfo_width()/2, self.canvas.winfo_height()/2)
-        self.canvas.create_oval(407-20,220-20, 407+20, 220+20, fill='red')
 
         # Add Freq. Display
         self.freq_disp = Text(self.top, height=1, width=7, borderwidth=0, highlightthickness=0,
@@ -118,7 +117,7 @@ class JFROCS_gui:
     # Calls the planner and reschedules itself
     def execute(self):
         tic = time.clock()
-        self.planner.execute(self)
+        self.planner.execute()
         toc = time.clock()
         period = max(0, 20-int(floor(toc-tic)))
         self.top.after(period, self.execute)
@@ -127,16 +126,29 @@ class JFROCS_gui:
         self.freq_disp.tag_config("WHITE", foreground='white')
 
     # Is called by the planner to draw the world 
-    def render(self):
+    def render(self, theta, pos, obstacles, lines):
         # Render the car
-        zoom_level = self.canvas.zoom_level
-        car = self.car_original.resize((int(zoom_level*50), int(zoom_level*50*self.car_original.size[1]/self.car_original.size[0])), Image.ANTIALIAS)
+        zl = self.canvas.zoom_level
+        car = self.car_original.resize((int(zl*50), int(zl*50*self.car_original.size[1]/self.car_original.size[0])), Image.ANTIALIAS)
+        car = car.rotate(theta, expand=True)
         car = ImageTk.PhotoImage(car) 
-        self.canvas.car = car
-        canvas_width = self.canvas.winfo_width()
-        canvas_height = self.canvas.winfo_height()
+        self.canvas.car = car   # Keep a reference
+        canvas_hw = self.canvas.winfo_width()/2
+        canvas_hh = self.canvas.winfo_height()/2
         self.canvas.delete("car")
-        self.canvas.create_image((canvas_width/2,canvas_height/2), image=car, tag="car")
+        self.canvas.create_image((canvas_hw+zl*pos[0],canvas_hh+zl*pos[1]), image=car, tag="car")
+
+        # Render the obstacles
+        self.canvas.delete('obstacle')
+        for o in obstacles:
+            rad = o.rad * zl
+            pos = (canvas_hw+o.pos[0]*zl, canvas_hh+o.pos[1]*zl)
+            self.canvas.create_oval(pos[0]-rad, pos[1]-rad, pos[0]+rad, pos[1]+rad, outline=PASTEL_RED, tag="obstacle")
+
+        self.canvas.delete('line')
+        for l in lines:
+            self.canvas.create_line(canvas_hw+zl*l[0],canvas_hh+zl*l[1],canvas_hw+zl*l[2],canvas_hh+zl*l[3], fill='white', tag='line')
+
 
     # Click and drag the canvas using the mouse
     def move_start(self, event):
@@ -146,15 +158,9 @@ class JFROCS_gui:
 
     # Zoom using...something 
     def zoomerP(self,event):
-        self.canvas.scale("all", self.canvas.canvasx(event.x), self.canvas.canvasy(event.y), 1.1, 1.1)
-        self.canvas.configure(scrollregion = self.canvas.bbox("all"))
         self.canvas.zoom_level *= 1.1
-        self.canvas.zoom_center = (self.canvas.canvasx(event.x), self.canvas.canvasy(event.y))
     def zoomerM(self,event):
-        self.canvas.scale("all", self.canvas.canvasx(event.x), self.canvas.canvasy(event.y), 0.9, 0.9)
-        self.canvas.configure(scrollregion = self.canvas.bbox("all"))
         self.canvas.zoom_level *= 0.9 
-        self.canvas.zoom_center = (self.canvas.canvasx(event.x), self.canvas.canvasy(event.y))
         
         
         
