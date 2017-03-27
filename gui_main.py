@@ -7,6 +7,11 @@ from math import *
 import time
 import random
 
+import matplotlib
+matplotlib.use("TkAgg")
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.figure import Figure
+
 from  planner import *
 
 # Colors
@@ -29,7 +34,7 @@ class JFROCS_gui:
         self.planner = Planner()
 
         # Load car model
-        self.car = Image.open("car_smallest.png")
+        self.car_original = Image.open("car_small.png")
 
         # Init the TK Window
         self.top = Tk()
@@ -42,48 +47,68 @@ class JFROCS_gui:
         
         self.top.configure(background=CHARCOAL)
 
+        # Create frame for buttons
+        self.button_frame = Frame(self.top, width = 100, height = 200, bg=CHARCOAL)
+        self.button_frame.grid(row=1, column=0, pady = (150,0), sticky='nsew')
+
         # Add Start Button
-        self.start_button = Button(self.top, text = "Start", command = self.planner.start_callback,
+        self.start_button = Button(self.button_frame, text = "Start", command = self.planner.start_callback,
                                    background=PASTEL_GREEN, borderwidth=0, highlightthickness=0)
-        self.start_button.place(x=20,y=150)
+        self.start_button.pack(pady=(0,5))
         self.start_button.config( height=1, width=4);
 
         # Add Pause Button
-        self.pause_button = Button(self.top, text = "Pause", command = self.planner.pause_callback,
+        self.pause_button = Button(self.button_frame, text = "Pause", command = self.planner.pause_callback,
                                    background=SKY_BLUE, borderwidth=0, highlightthickness=0)
-        self.pause_button.place(x=20,y=200)
+        self.pause_button.pack(pady=5)
         self.pause_button.config( height=1, width=4);
 
         # Add Stop Button
-        self.stop_button = Button(self.top, text = "Stop", command = self.planner.stop_callback,
+        self.stop_button = Button(self.button_frame, text = "Stop", command = self.planner.stop_callback,
                                   background=PASTEL_RED, borderwidth=0, highlightthickness=0)
-        self.stop_button.place(x=20,y=250)
+        self.stop_button.pack(pady=(5,0))
         self.stop_button.config( height=1, width=4);
 
         # Add Canvas
         self.canvas = Canvas(self.top, width=814, height=440,
                              background=LIGHT_GREY, borderwidth=0, highlightthickness=0)
-        self.canvas.place(x=100, y=50)
+        self.canvas.grid(row=1, column=1, columnspan=1, rowspan=2, pady=(30, 10), padx=(10,30),
+                         ipadx=30, ipady=30, sticky='nsew')
+        self.canvas.bind("<ButtonPress-1>", self.move_start)
+        self.canvas.bind("<B1-Motion>", self.move_move)
+        self.canvas.bind("<Button-4>", self.zoomerM)
+        self.canvas.bind("<Button-5>", self.zoomerP)
+        self.canvas.zoom_level = 1.0
+        self.canvas.zoom_center = (self.canvas.winfo_width()/2, self.canvas.winfo_height()/2)
+        self.canvas.create_oval(407-20,220-20, 407+20, 220+20, fill='red')
 
         # Add Freq. Display
         self.freq_disp = Text(self.top, height=1, width=7, borderwidth=0, highlightthickness=0,
                               background=LIGHT_GREY)
-        self.freq_disp.place(x=860, y=55)
+        self.freq_disp.grid(row=1, column=1, sticky='ne', pady=(30,0), padx=(0,30))
 
         # Add text display box
         self.text_out = Text(self.top, height=10, width=116, borderwidth=0, highlightthickness=0,
                              background=LIGHT_GREY)
         self.text_out.insert('3.0', 'Jordan Ford Racing Operator Control Station\n', 'WHITE')
         self.text_out.tag_config("WHITE", foreground='white')
-        self.text_out.place(x=100, y=500)
-        
+        self.text_out.grid(row=3, column=1, columnspan=1, rowspan=2, padx=(10,30), pady=(0,30), sticky='ew')
+
+        # Create frame for graphs
+        #self.graph_frame = Frame(self.top, width=200, height=600, bg=CHARCOAL)
+        #self.graph_frame.grid(row=1, column=2, rowspan=4, pady=30, padx=(0,30), sticky='nsew')
+
         # Add Jeep Logo (Just for fun!)
         jeep_logo = Image.open("jeep_logo.png")
         jeep_logo  = jeep_logo.resize((100,100), Image.ANTIALIAS)
         jeep_logo = ImageTk.PhotoImage(jeep_logo)
         self.logo = Label(self.top, image=jeep_logo, borderwidth=0)
         self.logo.image = jeep_logo
-        self.logo.place(x=0, y=self.height-100)
+        self.logo.grid(row=4,column=0,padx=(10,0))
+
+        # Handle resizing
+        self.top.grid_rowconfigure(1, weight=2)
+        self.top.grid_columnconfigure(1, weight=2)
 
     # Run the tk mainloop.
     def mainloop(self):
@@ -103,7 +128,35 @@ class JFROCS_gui:
 
     # Is called by the planner to draw the world 
     def render(self):
-        self.canvas.create_line(0,0,200,200,fill='red')
+        # Render the car
+        zoom_level = self.canvas.zoom_level
+        car = self.car_original.resize((int(zoom_level*50), int(zoom_level*50*self.car_original.size[1]/self.car_original.size[0])), Image.ANTIALIAS)
+        car = ImageTk.PhotoImage(car) 
+        self.canvas.car = car
+        canvas_width = self.canvas.winfo_width()
+        canvas_height = self.canvas.winfo_height()
+        self.canvas.delete("car")
+        self.canvas.create_image((canvas_width/2,canvas_height/2), image=car, tag="car")
+
+    # Click and drag the canvas using the mouse
+    def move_start(self, event):
+        self.canvas.scan_mark(event.x, event.y)
+    def move_move(self, event):
+        self.canvas.scan_dragto(event.x, event.y, gain=1)
+
+    # Zoom using...something 
+    def zoomerP(self,event):
+        self.canvas.scale("all", self.canvas.canvasx(event.x), self.canvas.canvasy(event.y), 1.1, 1.1)
+        self.canvas.configure(scrollregion = self.canvas.bbox("all"))
+        self.canvas.zoom_level *= 1.1
+        self.canvas.zoom_center = (self.canvas.canvasx(event.x), self.canvas.canvasy(event.y))
+    def zoomerM(self,event):
+        self.canvas.scale("all", self.canvas.canvasx(event.x), self.canvas.canvasy(event.y), 0.9, 0.9)
+        self.canvas.configure(scrollregion = self.canvas.bbox("all"))
+        self.canvas.zoom_level *= 0.9 
+        self.canvas.zoom_center = (self.canvas.canvasx(event.x), self.canvas.canvasy(event.y))
+        
+        
         
         
 
