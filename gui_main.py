@@ -171,9 +171,11 @@ class JFROCS_gui:
     def zoomerP(self,event):
         self.canvas.old_zoom_level = self.canvas.zoom_level
         self.canvas.zoom_level *= 1.1
+        self.canvas.zoom_level = min(self.canvas.zoom_level, 5)
     def zoomerM(self,event):
         self.canvas.old_zoom_level = self.canvas.zoom_level
         self.canvas.zoom_level *= 0.9 
+        self.canvas.zoom_level = max(self.canvas.zoom_level, .1)
 
 
 if __name__ == "__main__":

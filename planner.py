@@ -11,7 +11,7 @@ class Planner:
         self.rwm = rwm
 
         self.car_theta = 0
-        self.car_pos = (100,-100)
+        self.car_pos = (0,0)
         
         o1 = CircleObstacle((100,100), 15, color=PASTEL_RED)
         o2 = CircleObstacle((200,100), 25, color=PASTEL_RED)
