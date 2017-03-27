@@ -2,11 +2,13 @@ import Tkinter as tk
 
 from obstacle import *
 from custom_colors import *
+from parse_RNDF import *
 
 class Planner:
-    def __init__(self, gui):
+    def __init__(self, gui, rwm):
         self.active = False
         self.gui = gui
+        self.rwm = rwm
 
         self.car_theta = 0
         self.car_pos = (100,-100)
@@ -16,9 +18,8 @@ class Planner:
         r1 = RectangleObstacle((-50,-100), (50,30), color=PASTEL_RED)
         self.obs = [o1, o2, r1]
 
-        l1 = (0,0,100,100)
-        l2 = (0,0,-400,30)
-        self.lines = [l1, l2]
+        self.lines = []
+
     
     def execute(self): 
         # Planning goes here

@@ -9,13 +9,14 @@ class Lane():
         self.right_boundary = None
         self.checkpoints = []
         self.exits = []
+        self.stops = []
         self.waypoints = []
 
     def check_yo(self):
         if len(self.waypoints) > self.num_waypoints:
-            print "ERROR: Lane " + str(self.lane_num) + " has too many lanes."
+            print "ERROR: Lane " + str(self.lane_num) + " has too many waypoints."
         elif len(self.waypoints) < self.num_waypoints:
-            print "ERROR: Lane " + str(self.lane_num) + " has too few lanes."
+            print "ERROR: Lane " + str(self.lane_num) + " has too few waypoints."
         return len(self.waypoints) == self.num_waypoints
 
 
@@ -89,8 +90,10 @@ class RNDF:
                          new_lane.exits.append(self.lines[idx][1:2])
                     elif self.lines[idx][0] == 'checkpoint':
                          new_lane.checkpoints.append(self.lines[idx][1:2])
+                    elif self.lines[idx][0] == 'stop':
+                         new_lane.stops.append(self.lines[idx][1])
                     else:
-                         new_lane.waypoints.append(self.lines[idx])
+                         new_lane.waypoints.append( (1000*float(self.lines[idx][1]), 1000*float(self.lines[idx][2]), self.lines[idx][0]) )
                     idx = idx + 1
                 self.segments[-1].lanes.append(new_lane) 
             else:

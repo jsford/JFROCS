@@ -13,13 +13,16 @@ from  planner import *
 
 
 class JFROCS_gui:
-    def __init__(self, width, height):
+    def __init__(self, width, height, rndf_fname):
+        # Init the RoadWorldModel
+        self.rwm = RNDF(rndf_fname)
+
         # Init the planner
-        self.planner = Planner(self)
+        self.planner = Planner(self, self.rwm)
 
         # Load car model
         self.car_original = Image.open("car_small.png")
-       
+      
         # Init the TK Window
         self.top = Tk()
         self.top.title("Jordan Ford Racing")
@@ -115,7 +118,7 @@ class JFROCS_gui:
         # Render the car
         zl = self.canvas.zoom_level
         if(zl != self.canvas.old_zoom_level):
-            self.car = self.car_original.resize((int(zl*50), int(zl*50*self.car_original.size[1]/self.car_original.size[0])), Image.ANTIALIAS)
+            self.car = self.car_original.resize((int(zl*self.m2pix(1.75)), int(zl*self.m2pix(1.75)*self.car_original.size[1]/self.car_original.size[0])), Image.ANTIALIAS)
 
         car = self.car.rotate(theta, expand=True)
         car = ImageTk.PhotoImage(car) 
@@ -125,15 +128,38 @@ class JFROCS_gui:
         self.canvas.delete("car")
         self.canvas.create_image((canvas_hw+zl*pos[0],canvas_hh+zl*pos[1]), image=car, tag="car")
 
+        # Render the RoadWorldModel
+        self.canvas.delete('waypoint')
+        first_wp = self.rwm.segments[0].lanes[0].waypoints[0]
+        o = (canvas_hw - zl*first_wp[0]*self.m2pix(4), canvas_hh - zl*first_wp[1]*self.m2pix(4))
+
+        for seg in self.rwm.segments:
+            for lane in seg.lanes:
+                for wp in lane.waypoints:
+                    x = o[0] + zl*wp[0]*self.m2pix(4)
+                    y = o[1] + zl*wp[1]*self.m2pix(4) 
+                    self.canvas.create_oval(x-5*zl, y-5*zl, x+5*zl, y+5*zl, fill='white', tag='waypoint')
+        
+
         # Render the obstacles
         self.canvas.delete('obstacle')
         for o in obstacles:
             o.render(self.canvas, zl)
 
+        # Render the axes
+        self.canvas.delete('axis')
+        self.canvas.create_line(canvas_hw, canvas_hh, canvas_hw, canvas_hh+100*zl, fill='white', tag='axis')
+        self.canvas.create_line(canvas_hw, canvas_hh, canvas_hw+100*zl, canvas_hh, fill='white', tag='axis')
+
+        # Turn this into drawing the roadworldmodel
         self.canvas.delete('line')
         for l in lines:
             self.canvas.create_line(canvas_hw+zl*l[0],canvas_hh+zl*l[1],canvas_hw+zl*l[2],canvas_hh+zl*l[3], fill='white', tag='line')
 
+    def m2pix(self, m):
+        return m*50.0/1.75
+    def pix2m(self, p):
+        return p*1.75/50.0
 
     # Click and drag the canvas using the mouse
     def move_start(self, event):
@@ -151,6 +177,6 @@ class JFROCS_gui:
 
 
 if __name__ == "__main__":
-    jfrocs_gui = JFROCS_gui(960, 700)
+    jfrocs_gui = JFROCS_gui(960, 700, "scenarios/SchenleyNonStopClockwise/RNDF.txt")
     jfrocs_gui.mainloop() 
 
