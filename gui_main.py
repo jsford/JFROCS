@@ -74,6 +74,13 @@ class JFROCS_gui:
                               background=LIGHT_GREY)
         self.freq_disp.grid(row=1, column=1, sticky='ne', pady=(30,0), padx=(0,30))
 
+        # Add Cursor Coord. Display
+        self.mouse_coord_disp = Text(self.top, height=1, width=20, borderwidth=0, highlightthickness=0,
+                              background=LIGHT_GREY)
+        self.mouse_coord_disp.grid(row=1, column=1, sticky='se', pady=(0,10), padx=(0,30))
+        
+        self.canvas.bind("<Motion>", self.mouse_move)
+
         # Add text display box
         self.text_out = Text(self.top, height=10, width=116, borderwidth=0, highlightthickness=0,
                              background=LIGHT_GREY)
@@ -164,6 +171,21 @@ class JFROCS_gui:
         self.canvas.scan_mark(event.x, event.y)
     def move_move(self, event):
         self.canvas.scan_dragto(event.x, event.y, gain=1)
+
+    # Update the current mouse coordinates on the canvas
+    def mouse_move(self, event):
+        mx = self.canvas.canvasx(event.x)
+        my = self.canvas.canvasy(event.y)
+
+        canvas_hw = self.canvas.winfo_width()/2
+        canvas_hh = self.canvas.winfo_height()/2
+        zl = self.canvas.zoom_level
+
+        self.mouse_coord_disp.delete('1.0', END)
+        self.mouse_coord_disp.insert('1.0', "("+format(self.pix2m(mx-canvas_hw)/zl,'.2f')+", "
+                                               +format(self.pix2m(my-canvas_hh)/zl,'.2f')+")", "STYLE")
+        self.mouse_coord_disp.tag_config("STYLE", foreground='white', justify='right')
+        
 
     # Zoom using mouse scrollwheel 
     def zoomerP(self,event):
