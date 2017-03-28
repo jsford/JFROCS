@@ -120,13 +120,13 @@ class JFROCS_gui:
             v.step()
         toc = time.clock()
 
+        self.freq_disp.delete('1.0', END)
+        self.freq_disp.insert('1.0', format(1.0/(toc-tic), '.0f')+" Hz\n", "STYLE")
+        self.freq_disp.tag_config("STYLE", foreground='white', justify='right')
+
         self.render()
 
-        period = max(0, 20-int(floor(toc-tic)))
-        self.top.after(100, self.execute)
-        self.freq_disp.delete('1.0', END)
-        self.freq_disp.insert('1.0', str(1000/period)+" Hz\n", "WHITE")
-        self.freq_disp.tag_config("WHITE", foreground='white')
+        self.top.after(20, self.execute)
 
     # Is called by the planner to draw the world 
     def render(self):
