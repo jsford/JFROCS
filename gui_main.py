@@ -2,7 +2,6 @@
 
 from Tkinter import *
 import tkMessageBox as messagebox
-from PIL import Image, ImageTk
 from math import *
 import time
 import random
@@ -10,6 +9,7 @@ import sys
 
 from draw_funcs import *
 from  planner import *
+from vehicle import *
 
 
 class JFROCS_gui:
@@ -17,8 +17,11 @@ class JFROCS_gui:
         # Init the RoadWorldModel
         self.rwm = RNDF(rndf_fname)
 
-        # Init the planner
-        self.planner = Planner(self, self.rwm)
+        # Init the vehicle(s)
+        v1 = Vehicle("ego", self.rwm, pos=(0,0))
+        v2 = Vehicle("bonehead", self.rwm, pos=(100,0), theta=pi/4, lightweight=True)
+
+        self.vehicles = [v1, v2]
 
         # Load car model
         self.car_original = Image.open("car_small.png")
@@ -39,19 +42,19 @@ class JFROCS_gui:
         self.button_frame.grid(row=1, column=0, pady = (150,0), sticky='nsew')
 
         # Add Start Button
-        self.start_button = Button(self.button_frame, text = "Start", command = self.planner.start_callback,
+        self.start_button = Button(self.button_frame, text = "Start", command = self.start_callback,
                                    background=PASTEL_GREEN, borderwidth=0, highlightthickness=0)
         self.start_button.pack(pady=(0,5))
         self.start_button.config( height=1, width=4);
 
         # Add Pause Button
-        self.pause_button = Button(self.button_frame, text = "Pause", command = self.planner.pause_callback,
+        self.pause_button = Button(self.button_frame, text = "Pause", command = self.pause_callback,
                                    background=SKY_BLUE, borderwidth=0, highlightthickness=0)
         self.pause_button.pack(pady=5)
         self.pause_button.config( height=1, width=4);
 
         # Add Stop Button
-        self.stop_button = Button(self.button_frame, text = "Stop", command = self.planner.stop_callback,
+        self.stop_button = Button(self.button_frame, text = "Stop", command = self.stop_callback,
                                   background=PASTEL_RED, borderwidth=0, highlightthickness=0)
         self.stop_button.pack(pady=(5,0))
         self.stop_button.config( height=1, width=4);
@@ -113,40 +116,33 @@ class JFROCS_gui:
     # Calls the planner and reschedules itself
     def execute(self):
         tic = time.clock()
-        self.planner.execute()
+        for v in self.vehicles:
+            v.step()
         toc = time.clock()
+
+        self.render()
+
         period = max(0, 20-int(floor(toc-tic)))
-        self.top.after(period, self.execute)
+        self.top.after(100, self.execute)
         self.freq_disp.delete('1.0', END)
         self.freq_disp.insert('1.0', str(1000/period)+" Hz\n", "WHITE")
         self.freq_disp.tag_config("WHITE", foreground='white')
 
     # Is called by the planner to draw the world 
-    def render(self, theta, pos, obstacles, lines):
+    def render(self):
         # Get canvas dimensions. Quit if it's 0x0
-        canvas_hw = self.canvas.winfo_width()/2
-        canvas_hh = self.canvas.winfo_height()/2
-        if (canvas_hw == 0 and canvas_hh == 0): return
-
-        # Render the car
-        zl = self.canvas.zl
-        if(zl != self.canvas.old_zl):
-            self.car = self.car_original.resize((int(zl*m2pix(1.75)), int(zl*m2pix(1.75)*self.car_original.size[1]/self.car_original.size[0])), Image.ANTIALIAS)
-
-        car = self.car.rotate(theta, expand=True)
-        car = ImageTk.PhotoImage(car) 
-        self.canvas.car = car   # Keep a reference
-        self.canvas.delete("car")
-        self.canvas.create_image((world2screen_x(self.canvas, pos[0]),
-                                  world2screen_y(self.canvas, pos[1])), image=car, tag="car")
+        canvas_w = self.canvas.winfo_width()
+        canvas_h = self.canvas.winfo_height()
+        if (canvas_w == 0 and canvas_h == 0): return
 
         # Render the rwm
         self.rwm.render(self.canvas)
 
-        # Render the obstacles
-        self.canvas.delete('obstacle')
-        for o in obstacles:
-            o.render(self.canvas)
+        # Render the vehicles
+        #for v in self.vehicles:
+        #    v.render(self.canvas)
+        self.vehicles[0].render(self.canvas)
+        self.vehicles[1].render(self.canvas)
 
     # Click and drag the canvas using the mouse
     def move_start(self, event):
@@ -189,6 +185,13 @@ class JFROCS_gui:
 
         self.canvas.old_zl = self.canvas.zl
         self.canvas.zl /= 1.1 
+    
+    def start_callback(self):
+        pass
+    def pause_callback(self):
+        pass
+    def stop_callback(self):
+        pass
 
 
 if __name__ == "__main__":
@@ -203,17 +206,5 @@ if __name__ == "__main__":
     
     jfrocs_gui = JFROCS_gui(960, 700, rndf_fname)
     jfrocs_gui.mainloop() 
-
-
-
-
-
-
-
-
-
-
-
-
 
 

@@ -15,6 +15,7 @@ class Lane():
         self.exits = []
         self.stops = []
         self.waypoints = []
+    
 
     def check_yo(self):
         if len(self.waypoints) > self.num_waypoints:
@@ -50,7 +51,10 @@ class RNDF:
     def __init__(self, filename, zone=17):
         self.filename = filename
         f = open(self.filename)
-        
+    
+        # static variable for render function
+        self.old_zl = 0    
+
         self.UTM_zone = zone
 
         self.lines = []
@@ -128,6 +132,9 @@ class RNDF:
     
         
     def render(self, canvas):
+
+        if (self.old_zl == canvas.zl): return
+        self.old_zl = canvas.zl
 
         canvas.delete('boundary')
         o = self.segments[0].lanes[0].waypoints[0]
