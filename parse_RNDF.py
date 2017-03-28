@@ -127,9 +127,7 @@ class RNDF:
         print "creation_date: ", self.creation_date
     
         
-    def render(self, canvas, zl):
-        canvas_hw = canvas.winfo_width()/2
-        canvas_hh = canvas.winfo_height()/2
+    def render(self, canvas):
 
         canvas.delete('boundary')
         o = self.segments[0].lanes[0].waypoints[0]
@@ -138,21 +136,21 @@ class RNDF:
             for lane in seg.lanes:
                 last_wp = lane.waypoints[0]
                 next_wp = lane.waypoints[1]
-                old_x = zl*m2pix(last_wp[0] - o[0])
-                old_y = zl*m2pix(last_wp[1] - o[1])
+                old_x = m2pix(last_wp[0] - o[0])
+                old_y = m2pix(last_wp[1] - o[1])
 
-                x = zl*m2pix(next_wp[0] - o[0])
-                y = zl*m2pix(next_wp[1] - o[1])
+                x = m2pix(next_wp[0] - o[0])
+                y = m2pix(next_wp[1] - o[1])
 
                 angle = atan2(y-old_y, x-old_x)
                 a1 = angle - pi/2
                 a2 = angle + pi/2
 
                 lane_width_pix = m2pix(ft2m(lane.lane_width/2.0))
-                p1 = (canvas_hw + old_x + cos(a1)*lane_width_pix*zl, canvas_hh + old_y + sin(a1)*lane_width_pix*zl)
-                p2 = (canvas_hw +     x + cos(a1)*lane_width_pix*zl, canvas_hh +     y + sin(a1)*lane_width_pix*zl)
-                p3 = (canvas_hw + old_x + cos(a2)*lane_width_pix*zl, canvas_hh + old_y + sin(a2)*lane_width_pix*zl)
-                p4 = (canvas_hw +     x + cos(a2)*lane_width_pix*zl, canvas_hh +     y + sin(a2)*lane_width_pix*zl)
+                p1 = (world2screen_x(canvas, old_x + cos(a1)*lane_width_pix), world2screen_y(canvas, old_y + sin(a1)*lane_width_pix))
+                p2 = (world2screen_x(canvas,     x + cos(a1)*lane_width_pix), world2screen_y(canvas,     y + sin(a1)*lane_width_pix))
+                p3 = (world2screen_x(canvas, old_x + cos(a2)*lane_width_pix), world2screen_y(canvas, old_y + sin(a2)*lane_width_pix))
+                p4 = (world2screen_x(canvas,     x + cos(a2)*lane_width_pix), world2screen_y(canvas,     y + sin(a2)*lane_width_pix))
 
                 bt_left  = self.boundary_type(lane.left_boundary)
                 bt_right = self.boundary_type(lane.right_boundary)
@@ -164,19 +162,19 @@ class RNDF:
             
                 for w in range(1, len(lane.waypoints)):
                     wp = lane.waypoints[w]
-                    x = zl*m2pix(wp[0] - o[0])
-                    y = zl*m2pix(wp[1] - o[1])
-                    canvas.create_line(canvas_hw + old_x, canvas_hh + old_y,
-                                            canvas_hw + x, canvas_hh + y,
+                    x = m2pix(wp[0] - o[0])
+                    y = m2pix(wp[1] - o[1])
+                    canvas.create_line(world2screen_x(canvas, old_x), world2screen_y(canvas, old_y),
+                                       world2screen_x(canvas, x),     world2screen_y(canvas, y),
                                             fill='green', tag='boundary')
                     angle = atan2(y-old_y, x-old_x)
                     a1 = angle - pi/2
                     a2 = angle + pi/2
 
-                    p1 = (canvas_hw + old_x + cos(a1)*lane_width_pix*zl, canvas_hh + old_y + sin(a1)*lane_width_pix*zl)
-                    p2 = (canvas_hw +     x + cos(a1)*lane_width_pix*zl, canvas_hh +     y + sin(a1)*lane_width_pix*zl)
-                    p3 = (canvas_hw + old_x + cos(a2)*lane_width_pix*zl, canvas_hh + old_y + sin(a2)*lane_width_pix*zl)
-                    p4 = (canvas_hw +     x + cos(a2)*lane_width_pix*zl, canvas_hh +     y + sin(a2)*lane_width_pix*zl)
+                    p1 = (world2screen_x(canvas, old_x + cos(a1)*lane_width_pix), world2screen_y(canvas, old_y + sin(a1)*lane_width_pix))
+                    p2 = (world2screen_x(canvas,     x + cos(a1)*lane_width_pix), world2screen_y(canvas,     y + sin(a1)*lane_width_pix))
+                    p3 = (world2screen_x(canvas, old_x + cos(a2)*lane_width_pix), world2screen_y(canvas, old_y + sin(a2)*lane_width_pix))
+                    p4 = (world2screen_x(canvas,     x + cos(a2)*lane_width_pix), world2screen_y(canvas,     y + sin(a2)*lane_width_pix))
 
                     if bt_left is not None:
                         canvas.create_line(p1[0], p1[1], p2[0], p2[1], width=bt_left['width'], fill=bt_left['fill'], dash=bt_left['dash'], tag='boundary')

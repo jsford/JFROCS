@@ -65,8 +65,9 @@ class JFROCS_gui:
         self.canvas.bind("<B1-Motion>", self.move_move)
         self.canvas.bind("<Button-4>", self.zoomerM)
         self.canvas.bind("<Button-5>", self.zoomerP)
-        self.canvas.old_zoom_level = 0.0
-        self.canvas.zoom_level = 1.0
+        self.canvas.origin = (814/2, 440/2)
+        self.canvas.old_zl = 0.0
+        self.canvas.zl = 1.0
         self.canvas.zoom_center = (self.canvas.winfo_width()/2, self.canvas.winfo_height()/2)
 
         # Add Freq. Display
@@ -128,28 +129,24 @@ class JFROCS_gui:
         if (canvas_hw == 0 and canvas_hh == 0): return
 
         # Render the car
-        zl = self.canvas.zoom_level
-        if(zl != self.canvas.old_zoom_level):
+        zl = self.canvas.zl
+        if(zl != self.canvas.old_zl):
             self.car = self.car_original.resize((int(zl*m2pix(1.75)), int(zl*m2pix(1.75)*self.car_original.size[1]/self.car_original.size[0])), Image.ANTIALIAS)
 
         car = self.car.rotate(theta, expand=True)
         car = ImageTk.PhotoImage(car) 
         self.canvas.car = car   # Keep a reference
         self.canvas.delete("car")
-        self.canvas.create_image((canvas_hw+zl*pos[0],canvas_hh+zl*pos[1]), image=car, tag="car")
+        self.canvas.create_image((world2screen_x(self.canvas, pos[0]),
+                                  world2screen_y(self.canvas, pos[1])), image=car, tag="car")
 
         # Render the rwm
-        self.rwm.render(self.canvas, zl)
+        self.rwm.render(self.canvas)
 
         # Render the obstacles
         self.canvas.delete('obstacle')
         for o in obstacles:
-            o.render(self.canvas, zl)
-
-        # Turn this into drawing the roadworldmodel
-        self.canvas.delete('line')
-        for l in lines:
-            self.canvas.create_line(canvas_hw+zl*l[0],canvas_hh+zl*l[1],canvas_hw+zl*l[2],canvas_hh+zl*l[3], fill='white', tag='line')
+            o.render(self.canvas)
 
     # Click and drag the canvas using the mouse
     def move_start(self, event):
@@ -159,28 +156,26 @@ class JFROCS_gui:
 
     # Update the current mouse coordinates on the canvas
     def mouse_move(self, event):
-        mx = self.canvas.canvasx(event.x)
-        my = self.canvas.canvasy(event.y)
-
-        canvas_hw = self.canvas.winfo_width()/2
-        canvas_hh = self.canvas.winfo_height()/2
-        zl = self.canvas.zoom_level
+        mx = screen2world_x(self.canvas, self.canvas.canvasx(event.x))
+        my = screen2world_y(self.canvas, self.canvas.canvasy(event.y))
 
         self.mouse_coord_disp.delete('1.0', END)
-        self.mouse_coord_disp.insert('1.0', "("+format(pix2m(mx-canvas_hw)/zl,'.2f')+", "
-                                               +format(pix2m(my-canvas_hh)/zl,'.2f')+")", "STYLE")
+        self.mouse_coord_disp.insert('1.0', "("+format(pix2m(mx),'.2f')+", "
+                                               +format(pix2m(my),'.2f')+")", "STYLE")
         self.mouse_coord_disp.tag_config("STYLE", foreground='white', justify='right')
         
 
     # Zoom using mouse scrollwheel 
     def zoomerP(self,event):
-        self.canvas.old_zoom_level = self.canvas.zoom_level
-        self.canvas.zoom_level *= 1.1
-        self.canvas.zoom_level = min(self.canvas.zoom_level, 5)
+        self.canvas.origin = (self.canvas.canvasx(event.x), self.canvas.canvasy(event.y))
+        self.canvas.old_zl = self.canvas.zl
+        self.canvas.zl *= 1.1
+        self.canvas.zl = min(self.canvas.zl, 5)
     def zoomerM(self,event):
-        self.canvas.old_zoom_level = self.canvas.zoom_level
-        self.canvas.zoom_level /= 1.1 
-        self.canvas.zoom_level = max(self.canvas.zoom_level, .01)
+        self.canvas.origin = (self.canvas.canvasx(event.x), self.canvas.canvasy(event.y))
+        self.canvas.old_zl = self.canvas.zl
+        self.canvas.zl /= 1.1 
+        self.canvas.zl = max(self.canvas.zl, .01)
 
 
 if __name__ == "__main__":
