@@ -23,17 +23,17 @@ def pix2m(p):
     return p*1.75/50.0
 
 def world2screen_x(canvas, x):
-    #return (x-canvas.origin[0])*canvas.zl + canvas.winfo_width()/2
-    return (x)*canvas.zl + canvas.winfo_width()/2
+    return (x)*canvas.zl + canvas.origin[0]
+    #return (x)*canvas.zl + canvas.winfo_width()/2
 
 def world2screen_y(canvas, y):
-    #return (y-canvas.origin[1])*canvas.zl + canvas.winfo_height()/2
-    return (y)*canvas.zl + canvas.winfo_height()/2
+    return (y)*canvas.zl + canvas.origin[1]
+    #return (y)*canvas.zl + canvas.winfo_height()/2
 
 def screen2world_x(canvas, x):
-    #return (x - canvas.winfo_width()/2)/canvas.zl + canvas.origin[0]
-    return (x - canvas.winfo_width()/2)/canvas.zl
+    return (x - canvas.winfo_width()/2)/canvas.zl + canvas.origin[0]
+    #return (x - canvas.winfo_width()/2)/canvas.zl
     
 def screen2world_y(canvas, y):
-    #return (y - canvas.winfo_height()/2)/canvas.zl + canvas.origin[1]
-    return (y - canvas.winfo_height()/2)/canvas.zl
+    return (y - canvas.winfo_height()/2)/canvas.zl + canvas.origin[1]
+    #return (y - canvas.winfo_height()/2)/canvas.zl

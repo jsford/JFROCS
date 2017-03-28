@@ -167,15 +167,28 @@ class JFROCS_gui:
 
     # Zoom using mouse scrollwheel 
     def zoomerP(self,event):
-        self.canvas.origin = (self.canvas.canvasx(event.x), self.canvas.canvasy(event.y))
+        MAX_ZOOM = 3
+        if (self.canvas.zl >= MAX_ZOOM): self.canvas.zl = MAX_ZOOM; return;
+
+        (mx, my) = (self.canvas.canvasx(event.x), self.canvas.canvasy(event.y))
+        # Move the origin to a new point calculated from the zoom center
+        self.canvas.origin = (self.canvas.origin[0] - (mx-self.canvas.origin[0])*0.1,
+                              self.canvas.origin[1] - (my-self.canvas.origin[1])*0.1)
+
         self.canvas.old_zl = self.canvas.zl
         self.canvas.zl *= 1.1
-        self.canvas.zl = min(self.canvas.zl, 5)
+
     def zoomerM(self,event):
-        self.canvas.origin = (self.canvas.canvasx(event.x), self.canvas.canvasy(event.y))
+        MIN_ZOOM = 0.01 
+        if (self.canvas.zl <= MIN_ZOOM): self.canvas.zl = MIN_ZOOM; return;
+
+        (mx, my) = (self.canvas.canvasx(event.x), self.canvas.canvasy(event.y))
+        # Move the origin to a new point calculated from the zoom center
+        self.canvas.origin = (mx - (mx-self.canvas.origin[0])/1.1,
+                              my - (my-self.canvas.origin[1])/1.1)
+
         self.canvas.old_zl = self.canvas.zl
         self.canvas.zl /= 1.1 
-        self.canvas.zl = max(self.canvas.zl, .01)
 
 
 if __name__ == "__main__":
