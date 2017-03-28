@@ -6,11 +6,21 @@ from PIL import Image, ImageTk
 from math import *
 import time
 import random
+import sys
 
 from custom_colors import *
 from  planner import *
 
+def ft2m(dim):
+    return dim*0.3048
 
+def m2ft(dim):
+    return dim*3.2808399
+
+def m2pix(m):
+    return m*50.0/1.75
+def pix2m(p):
+    return p*1.75/50.0
 
 class JFROCS_gui:
     def __init__(self, width, height, rndf_fname):
@@ -122,49 +132,79 @@ class JFROCS_gui:
 
     # Is called by the planner to draw the world 
     def render(self, theta, pos, obstacles, lines):
+        # Get canvas dimensions. Quit if it's 0x0
+        canvas_hw = self.canvas.winfo_width()/2
+        canvas_hh = self.canvas.winfo_height()/2
+        if (canvas_hw == 0 and canvas_hh == 0): return
+
         # Render the car
         zl = self.canvas.zoom_level
         if(zl != self.canvas.old_zoom_level):
-            self.car = self.car_original.resize((int(zl*self.m2pix(1.75)), int(zl*self.m2pix(1.75)*self.car_original.size[1]/self.car_original.size[0])), Image.ANTIALIAS)
+            self.car = self.car_original.resize((int(zl*m2pix(1.75)), int(zl*m2pix(1.75)*self.car_original.size[1]/self.car_original.size[0])), Image.ANTIALIAS)
 
         car = self.car.rotate(theta, expand=True)
         car = ImageTk.PhotoImage(car) 
         self.canvas.car = car   # Keep a reference
-        canvas_hw = self.canvas.winfo_width()/2
-        canvas_hh = self.canvas.winfo_height()/2
         self.canvas.delete("car")
         self.canvas.create_image((canvas_hw+zl*pos[0],canvas_hh+zl*pos[1]), image=car, tag="car")
 
         # Render the RoadWorldModel
-        self.canvas.delete('waypoint')
+        self.canvas.delete('boundary')
         o = self.rwm.segments[0].lanes[0].waypoints[0]
 
         for seg in self.rwm.segments:
             for lane in seg.lanes:
-                for wp in lane.waypoints:
-                    x = canvas_hw + zl*self.m2pix(wp[0] - o[0])
-                    y = canvas_hh + zl*self.m2pix(wp[1] - o[1])
-                    self.canvas.create_oval(x-5*zl, y-5*zl, x+5*zl, y+5*zl, fill='white', tag='waypoint')
+                last_wp = lane.waypoints[0]
+                next_wp = lane.waypoints[1]
+                old_x = zl*m2pix(last_wp[0] - o[0])
+                old_y = zl*m2pix(last_wp[1] - o[1])
+
+                x = zl*m2pix(next_wp[0] - o[0])
+                y = zl*m2pix(next_wp[1] - o[1])
+
+                angle = atan2(y-old_y, x-old_x)
+                a1 = angle + pi/2
+                a2 = angle - pi/2
+
+                lane_width_pix = m2pix(5*.3048)
+                p1 = (canvas_hw + old_x + cos(a1)*lane_width_pix*zl, canvas_hh + old_y + sin(a1)*lane_width_pix*zl)
+                p2 = (canvas_hw +     x + cos(a1)*lane_width_pix*zl, canvas_hh +     y + sin(a1)*lane_width_pix*zl)
+                p3 = (canvas_hw + old_x + cos(a2)*lane_width_pix*zl, canvas_hh + old_y + sin(a2)*lane_width_pix*zl)
+                p4 = (canvas_hw +     x + cos(a2)*lane_width_pix*zl, canvas_hh +     y + sin(a2)*lane_width_pix*zl)
+
+                self.canvas.create_line(p1[0], p1[1], p2[0], p2[1], fill='yellow', tag='boundary')
+                self.canvas.create_line(p3[0], p3[1], p4[0], p4[1], fill='yellow', tag='boundary')
+            
+                for w in range(1, len(lane.waypoints)):
+                    wp = lane.waypoints[w]
+                    x = zl*m2pix(wp[0] - o[0])
+                    y = zl*m2pix(wp[1] - o[1])
+                    self.canvas.create_line(canvas_hw + old_x, canvas_hh + old_y,
+                                            canvas_hw + x, canvas_hh + y,
+                                            fill='white', tag='boundary')
+                    angle = atan2(y-old_y, x-old_x)
+                    a1 = angle + pi/2
+                    a2 = angle - pi/2
+
+                    p1 = (canvas_hw + old_x + cos(a1)*lane_width_pix*zl, canvas_hh + old_y + sin(a1)*lane_width_pix*zl)
+                    p2 = (canvas_hw +     x + cos(a1)*lane_width_pix*zl, canvas_hh +     y + sin(a1)*lane_width_pix*zl)
+                    p3 = (canvas_hw + old_x + cos(a2)*lane_width_pix*zl, canvas_hh + old_y + sin(a2)*lane_width_pix*zl)
+                    p4 = (canvas_hw +     x + cos(a2)*lane_width_pix*zl, canvas_hh +     y + sin(a2)*lane_width_pix*zl)
+
+                    self.canvas.create_line(p1[0], p1[1], p2[0], p2[1], fill='yellow', tag='boundary')
+                    self.canvas.create_line(p3[0], p3[1], p4[0], p4[1], fill='yellow', tag='boundary')
+                    old_x = x; old_y = y
 
         # Render the obstacles
         self.canvas.delete('obstacle')
         for o in obstacles:
             o.render(self.canvas, zl)
 
-        # Render the axes
-        self.canvas.delete('axis')
-        self.canvas.create_line(canvas_hw, canvas_hh, canvas_hw, canvas_hh+100*zl, fill='white', tag='axis')
-        self.canvas.create_line(canvas_hw, canvas_hh, canvas_hw+100*zl, canvas_hh, fill='white', tag='axis')
-
         # Turn this into drawing the roadworldmodel
         self.canvas.delete('line')
         for l in lines:
             self.canvas.create_line(canvas_hw+zl*l[0],canvas_hh+zl*l[1],canvas_hw+zl*l[2],canvas_hh+zl*l[3], fill='white', tag='line')
 
-    def m2pix(self, m):
-        return m*50.0/1.75
-    def pix2m(self, p):
-        return p*1.75/50.0
 
     # Click and drag the canvas using the mouse
     def move_start(self, event):
@@ -182,8 +222,8 @@ class JFROCS_gui:
         zl = self.canvas.zoom_level
 
         self.mouse_coord_disp.delete('1.0', END)
-        self.mouse_coord_disp.insert('1.0', "("+format(self.pix2m(mx-canvas_hw)/zl,'.2f')+", "
-                                               +format(self.pix2m(my-canvas_hh)/zl,'.2f')+")", "STYLE")
+        self.mouse_coord_disp.insert('1.0', "("+format(pix2m(mx-canvas_hw)/zl,'.2f')+", "
+                                               +format(pix2m(my-canvas_hh)/zl,'.2f')+")", "STYLE")
         self.mouse_coord_disp.tag_config("STYLE", foreground='white', justify='right')
         
 
@@ -194,11 +234,33 @@ class JFROCS_gui:
         self.canvas.zoom_level = min(self.canvas.zoom_level, 5)
     def zoomerM(self,event):
         self.canvas.old_zoom_level = self.canvas.zoom_level
-        self.canvas.zoom_level *= 0.9 
+        self.canvas.zoom_level /= 1.1 
         self.canvas.zoom_level = max(self.canvas.zoom_level, .01)
 
 
 if __name__ == "__main__":
-    jfrocs_gui = JFROCS_gui(960, 700, "scenarios/SchenleyNonStopClockwise/RNDF.txt")
+
+    if len(sys.argv) == 2:
+        rndf_fname = sys.argv[1]
+    elif len(sys.argv) == 1:
+        rndf_fname = "scenarios/SchenleyNonStopClockwise/RNDF.txt"
+    else:
+        print "Usage: ./gui_main <rndf>"
+        exit()
+    
+    jfrocs_gui = JFROCS_gui(960, 700, rndf_fname)
     jfrocs_gui.mainloop() 
+
+
+
+
+
+
+
+
+
+
+
+
+
 
