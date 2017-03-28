@@ -19,7 +19,7 @@ class JFROCS_gui:
 
         # Init the vehicle(s)
         v1 = Vehicle("ego", self.rwm, pos=(0,0))
-        v2 = Vehicle("bonehead", self.rwm, pos=(100,0), theta=pi/4, lightweight=True)
+        v2 = Vehicle("bonehead", self.rwm, pos=(100,0), theta=pi/4)
 
         self.vehicles = [v1, v2]
 

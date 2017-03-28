@@ -4,7 +4,7 @@ from math import *
 from draw_funcs import *
 
 class Vehicle:
-    def __init__(self, name, rwm, pos=(0,0), theta=0, width_m=1.75, texture_fname='car_smallest.png', lightweight=False):
+    def __init__(self, name, rwm, pos=(0,0), theta=0, width_m=1.75, texture_fname='car_small.png', lightweight=False):
         self.name = name
         self.rwm = rwm
         self.pos = pos
@@ -20,7 +20,7 @@ class Vehicle:
     
     # Call the planner and update the car's position and heading here
     def step(self):
-        self.theta += 10*180/pi 
+        self.theta += 5*pi/180.0 
         
     def render(self, canvas):
         zl = canvas.zl
