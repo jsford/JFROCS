@@ -1,7 +1,7 @@
 import Tkinter as tk
 
 from obstacle import *
-from custom_colors import *
+from draw_funcs import *
 from parse_RNDF import *
 
 class Planner:

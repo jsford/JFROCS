@@ -8,19 +8,9 @@ import time
 import random
 import sys
 
-from custom_colors import *
+from draw_funcs import *
 from  planner import *
 
-def ft2m(dim):
-    return dim*0.3048
-
-def m2ft(dim):
-    return dim*3.2808399
-
-def m2pix(m):
-    return m*50.0/1.75
-def pix2m(p):
-    return p*1.75/50.0
 
 class JFROCS_gui:
     def __init__(self, width, height, rndf_fname):
@@ -148,52 +138,8 @@ class JFROCS_gui:
         self.canvas.delete("car")
         self.canvas.create_image((canvas_hw+zl*pos[0],canvas_hh+zl*pos[1]), image=car, tag="car")
 
-        # Render the RoadWorldModel
-        self.canvas.delete('boundary')
-        o = self.rwm.segments[0].lanes[0].waypoints[0]
-
-        for seg in self.rwm.segments:
-            for lane in seg.lanes:
-                last_wp = lane.waypoints[0]
-                next_wp = lane.waypoints[1]
-                old_x = zl*m2pix(last_wp[0] - o[0])
-                old_y = zl*m2pix(last_wp[1] - o[1])
-
-                x = zl*m2pix(next_wp[0] - o[0])
-                y = zl*m2pix(next_wp[1] - o[1])
-
-                angle = atan2(y-old_y, x-old_x)
-                a1 = angle + pi/2
-                a2 = angle - pi/2
-
-                lane_width_pix = m2pix(5*.3048)
-                p1 = (canvas_hw + old_x + cos(a1)*lane_width_pix*zl, canvas_hh + old_y + sin(a1)*lane_width_pix*zl)
-                p2 = (canvas_hw +     x + cos(a1)*lane_width_pix*zl, canvas_hh +     y + sin(a1)*lane_width_pix*zl)
-                p3 = (canvas_hw + old_x + cos(a2)*lane_width_pix*zl, canvas_hh + old_y + sin(a2)*lane_width_pix*zl)
-                p4 = (canvas_hw +     x + cos(a2)*lane_width_pix*zl, canvas_hh +     y + sin(a2)*lane_width_pix*zl)
-
-                self.canvas.create_line(p1[0], p1[1], p2[0], p2[1], fill='yellow', tag='boundary')
-                self.canvas.create_line(p3[0], p3[1], p4[0], p4[1], fill='yellow', tag='boundary')
-            
-                for w in range(1, len(lane.waypoints)):
-                    wp = lane.waypoints[w]
-                    x = zl*m2pix(wp[0] - o[0])
-                    y = zl*m2pix(wp[1] - o[1])
-                    self.canvas.create_line(canvas_hw + old_x, canvas_hh + old_y,
-                                            canvas_hw + x, canvas_hh + y,
-                                            fill='white', tag='boundary')
-                    angle = atan2(y-old_y, x-old_x)
-                    a1 = angle + pi/2
-                    a2 = angle - pi/2
-
-                    p1 = (canvas_hw + old_x + cos(a1)*lane_width_pix*zl, canvas_hh + old_y + sin(a1)*lane_width_pix*zl)
-                    p2 = (canvas_hw +     x + cos(a1)*lane_width_pix*zl, canvas_hh +     y + sin(a1)*lane_width_pix*zl)
-                    p3 = (canvas_hw + old_x + cos(a2)*lane_width_pix*zl, canvas_hh + old_y + sin(a2)*lane_width_pix*zl)
-                    p4 = (canvas_hw +     x + cos(a2)*lane_width_pix*zl, canvas_hh +     y + sin(a2)*lane_width_pix*zl)
-
-                    self.canvas.create_line(p1[0], p1[1], p2[0], p2[1], fill='yellow', tag='boundary')
-                    self.canvas.create_line(p3[0], p3[1], p4[0], p4[1], fill='yellow', tag='boundary')
-                    old_x = x; old_y = y
+        # Render the rwm
+        self.rwm.render(self.canvas, zl)
 
         # Render the obstacles
         self.canvas.delete('obstacle')
@@ -204,7 +150,6 @@ class JFROCS_gui:
         self.canvas.delete('line')
         for l in lines:
             self.canvas.create_line(canvas_hw+zl*l[0],canvas_hh+zl*l[1],canvas_hw+zl*l[2],canvas_hh+zl*l[3], fill='white', tag='line')
-
 
     # Click and drag the canvas using the mouse
     def move_start(self, event):
