@@ -20,6 +20,8 @@ class Vehicle:
     
     # Call the planner and update the car's position and heading here
     def step(self):
+        for i in range(1, 100000):
+            x = i/134134.0
         self.theta += 5*pi/180.0 
         
     def render(self, canvas):
