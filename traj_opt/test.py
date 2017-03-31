@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import numpy as np
 import matplotlib.pyplot as plt
 import pdb
@@ -36,7 +38,7 @@ def g_dq(q, x0, xd):
         grad[p_idx,:] = np.transpose(boundary_function_g(q, x0, xd)
                          - boundary_function_g(perturbed, x0, xd))
     np.divide(grad, epsilon)
-    return grad
+    return np.transpose(grad)
 
 def cost_function_J(q):
     s = np.arange(0, q[0], epsilon)
@@ -46,11 +48,11 @@ def cost_function_J(q):
     return sum_squares 
 
 def J_dq(q):
-    grad = np.zeros((len(q), 1))
+    grad = np.zeros((1, len(q)))
     for p_idx in range(0, len(q)):
         perturbed = q.copy()
         perturbed[p_idx] += epsilon
-        grad[p_idx] = (cost_function_J(q) - cost_function_J(perturbed))/epsilon
+        grad[:,p_idx] = (cost_function_J(q) - cost_function_J(perturbed))/epsilon
     return grad
 
 
@@ -70,7 +72,6 @@ def grad_L(params, x0, xd):
         grad[p_idx] = (plus-center)/epsilon
     return grad
 
-        
 
 def init_sf(x0, xf):
     rad = np.sqrt((xf[0]-x0[0])**2 + (xf[1]-x0[1])**2)
@@ -99,13 +100,9 @@ def init_p(sf, x0, xf):
 def init_lambda(q, x0, xf): 
     dg_dq = g_dq(q, x0, xf) 
     dJ_dq = J_dq(q)
-    print dg_dq
-    print dJ_dq
 
-    soodo_inv = np.linalg.pinv(dg_dq)
-    print dg_dq.shape
-    lambduh = -dJ_dq * soodo_inv
-    print lambduh
+    dg_dq_T_pinv = np.linalg.pinv(np.transpose(dg_dq))
+    lambduh = np.dot( dg_dq_T_pinv , np.transpose(-dJ_dq) )
     return lambduh
     
 
@@ -116,15 +113,13 @@ x0 = [0, 0, 0, 0]
 xd = [0.70102248, 0.52060821, -1.22559075, -7.68353244]; 
 
 
-#p_opt = fsolve(grad_L, p, (x0, xd))
-
-#calc_f(p_opt, 1.1, plot=True)
-
 sf_guess = init_sf(x0, xd)
 p_guess = init_p(sf_guess, x0, xd)
 q_guess = np.insert(p_guess, 0, sf_guess)
 
 lambda_guess = init_lambda(q_guess, x0, xd)
+
+#p_opt = fsolve(grad_L, p, (x0, xd))
 
 
 calc_f(q_guess, plot=True) 
