@@ -10,7 +10,7 @@ POLY_DEG = 4
 
 # This function describes state as a function of the 
 # parameter vector p and the arclength s
-def calc_f(q, plot=False ):
+def calc_f(q, plot=False, color='black'):
     s = np.arange(0, q[0], epsilon)
     u = q[1] + s*(q[2] + s*(q[3] + s*(q[4])))
 
@@ -19,7 +19,7 @@ def calc_f(q, plot=False ):
     x = np.cumsum(np.cos(theta))*epsilon 
     y = np.cumsum(np.sin(theta))*epsilon 
     if(plot):
-        plt.plot(x, y)
+        plt.plot(x, y, color)
 
     return np.array([x[-1],y[-1],theta[-1],k[-1]])
 
@@ -57,8 +57,9 @@ def J_dq(q):
 
 
 def calc_L(params, x0, xd):
-    l_mult = params[5] 
-    return cost_function_J(q) + l_mult*boundary_function_g(q, x0, xd)
+    q = params[0:POLY_DEG+1]
+    l_mult = params[POLY_DEG+1:] 
+    return cost_function_J(q) + np.dot(l_mult, boundary_function_g(q, x0, xd))
 
 
 def grad_L(params, x0, xd):
@@ -69,8 +70,8 @@ def grad_L(params, x0, xd):
         perturbed_params = params
         params[p_idx] += epsilon
         plus = calc_L(params, x0, xd)
-        grad[p_idx] = (plus-center)/epsilon
-    return grad
+        grad[:, p_idx] = (plus-center)/epsilon
+    return grad[0,:]
 
 
 def init_sf(x0, xf):
@@ -88,7 +89,7 @@ def init_p(sf, x0, xf):
     dt = tf-t0
     dk = kf-k0
 
-    init_p = np.zeros((POLY_DEG, 1))
+    init_p = np.zeros((POLY_DEG, ))
     init_p[0] = 2*dt/sf - dk
     init_p[1] = (dk - init_p[0])/sf
             
@@ -103,7 +104,7 @@ def init_lambda(q, x0, xf):
 
     dg_dq_T_pinv = np.linalg.pinv(np.transpose(dg_dq))
     lambduh = np.dot( dg_dq_T_pinv , np.transpose(-dJ_dq) )
-    return lambduh
+    return lambduh[:,0]
     
 
 # sf, p
@@ -115,14 +116,16 @@ xd = [0.70102248, 0.52060821, -1.22559075, -7.68353244];
 
 sf_guess = init_sf(x0, xd)
 p_guess = init_p(sf_guess, x0, xd)
-q_guess = np.insert(p_guess, 0, sf_guess)
+q_guess = np.insert(p_guess, 0, np.array(sf_guess))
 
 lambda_guess = init_lambda(q_guess, x0, xd)
+param_guess = np.concatenate((q_guess, lambda_guess))
 
-#p_opt = fsolve(grad_L, p, (x0, xd))
+q_opt = fsolve(grad_L, param_guess, (x0, xd))
 
 
-calc_f(q_guess, plot=True) 
-calc_f(q, plot=True) 
+calc_f(q_guess, plot=True, color='red') 
+calc_f(q, plot=True, color='blue') 
+calc_f(q_opt, plot=True, color='green') 
 
 plt.show()
