@@ -7,7 +7,6 @@ from scipy.optimize import fsolve
 
 epsilon = 1e-3
 POLY_DEG = 4
-CONSTRAINTS = 4
 
 # Uses Horner's Method to evaluate a polynomial 
 # with a given set of coefficients at a given set of points.
@@ -21,17 +20,103 @@ def polyval(coeffs, samples):
 # This function does the forward dynamics to find the state
 # as a function of the coefficient vector p and the arclength s
 # Note: q = [sf, p]
-def get_state(q, plot=False, color='black'):
-    s = arange(0, q[0], epsilon)
-    k = polyval(q[1:POLY_DEG+1], s)
+def plot_state(q):
+    POINTNUM = 100
 
-    theta = cumsum(k)*epsilon 
-    x = cumsum(cos(theta))*epsilon 
-    y = cumsum(sin(theta))*epsilon 
-    if(plot):
-        plt.plot(x, y, color)
+    # Temporary
+    x0 = array([0,0,0,0])
 
-    return array([x[-1],y[-1],theta[-1],k[-1]])
+    sf = q[0]
+
+    plot_x     = zeros((POINTNUM, ))
+    plot_y     = zeros((POINTNUM, ))
+    plot_theta = zeros((POINTNUM, ))
+    plot_k     = zeros((POINTNUM, ))
+
+    sk    = 0; k        = 0;
+    x     = 0; y        = 0;
+    dx    = 0; dy       = 0; 
+    dx1   = 0; dy1      = 0;
+    theta = 0; theta1   = 0;
+
+    for i in range(0, POINTNUM):
+        sk = i*sf/(POINTNUM-1)
+
+        k  = polyval(q[1:], sk) 
+        
+        if(i==0):
+            x = 0;
+            y = 0;
+            theta = 0;
+            dx1   = 0;
+            dy1   = 0;
+            theta1 = theta;
+        else:
+            theta = polyval(array([0, q[1], q[2]/2.0, q[3]/3.0, q[4]/4.0]), sk)
+            dx = dx1*(i-1)/i + (cos(theta) + cos(theta1))/(2*i)
+            dy = dy1*(i-1)/i + (sin(theta) + sin(theta1))/(2*i)
+            x  = sk*dx
+            y  = sk*dy
+
+            dx1 = dx
+            dy1 = dy
+            theta1 = theta
+        
+        plot_x[i]     = cos(x0[2])*x-sin(x0[2])*y+x0[0]
+        plot_y[i]     = cos(x0[2])*y+sin(x0[2])*x+x0[1]
+        plot_theta[i] = theta+x0[2]
+        plot_k[i]     = sk
+    
+    return vstack((plot_x, plot_y, plot_theta, plot_k)) 
+
+
+# This function does the forward dynamics to find the state
+# as a function of the coefficient vector p and the arclength s
+# Note: q = [sf, p]
+def get_state(q):
+    POINTNUM = 100
+    temp_x = zeros((4,))
+
+    sf = q[0]                       # For convenience
+
+    w = 0; s = 0; f = 0; g = 0;
+    x = 0; y = 0;
+    theta = 0;
+
+    for i in range(0, POINTNUM+1):
+        if ( i==0 or i==POINTNUM ):
+            w = 1
+        elif ( i%2 == 1 ):
+            w = 4
+        else:
+            w = 2
+        
+        s = sf*i/(POINTNUM-1) 
+        theta = polyval(array([0, q[1], q[2]/2.0, q[3]/3.0, q[4]/4.0]), s)
+        f = cos(theta)
+        g = sin(theta)
+        x += w*f
+        y += w*g
+
+    x *= sf/(3*POINTNUM)
+    y *= sf/(3*POINTNUM)
+
+    temp_x[0] = x
+    temp_x[1] = y
+    temp_x[2] = polyval(array([0, q[1], q[2]/2.0, q[3]/3.0, q[4]/4.0]), sf) % (2*pi)
+    temp_x[3] = polyval(q[1:], sf) 
+
+    # Normalize theta to [-pi, pi]
+    theta1 = (temp_x[2]+2*pi) % (2*pi)
+    theta2 = theta1 - 2*pi
+    
+    if( abs(theta1) <= abs(theta2) ):
+        temp_x[2] = theta1
+    else:
+        temp_x[2] = theta2
+
+    return temp_x
+
 
 # Estimate the arclength and polynomial coefficients required to 
 # get from x0 = [0,0,0,0] to xf
@@ -75,7 +160,7 @@ def calc_Jacobian(q):
     y1 = 0; y2 = 0; y3 = 0;
             
     for i in range(0, N+1):         # N+1 to match Tianyu. I think it's a bug.
-        if (i==0 or i== N):
+        if (i==0 or i == N):
             w = 1
         elif (i%2 == 1):
             w = 4
@@ -84,7 +169,7 @@ def calc_Jacobian(q):
         
         s = sf*i/float(N-1)
         # GetBiasThetaByS
-        theta = polyval(array([0, q[1], q[2]/2.0, q[3]/3.0, q[4]/4.0]), sf)
+        theta = polyval(array([0, q[1], q[2]/2.0, q[3]/3.0, q[4]/4.0]), s)
         f = cos(theta)
         g = sin(theta)
         x1 += w*g*s**2
@@ -93,18 +178,20 @@ def calc_Jacobian(q):
         y1 += w*f*s**2
         y2 += w*f*s**3
         y3 += w*f*s**4
+    
 
-    x1 *= sf/(3*N); x2 *= sf/(3*N); x3 *= sf/(3*N);
-    y1 *= sf/(3*N); y2 *= sf/(3*N); y3 *= sf/(3*N);
+    x1 *= sf/(3.0*N); x2 *= sf/(3.0*N); x3 *= sf/(3.0*N);
+    y1 *= sf/(3.0*N); y2 *= sf/(3.0*N); y3 *= sf/(3.0*N);
 
     # GetBiasThetaByS
     theta = polyval(array([0, q[1], q[2]/2.0, q[3]/3.0, q[4]/4.0]), sf)
-    k     = polyval(q[1:4], sf)
+    k     = polyval(q[1:], sf)
+
 
     j[0,0] = -x1/2.0;      j[0,1] = -x2/3.0;      j[0,2] = -x3/4.0;      j[0,3] = cos(theta);
     j[1,0] =  y1/2.0;      j[1,1] =  y2/3.0;      j[1,2] =  y3/4.0;      j[1,3] = sin(theta);
     j[2,0] = (sf**2)/2.0;  j[2,1] = (sf**3)/3.0;  j[2,2] = (sf**4)/4.0;  j[2,3] = k;
-    j[3,0] = sf;           j[3,1] = sf**2;        j[3,2] = sf**3;        j[3,3] = q[1]+2*q[2]*sf+3*q[3]*sf**2;
+    j[3,0] = sf;           j[3,1] = sf**2;        j[3,2] = sf**3;        j[3,3] = q[2]+2*q[3]*sf+3*q[4]*sf**2;
 
     return j
 
@@ -121,7 +208,7 @@ def same_state(x0, x1):
 
 def optimize_params(xf):
 
-    # Normalize the final heading to [0, 2*pi)
+    # Normalize the final heading to [-pi, pi]
     theta1 = (xf[2]+2*pi) % (2*pi)
     theta2 =  theta1-2*pi
     if (abs(theta1) <= abs(theta2)):
@@ -144,9 +231,10 @@ def optimize_params(xf):
         delta = dot(linalg.inv(jacobi), param)
 
         temp_p[0] -= delta[3]       # Arclength
-        temp_p[1] -= delta[0]       # p0
-        temp_p[2] -= delta[1]       # p1
-        temp_p[3] -= delta[2]       # p2
+        temp_p[1] -= 0              # p0 stays the same
+        temp_p[2] -= delta[0]       # p1
+        temp_p[3] -= delta[1]       # p2
+        temp_p[4] -= delta[2]       # p3
 
         if(temp_p[0] < 0 or temp_p[0] > 3*sqrt(xf[0]**2+xf[1]**2)):
             temp_p[0] = sqrt(xf[0]**2+xf[1]**2)
@@ -155,8 +243,6 @@ def optimize_params(xf):
             temp_p[3] = 0
 
         temp_x = get_state(temp_p)
-        print temp_x
-        exit()
         i += 1
 
     return temp_p
@@ -164,16 +250,13 @@ def optimize_params(xf):
     
     
 
-# sf, p
-#q = array([1.1, 0, 33, -82, 41.5])
 
-# [X, Y, T, K]
-#xd = array([0.70102248, 0.52060821, -1.22559075, -7.68353244]);
-xd2 = array([10,6,0,0])
+xd = array([10,6,0,0])
 
-param_guess = optimize_params(xd2)
+params = optimize_params(xd)
+print params
 
-get_state(param_guess[0:5], plot=True, color='red') 
-#get_state(q, plot=True, color='blue') 
-
+plots = plot_state(params)
+plt.plot(plots[0,:], plots[1,:])
 plt.show()
+
