@@ -10,6 +10,9 @@ POLY_DEG = 4
 
 # Uses Horner's Method to evaluate a polynomial 
 # with a given set of coefficients at a given set of points.
+# coeffs = [p0, p1, ..., pn]
+# samples = [t0, t1, ..., tm]
+# return:   p0 + p1*samples + p2*samples^2 + ...
 def polyval(coeffs, samples):
     vals = samples*coeffs[-1]
     for i in range(coeffs.size-2, 0, -1):
@@ -17,8 +20,10 @@ def polyval(coeffs, samples):
     vals += coeffs[0]
     return vals
 
-# This function does the forward dynamics to find the state
-# as a function of the coefficient vector p and the arclength s
+# This function returns a 4xNUM_POINTS array
+# where each column is an [x,y,theta,k]' coordinate
+# representing a point along the trajectory described
+# by q.
 # Note: q = [sf, p]
 def plot_state(q, NUM_POINTS=100):
 
@@ -213,6 +218,8 @@ def optimize_params(x0, xf):
         xf[2] = theta2
 
     temp_p = init_params(x0, xf)
+    plots = plot_state(temp_p)
+    plt.plot(plots[0,:], plots[1,:], 'red')
 
     temp_x = get_state(temp_p)
     
@@ -247,12 +254,11 @@ def optimize_params(x0, xf):
     
 
 x0 = array([0,0,0,0])
-xd = array([10,6,0,0])
+xd = array([10,6,-pi/3,0])
 
 params = optimize_params(x0, xd)
-print params
 
 plots = plot_state(params)
-plt.plot(plots[0,:], plots[1,:])
+plt.plot(plots[0,:], plots[1,:], 'blue')
 plt.show()
 
