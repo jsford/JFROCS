@@ -20,18 +20,17 @@ def polyval(coeffs, samples):
 # This function does the forward dynamics to find the state
 # as a function of the coefficient vector p and the arclength s
 # Note: q = [sf, p]
-def plot_state(q):
-    POINTNUM = 100
+def plot_state(q, NUM_POINTS=100):
 
     # Temporary
     x0 = array([0,0,0,0])
 
     sf = q[0]
 
-    plot_x     = zeros((POINTNUM, ))
-    plot_y     = zeros((POINTNUM, ))
-    plot_theta = zeros((POINTNUM, ))
-    plot_k     = zeros((POINTNUM, ))
+    plot_x     = zeros((NUM_POINTS, ))
+    plot_y     = zeros((NUM_POINTS, ))
+    plot_theta = zeros((NUM_POINTS, ))
+    plot_k     = zeros((NUM_POINTS, ))
 
     sk    = 0; k        = 0;
     x     = 0; y        = 0;
@@ -39,8 +38,8 @@ def plot_state(q):
     dx1   = 0; dy1      = 0;
     theta = 0; theta1   = 0;
 
-    for i in range(0, POINTNUM):
-        sk = i*sf/(POINTNUM-1)
+    for i in range(0, NUM_POINTS):
+        sk = i*sf/(NUM_POINTS-1)
 
         k  = polyval(q[1:], sk) 
         
@@ -73,8 +72,7 @@ def plot_state(q):
 # This function does the forward dynamics to find the state
 # as a function of the coefficient vector p and the arclength s
 # Note: q = [sf, p]
-def get_state(q):
-    POINTNUM = 100
+def get_state(q, NUM_POINTS=100):
     temp_x = zeros((4,))
 
     sf = q[0]                       # For convenience
@@ -83,23 +81,23 @@ def get_state(q):
     x = 0; y = 0;
     theta = 0;
 
-    for i in range(0, POINTNUM+1):
-        if ( i==0 or i==POINTNUM ):
+    for i in range(0, NUM_POINTS+1):
+        if ( i==0 or i==NUM_POINTS ):
             w = 1
         elif ( i%2 == 1 ):
             w = 4
         else:
             w = 2
         
-        s = sf*i/(POINTNUM-1) 
+        s = sf*i/(NUM_POINTS-1) 
         theta = polyval(array([0, q[1], q[2]/2.0, q[3]/3.0, q[4]/4.0]), s)
         f = cos(theta)
         g = sin(theta)
         x += w*f
         y += w*g
 
-    x *= sf/(3*POINTNUM)
-    y *= sf/(3*POINTNUM)
+    x *= sf/(3*NUM_POINTS)
+    y *= sf/(3*NUM_POINTS)
 
     temp_x[0] = x
     temp_x[1] = y
@@ -120,19 +118,18 @@ def get_state(q):
 
 # Estimate the arclength and polynomial coefficients required to 
 # get from x0 = [0,0,0,0] to xf
-def init_params(xf):
+def init_params(x0, xf):
     
     # Convenient renaming
-    tf = xf[2];
-    kf = xf[3];
-
+    t0 = x0[2]; tf = xf[2];
+    k0 = x0[3]; kf = xf[2];
 
     # This vector will hold 
     # [sf, p_1, p_2, ..., p_n]
     params = zeros((POLY_DEG+1, ))
 
     # Estimate the arclength from x0 to xf
-    rad = sqrt(xf[0]**2 + xf[1]**2)     # Crow-flies dist. from x0 to xf
+    rad = sqrt((x0[0] - xf[0])**2 + (x0[1] - xf[1])**2)     # Crow-flies dist. from x0 to xf
     sf = rad * ( ( xf[2]**2 )/5 + 1 )   # Tianyu is adding 2*abs(theta)/5 here. Don't know why.
 
     params[0] = sf
@@ -148,9 +145,8 @@ def init_params(xf):
     return params
 
 
-def calc_Jacobian(q):
-    j = zeros((4,4))                # This will become the jacobian
-    N = 100;
+def calc_Jacobian(q, NUM_POINTS=100):
+    j = zeros((4,4))                # This will become the Jacobian
 
     sf = q[0]                       # For convenience
 
@@ -159,15 +155,15 @@ def calc_Jacobian(q):
     x1 = 0; x2 = 0; x3 = 0;
     y1 = 0; y2 = 0; y3 = 0;
             
-    for i in range(0, N+1):         # N+1 to match Tianyu. I think it's a bug.
-        if (i==0 or i == N):
+    for i in range(0, NUM_POINTS+1):         # NUM_POINTS+1 to match Tianyu. I think it's a bug.
+        if (i==0 or i == NUM_POINTS):
             w = 1
         elif (i%2 == 1):
             w = 4
         else:
             w = 2
         
-        s = sf*i/float(N-1)
+        s = sf*i/float(NUM_POINTS-1)
         # GetBiasThetaByS
         theta = polyval(array([0, q[1], q[2]/2.0, q[3]/3.0, q[4]/4.0]), s)
         f = cos(theta)
@@ -180,8 +176,8 @@ def calc_Jacobian(q):
         y3 += w*f*s**4
     
 
-    x1 *= sf/(3.0*N); x2 *= sf/(3.0*N); x3 *= sf/(3.0*N);
-    y1 *= sf/(3.0*N); y2 *= sf/(3.0*N); y3 *= sf/(3.0*N);
+    x1 *= sf/(3.0*NUM_POINTS); x2 *= sf/(3.0*NUM_POINTS); x3 *= sf/(3.0*NUM_POINTS);
+    y1 *= sf/(3.0*NUM_POINTS); y2 *= sf/(3.0*NUM_POINTS); y3 *= sf/(3.0*NUM_POINTS);
 
     # GetBiasThetaByS
     theta = polyval(array([0, q[1], q[2]/2.0, q[3]/3.0, q[4]/4.0]), sf)
@@ -199,14 +195,14 @@ def calc_Jacobian(q):
 # If x0 and x1 represent identical vehicle states, return True. 
 # Else, return False.
 def same_state(x0, x1):
-    if  ( (abs(x0[0]-x1[0]) > 0.001) ): return False
-    elif( (abs(x0[1]-x1[0]) > 0.001) ): return False
-    elif( (abs(mod(x0[2]-x1[2], 2*pi)) >  0.01) ): return False
-    elif( (abs(x0[3]-x1[3]) > 0.005) ):            return False
+    if  ( (abs(x0[0]-x1[0]) <= 0.001) and 
+          (abs(x0[1]-x1[1]) <= 0.001) and
+          (abs( (x0[2]-x1[2]) % (2*pi) ) <=  0.01) and
+          (abs(x0[3]-x1[3]) <= 0.005) ): return True
     else:
-        return True
+        return False
 
-def optimize_params(xf):
+def optimize_params(x0, xf):
 
     # Normalize the final heading to [-pi, pi]
     theta1 = (xf[2]+2*pi) % (2*pi)
@@ -216,7 +212,7 @@ def optimize_params(xf):
     else:
         xf[2] = theta2
 
-    temp_p = init_params(xf)
+    temp_p = init_params(x0, xf)
 
     temp_x = get_state(temp_p)
     
@@ -225,7 +221,7 @@ def optimize_params(xf):
         if(i > 20):
             disp('Reached Iteration limit. Stopping.')
             break
-        jacobi = calc_Jacobian(temp_p) 
+        jacobi = calc_Jacobian(temp_p, NUM_POINTS=100) 
 
         param = temp_x-xf
         delta = dot(linalg.inv(jacobi), param)
@@ -250,10 +246,10 @@ def optimize_params(xf):
     
     
 
-
+x0 = array([0,0,0,0])
 xd = array([10,6,0,0])
 
-params = optimize_params(xd)
+params = optimize_params(x0, xd)
 print params
 
 plots = plot_state(params)
