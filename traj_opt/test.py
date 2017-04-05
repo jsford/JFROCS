@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import matplotlib.colors as colors
 import matplotlib.pyplot as plt
 import pdb
 from numpy import *
@@ -25,10 +26,7 @@ def polyval(coeffs, samples):
 # representing a point along the trajectory described
 # by q.
 # Note: q = [sf, p]
-def plot_state(q, NUM_POINTS=100):
-
-    # Temporary
-    x0 = array([0,0,0,0])
+def plot_state(q, x0, NUM_POINTS=100):
 
     sf = q[0]
 
@@ -127,7 +125,7 @@ def init_params(x0, xf):
     
     # Convenient renaming
     t0 = x0[2]; tf = xf[2];
-    k0 = x0[3]; kf = xf[2];
+    k0 = x0[3]; kf = xf[3];
 
     # This vector will hold 
     # [sf, p_1, p_2, ..., p_n]
@@ -141,9 +139,8 @@ def init_params(x0, xf):
 
     # Estimate the polynomial params to get from x0 to xf
     # I don't understand this, and I don't see where in the paper it is justified.
-    k0 = 0
     params[1] = k0
-    params[2] = 6*tf/sf**2 - 4*k0/sf - 2*kf/sf 
+    params[2] = 6*tf/sf**2 - (2*kf+4*k0)/sf 
     params[3] = 3*(k0+kf)/sf**2 - 6*tf/sf**3
     params[4] = 0
 
@@ -157,6 +154,7 @@ def calc_Jacobian(q, NUM_POINTS=100):
 
     w = 0; s = 0; f = 0; g = 0;
     theta = 0; k = 0;
+
     x1 = 0; x2 = 0; x3 = 0;
     y1 = 0; y2 = 0; y3 = 0;
             
@@ -169,15 +167,17 @@ def calc_Jacobian(q, NUM_POINTS=100):
             w = 2
         
         s = sf*i/float(NUM_POINTS-1)
-        # GetBiasThetaByS
         theta = polyval(array([0, q[1], q[2]/2.0, q[3]/3.0, q[4]/4.0]), s)
         f = cos(theta)
         g = sin(theta)
+
         x1 += w*g*s**2
-        x2 += w*g*s**3
-        x3 += w*g*s**4
         y1 += w*f*s**2
+
+        x2 += w*g*s**3
         y2 += w*f*s**3
+
+        x3 += w*g*s**4
         y3 += w*f*s**4
     
 
@@ -218,26 +218,30 @@ def optimize_params(x0, xf):
         xf[2] = theta2
 
     temp_p = init_params(x0, xf)
-    plots = plot_state(temp_p)
+    plots = plot_state(temp_p, x0)
     plt.plot(plots[0,:], plots[1,:], 'red')
 
     temp_x = get_state(temp_p)
     
-    i = 0
+    last_dist = linalg.norm(xf-temp_x)
+
+    iteration = 0
     while not same_state(temp_x, xf):
-        if(i > 20):
+        if(iteration >= 20):
             disp('Reached Iteration limit. Stopping.')
             break
+
         jacobi = calc_Jacobian(temp_p, NUM_POINTS=100) 
 
-        param = temp_x-xf
+        param = xf-temp_x
         delta = dot(linalg.inv(jacobi), param)
 
-        temp_p[0] -= delta[3]       # Arclength
-        temp_p[1] -= 0              # p0 stays the same
-        temp_p[2] -= delta[0]       # p1
-        temp_p[3] -= delta[1]       # p2
-        temp_p[4] -= delta[2]       # p3
+        # Forward step by delta
+        temp_p[0] += delta[3]       # Arclength
+        temp_p[1] += 0              # p0 stays the same
+        temp_p[2] += delta[0]       # p1
+        temp_p[3] += delta[1]       # p2
+        temp_p[4] += delta[2]       # p3
 
         if(temp_p[0] < 0 or temp_p[0] > 3*sqrt(xf[0]**2+xf[1]**2)):
             temp_p[0] = sqrt(xf[0]**2+xf[1]**2)
@@ -246,19 +250,40 @@ def optimize_params(x0, xf):
             temp_p[3] = 0
 
         temp_x = get_state(temp_p)
-        i += 1
+
+        backstep_count = 0
+        while( backstep_count < 4 ):
+            # If you went too far, reduce delta to delta/2.0
+            dist = linalg.norm(temp_x)
+            if( linalg.norm(xf-temp_x) > last_dist ):
+                delta /= 2.0
+                temp_p[0] -= delta[3]       # Arclength
+                temp_p[1] -= 0              # p0 stays the same
+                temp_p[2] -= delta[0]       # p1
+                temp_p[3] -= delta[1]       # p2
+                temp_p[4] -= delta[2]       # p3
+                backstep_count += 1
+                temp_x = get_state(temp_p)
+                print "Backstepping! " + str(backstep_count)
+            else:
+                break
+
+        last_dist = linalg.norm(temp_x)
+
+        print iteration
+        iteration += 1
 
     return temp_p
-        
-    
-    
 
+# TODO: Try generalizing to any polynomial degree.
+#       Try scipy.optimize instead of Tianyu's thing.        
+    
 x0 = array([0,0,0,0])
-xd = array([10,6,-pi/3,0])
+xd = array([10,6,-pi/8,0])
 
 params = optimize_params(x0, xd)
 
-plots = plot_state(params)
+plots = plot_state(params, x0)
 plt.plot(plots[0,:], plots[1,:], 'blue')
 plt.show()
 
