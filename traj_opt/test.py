@@ -10,8 +10,6 @@ from scipy.optimize import fsolve
 epsilon = 1e-3
 POLY_DEG = 4
 
-fig, ax = plt.subplots()
-
 # Uses Horner's Method to evaluate a polynomial 
 # with a given set of coefficients at a given set of points.
 # coeffs = [p0, p1, ..., pn]
@@ -221,14 +219,6 @@ def optimize_params(x0, xf, backstep=True):
 
     temp_p = init_params(x0, xf)
 
-    # Plot initial trajectory
-    plots = plot_state(temp_p, x0)
-    plt.xlim(0, 14)
-    plt.ylim(-4, 8) 
-    plt.scatter(xf[0], xf[1], marker='+', s=500, color='#000000')
-    init_line, = ax.plot(plots[0,:], plots[1,:], '#e74c3c')
-    plt.savefig('anim/0_0.png', bbox_inches='tight', dpi=150)
-
     temp_x = get_state(temp_p)
     
     last_dist = linalg.norm(xf-temp_x)
@@ -254,19 +244,10 @@ def optimize_params(x0, xf, backstep=True):
 
         temp_x = get_state(temp_p)
 
-        # Plot
-        if iteration == 0:
-            plots = plot_state(temp_p, x0)
-            line, = ax.plot(plots[0,:], plots[1,:], color='#4640b2')
-            plt.savefig('anim/1_0.png', bbox_inches='tight', dpi=150)
-        else:
-            plots = plot_state(temp_p, x0)
-            line.set_xdata(plots[0,:])
-            line.set_ydata(plots[1,:])
-            plt.savefig('anim/' + str(iteration+1)+'_0.png', bbox_inches='tight', dpi=150)
-            
-            
         # If the path has gotten too long or too short, reset and try again
+        # Not totally sure what the effect of this is... Seems like we should
+        # try again with something similar, but different from our initial guess?
+        # This seems like it will give up to me.
         if(temp_p[0] < 0 or temp_p[0] > 3*sqrt(xf[0]**2+xf[1]**2)):
             temp_p[0] = sqrt(xf[0]**2+xf[1]**2)
             temp_p[1] = 0
@@ -278,12 +259,10 @@ def optimize_params(x0, xf, backstep=True):
         # back off by half until you get closer.
         elif (backstep == True):
             backstep_count = 0
-            b_lines = []
-            while(backstep_count < 8 ):
+            while(backstep_count < 4 ):
                 # If you went too far, reduce delta to delta/2.0
                 dist = linalg.norm(temp_x)
                 if( linalg.norm(xf-temp_x) > last_dist ):
-                    line.set_color('#4640b2')
                     delta /= 2.0
                     temp_p[0] -= delta[3]       # Arclength
                     temp_p[1] -= 0              # p0 stays the same
@@ -291,24 +270,15 @@ def optimize_params(x0, xf, backstep=True):
                     temp_p[3] -= delta[1]       # p2
                     temp_p[4] -= delta[2]       # p3
 
-                    plots = plot_state(temp_p, x0)
-                    l, = ax.plot(plots[0,:], plots[1,:], linestyle='--', color="#4640b2")
-                    b_lines.append(l)
-                    plt.savefig('anim/' + str(iteration+1)+'_'+str(backstep_count+1)+'.png', bbox_inches='tight', dpi=150)
-
                     backstep_count += 1
                     temp_x = get_state(temp_p)
                 else:
                     break
 
-        line.set_color('#4640b2')
-        for b in b_lines:
-            b.remove()
-
         last_dist = linalg.norm(temp_x)
         iteration += 1
     
-    return temp_p, line, init_line
+    return temp_p
 
 # TODO: Try generalizing to any polynomial degree.
 #       Try scipy.optimize instead of Tianyu's thing.        
@@ -318,16 +288,12 @@ xd = array([10,6,-pi/8,0])
 
 
 plot = plt.plot()
-params, line, init_line = optimize_params(x0, xd)
+params = optimize_params(x0, xd)
 
 plots = plot_state(params, x0)
-
-init_line.set_color((231/255., 76/255., 60/255., 0.2))
-
-line.set_xdata(plots[0,:])
-line.set_ydata(plots[1,:])
-line.set_color('#87EB2D')
-plt.savefig('anim/final.png', bbox_inches='tight', dpi=150)
+plt.plot(plots[0,:], plots[1,:], color='#87EB2D')
+plt.xlim(0, 12)
+plt.ylim(-2, 10)
 sns.despine()
 plt.show()
 
