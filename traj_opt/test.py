@@ -1,13 +1,16 @@
 #!/usr/bin/python
 
-import matplotlib.colors as colors
 import matplotlib.pyplot as plt
+import matplotlib.colors
+import seaborn as sns
 import pdb
 from numpy import *
 from scipy.optimize import fsolve
 
 epsilon = 1e-3
 POLY_DEG = 4
+
+fig, ax = plt.subplots()
 
 # Uses Horner's Method to evaluate a polynomial 
 # with a given set of coefficients at a given set of points.
@@ -26,7 +29,7 @@ def polyval(coeffs, samples):
 # representing a point along the trajectory described
 # by q.
 # Note: q = [sf, p]
-def plot_state(q, x0, NUM_POINTS=100):
+def plot_state(q, x0, NUM_POINTS=1000):
 
     sf = q[0]
 
@@ -42,7 +45,7 @@ def plot_state(q, x0, NUM_POINTS=100):
     theta = 0; theta1   = 0;
 
     for i in range(0, NUM_POINTS):
-        sk = i*sf/(NUM_POINTS-1)
+        sk = i*sf/(NUM_POINTS)
 
         k  = polyval(q[1:], sk) 
         
@@ -71,11 +74,10 @@ def plot_state(q, x0, NUM_POINTS=100):
     
     return vstack((plot_x, plot_y, plot_theta, plot_k)) 
 
-
 # This function does the forward dynamics to find the state
 # as a function of the coefficient vector p and the arclength s
 # Note: q = [sf, p]
-def get_state(q, NUM_POINTS=100):
+def get_state(q, NUM_POINTS=1000):
     temp_x = zeros((4,))
 
     sf = q[0]                       # For convenience
@@ -85,7 +87,7 @@ def get_state(q, NUM_POINTS=100):
     theta = 0;
 
     for i in range(0, NUM_POINTS+1):
-        if ( i==0 or i==NUM_POINTS ):
+        if ( i==0 or i==NUM_POINTS):
             w = 1
         elif ( i%2 == 1 ):
             w = 4
@@ -167,7 +169,7 @@ def calc_Jacobian(q, NUM_POINTS=100):
             w = 2
         
         s = sf*i/float(NUM_POINTS-1)
-        theta = polyval(array([0, q[1], q[2]/2.0, q[3]/3.0, q[4]/4.0]), s)
+        theta = polyval(array([0, q[1], q[2]/2.0, q[3]/3.0, q[4]/4.0]), s) % (2*pi)
         f = cos(theta)
         g = sin(theta)
 
@@ -185,7 +187,7 @@ def calc_Jacobian(q, NUM_POINTS=100):
     y1 *= sf/(3.0*NUM_POINTS); y2 *= sf/(3.0*NUM_POINTS); y3 *= sf/(3.0*NUM_POINTS);
 
     # GetBiasThetaByS
-    theta = polyval(array([0, q[1], q[2]/2.0, q[3]/3.0, q[4]/4.0]), sf)
+    theta = polyval(array([0, q[1], q[2]/2.0, q[3]/3.0, q[4]/4.0]), sf) % (2*pi)
     k     = polyval(q[1:], sf)
 
 
@@ -207,7 +209,7 @@ def same_state(x0, x1):
     else:
         return False
 
-def optimize_params(x0, xf):
+def optimize_params(x0, xf, backstep=True):
 
     # Normalize the final heading to [-pi, pi]
     theta1 = (xf[2]+2*pi) % (2*pi)
@@ -218,8 +220,14 @@ def optimize_params(x0, xf):
         xf[2] = theta2
 
     temp_p = init_params(x0, xf)
+
+    # Plot initial trajectory
     plots = plot_state(temp_p, x0)
-    plt.plot(plots[0,:], plots[1,:], 'red')
+    plt.xlim(0, 14)
+    plt.ylim(-4, 8) 
+    plt.scatter(xf[0], xf[1], marker='+', s=500, color='#000000')
+    init_line, = ax.plot(plots[0,:], plots[1,:], '#e74c3c')
+    plt.savefig('anim/0_0.png', bbox_inches='tight', dpi=150)
 
     temp_x = get_state(temp_p)
     
@@ -243,37 +251,64 @@ def optimize_params(x0, xf):
         temp_p[3] += delta[1]       # p2
         temp_p[4] += delta[2]       # p3
 
+
+        temp_x = get_state(temp_p)
+
+        # Plot
+        if iteration == 0:
+            plots = plot_state(temp_p, x0)
+            line, = ax.plot(plots[0,:], plots[1,:], color='#4640b2')
+            plt.savefig('anim/1_0.png', bbox_inches='tight', dpi=150)
+        else:
+            plots = plot_state(temp_p, x0)
+            line.set_xdata(plots[0,:])
+            line.set_ydata(plots[1,:])
+            plt.savefig('anim/' + str(iteration+1)+'_0.png', bbox_inches='tight', dpi=150)
+            
+            
+        # If the path has gotten too long or too short, reset and try again
         if(temp_p[0] < 0 or temp_p[0] > 3*sqrt(xf[0]**2+xf[1]**2)):
             temp_p[0] = sqrt(xf[0]**2+xf[1]**2)
             temp_p[1] = 0
             temp_p[2] = 0
             temp_p[3] = 0
 
-        temp_x = get_state(temp_p)
+        # See Section 5. of RootFindingMethods.pdf for a discussion of 
+        # backstepping. Basically, if you overshot the goal, 
+        # back off by half until you get closer.
+        elif (backstep == True):
+            backstep_count = 0
+            b_lines = []
+            while(backstep_count < 8 ):
+                # If you went too far, reduce delta to delta/2.0
+                dist = linalg.norm(temp_x)
+                if( linalg.norm(xf-temp_x) > last_dist ):
+                    line.set_color('#4640b2')
+                    delta /= 2.0
+                    temp_p[0] -= delta[3]       # Arclength
+                    temp_p[1] -= 0              # p0 stays the same
+                    temp_p[2] -= delta[0]       # p1
+                    temp_p[3] -= delta[1]       # p2
+                    temp_p[4] -= delta[2]       # p3
 
-        backstep_count = 0
-        while( backstep_count < 4 ):
-            # If you went too far, reduce delta to delta/2.0
-            dist = linalg.norm(temp_x)
-            if( linalg.norm(xf-temp_x) > last_dist ):
-                delta /= 2.0
-                temp_p[0] -= delta[3]       # Arclength
-                temp_p[1] -= 0              # p0 stays the same
-                temp_p[2] -= delta[0]       # p1
-                temp_p[3] -= delta[1]       # p2
-                temp_p[4] -= delta[2]       # p3
-                backstep_count += 1
-                temp_x = get_state(temp_p)
-                print "Backstepping! " + str(backstep_count)
-            else:
-                break
+                    plots = plot_state(temp_p, x0)
+                    l, = ax.plot(plots[0,:], plots[1,:], linestyle='--', color="#4640b2")
+                    b_lines.append(l)
+                    plt.savefig('anim/' + str(iteration+1)+'_'+str(backstep_count+1)+'.png', bbox_inches='tight', dpi=150)
+
+                    backstep_count += 1
+                    temp_x = get_state(temp_p)
+                else:
+                    break
+
+        line.set_color('#4640b2')
+        for b in b_lines:
+            b.remove()
 
         last_dist = linalg.norm(temp_x)
-
-        print iteration
         iteration += 1
-
-    return temp_p
+    
+    return temp_p, line, init_line
 
 # TODO: Try generalizing to any polynomial degree.
 #       Try scipy.optimize instead of Tianyu's thing.        
@@ -281,9 +316,18 @@ def optimize_params(x0, xf):
 x0 = array([0,0,0,0])
 xd = array([10,6,-pi/8,0])
 
-params = optimize_params(x0, xd)
+
+plot = plt.plot()
+params, line, init_line = optimize_params(x0, xd)
 
 plots = plot_state(params, x0)
-plt.plot(plots[0,:], plots[1,:], 'blue')
+
+init_line.set_color((231/255., 76/255., 60/255., 0.2))
+
+line.set_xdata(plots[0,:])
+line.set_ydata(plots[1,:])
+line.set_color('#87EB2D')
+plt.savefig('anim/final.png', bbox_inches='tight', dpi=150)
+sns.despine()
 plt.show()
 
