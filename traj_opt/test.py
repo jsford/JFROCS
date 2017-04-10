@@ -189,10 +189,10 @@ def calc_Jacobian(q, NUM_POINTS=100):
     k     = polyval(q[1:], sf)
 
 
-    j[0,0] = -x1/2.0;      j[0,1] = -x2/3.0;      j[0,2] = -x3/4.0;      j[0,3] = cos(theta);
-    j[1,0] =  y1/2.0;      j[1,1] =  y2/3.0;      j[1,2] =  y3/4.0;      j[1,3] = sin(theta);
-    j[2,0] = (sf**2)/2.0;  j[2,1] = (sf**3)/3.0;  j[2,2] = (sf**4)/4.0;  j[2,3] = k;
-    j[3,0] = sf;           j[3,1] = sf**2;        j[3,2] = sf**3;        j[3,3] = q[2]+2*q[3]*sf+3*q[4]*sf**2;
+    j[0,1] = -x1/2.0;      j[0,2] = -x2/3.0;      j[0,3] = -x3/4.0;      j[0,0] = cos(theta);
+    j[1,1] =  y1/2.0;      j[1,2] =  y2/3.0;      j[1,3] =  y3/4.0;      j[1,0] = sin(theta);
+    j[2,1] = (sf**2)/2.0;  j[2,2] = (sf**3)/3.0;  j[2,3] = (sf**4)/4.0;  j[2,0] = k;
+    j[3,1] = sf;           j[3,2] = sf**2;        j[3,3] = sf**3;        j[3,0] = q[2]+2*q[3]*sf+3*q[4]*sf**2;
 
     return j
 
@@ -235,11 +235,11 @@ def optimize_params(x0, xf, backstep=True):
         delta = dot(linalg.inv(jacobi), param)
 
         # Forward step by delta
-        temp_p[0] += delta[3]       # Arclength
+        temp_p[0] += delta[0]       # Arclength
         temp_p[1] += 0              # p0 stays the same
-        temp_p[2] += delta[0]       # p1
-        temp_p[3] += delta[1]       # p2
-        temp_p[4] += delta[2]       # p3
+        temp_p[2] += delta[1]       # p1
+        temp_p[3] += delta[2]       # p2
+        temp_p[4] += delta[3]       # p3
 
 
         temp_x = get_state(temp_p)
@@ -253,6 +253,7 @@ def optimize_params(x0, xf, backstep=True):
             temp_p[1] = 0
             temp_p[2] = 0
             temp_p[3] = 0
+            temp_p[4] = 0
 
         # See Section 5. of RootFindingMethods.pdf for a discussion of 
         # backstepping. Basically, if you overshot the goal, 
@@ -264,11 +265,11 @@ def optimize_params(x0, xf, backstep=True):
                 dist = linalg.norm(temp_x)
                 if( linalg.norm(xf-temp_x) > last_dist ):
                     delta /= 2.0
-                    temp_p[0] -= delta[3]       # Arclength
+                    temp_p[0] -= delta[0]       # Arclength
                     temp_p[1] -= 0              # p0 stays the same
-                    temp_p[2] -= delta[0]       # p1
-                    temp_p[3] -= delta[1]       # p2
-                    temp_p[4] -= delta[2]       # p3
+                    temp_p[2] -= delta[1]       # p1
+                    temp_p[3] -= delta[2]       # p2
+                    temp_p[4] -= delta[3]       # p3
 
                     backstep_count += 1
                     temp_x = get_state(temp_p)
@@ -291,7 +292,7 @@ plot = plt.plot()
 params = optimize_params(x0, xd)
 
 plots = plot_state(params, x0)
-plt.plot(plots[0,:], plots[1,:], color='#87EB2D')
+plt.plot(plots[0,:], plots[1,:], color='red')
 plt.xlim(0, 12)
 plt.ylim(-2, 10)
 sns.despine()
