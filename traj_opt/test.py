@@ -188,11 +188,18 @@ def calc_Jacobian(q, NUM_POINTS=100):
     theta = polyval(array([0, q[1], q[2]/2.0, q[3]/3.0, q[4]/4.0]), sf) % (2*pi)
     k     = polyval(q[1:], sf)
 
+    # d?/dsf                                # d?/dp1
+    j[0,0] = cos(theta);                    j[0,1] = -x1/2.0;       # dx/d?
+    j[1,0] = sin(theta);                    j[1,1] =  y1/2.0;       # dy/d?
+    j[2,0] = k;                             j[2,1] = (sf**2)/2.0;   # dtheta/d?
+    j[3,0] = q[2]+2*q[3]*sf+3*q[4]*sf**2;   j[3,1] = sf;            # dk/d?
 
-    j[0,1] = -x1/2.0;      j[0,2] = -x2/3.0;      j[0,3] = -x3/4.0;      j[0,0] = cos(theta);
-    j[1,1] =  y1/2.0;      j[1,2] =  y2/3.0;      j[1,3] =  y3/4.0;      j[1,0] = sin(theta);
-    j[2,1] = (sf**2)/2.0;  j[2,2] = (sf**3)/3.0;  j[2,3] = (sf**4)/4.0;  j[2,0] = k;
-    j[3,1] = sf;           j[3,2] = sf**2;        j[3,3] = sf**3;        j[3,0] = q[2]+2*q[3]*sf+3*q[4]*sf**2;
+    # d?/dp2                                # d?/dp3
+    j[0,2] = -x2/3.0;                       j[0,3] = -x3/4.0;       # dx/d?
+    j[1,2] =  y2/3.0;                       j[1,3] =  y3/4.0;       # dy/d?
+    j[2,2] = (sf**3)/3.0;                   j[2,3] = (sf**4)/4.0;   # dtheta/d?
+    j[3,2] = sf**2;                         j[3,3] = sf**3;         # dk/d?
+
 
     return j
 
@@ -207,7 +214,7 @@ def same_state(x0, x1):
     else:
         return False
 
-def optimize_params(x0, xf, backstep=True):
+def optimize_params(x0, xf, init_p=None, backstep=True):
 
     # Normalize the final heading to [-pi, pi]
     theta1 = (xf[2]+2*pi) % (2*pi)
@@ -217,7 +224,13 @@ def optimize_params(x0, xf, backstep=True):
     else:
         xf[2] = theta2
 
-    temp_p = init_params(x0, xf)
+
+    if init_p is None:
+        temp_p = init_params(x0, xf)
+        plots = plot_state(temp_p, x0)
+        plt.plot(plots[0,:], plots[1,:], color='purple')
+    else:
+        temp_p = init_p
 
     temp_x = get_state(temp_p)
     
@@ -227,7 +240,7 @@ def optimize_params(x0, xf, backstep=True):
     while not same_state(temp_x, xf):
         if(iteration >= 20):
             disp('Reached Iteration limit. Stopping.')
-            break
+            return None
 
         jacobi = calc_Jacobian(temp_p, NUM_POINTS=100) 
 
@@ -244,21 +257,10 @@ def optimize_params(x0, xf, backstep=True):
 
         temp_x = get_state(temp_p)
 
-        # If the path has gotten too long or too short, reset and try again
-        # Not totally sure what the effect of this is... Seems like we should
-        # try again with something similar, but different from our initial guess?
-        # This seems like it will give up to me.
-        if(temp_p[0] < 0 or temp_p[0] > 3*sqrt(xf[0]**2+xf[1]**2)):
-            temp_p[0] = sqrt(xf[0]**2+xf[1]**2)
-            temp_p[1] = 0
-            temp_p[2] = 0
-            temp_p[3] = 0
-            temp_p[4] = 0
-
         # See Section 5. of RootFindingMethods.pdf for a discussion of 
-        # backstepping. Basically, if you overshot the goal, 
+        # backstepping line search. Basically, if you overshot the goal, 
         # back off by half until you get closer.
-        elif (backstep == True):
+        if (backstep == True):
             backstep_count = 0
             while(backstep_count < 4 ):
                 # If you went too far, reduce delta to delta/2.0
@@ -281,20 +283,22 @@ def optimize_params(x0, xf, backstep=True):
     
     return temp_p
 
-# TODO: Try generalizing to any polynomial degree.
-#       Try scipy.optimize instead of Tianyu's thing.        
     
 x0 = array([0,0,0,0])
-xd = array([10,6,-pi/8,0])
+xd = array([1,1,0,0])
 
-
-plot = plt.plot()
 params = optimize_params(x0, xd)
 
-plots = plot_state(params, x0)
-plt.plot(plots[0,:], plots[1,:], color='red')
-plt.xlim(0, 12)
-plt.ylim(-2, 10)
-sns.despine()
-plt.show()
+if params is not None:
+    plots = plot_state(params, x0)
+    plt.plot(plots[0,:], plots[1,:], color='red')
+
+    plt.xlim(-2, 2)
+    plt.ylim(-2, 2)
+    sns.despine()
+    plt.show()
+
+else:
+    print "Failed to generate a trajectory."
+
 
