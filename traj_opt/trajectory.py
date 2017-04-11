@@ -39,13 +39,21 @@ class VehicleState:
 
 
 class Trajectory:
-    def __init__(self, vs0, vsf, NUM_POINTS=1000):
+    def __init__(self, vs0, vsf, init_guess=None, NUM_POINTS=1000):
         self.vs0 = vs0
         self.vsf = vsf
-        self.tf = -1;
-        self.sf = -1;
-        self.pos_params = zeros((4,))
-        self.vel_params = zeros((4,))
+
+        if init_guess is not None:
+            self.pos_params = init_guess.pos_params 
+            self.vel_params = init_guess.vel_params 
+            self.sf = init_guess.sf
+            self.tf = init_guess.tf
+        else:
+            self.pos_params = None
+            self.vel_params = None
+            self.tf = -1;
+            self.sf = -1;
+
         self.NUM_POINTS = NUM_POINTS
         self.valid = False
         
@@ -193,6 +201,7 @@ class Trajectory:
 
         # Estimate the polynomial params to get from x0 to xf
         # I don't understand this, and I don't see where in the paper it is justified.
+        self.pos_params = zeros((4,))
         self.pos_params[0] = k0
         self.pos_params[1] = 6*tf/sf**2 - (2*kf+4*k0)/sf 
         self.pos_params[2] = 3*(k0+kf)/sf**2 - 6*tf/sf**3
@@ -276,8 +285,9 @@ class Trajectory:
             self.vsf.theta = theta2
 
         # Generate an initial guess for the correct parameters
-        self._init_params()
-        
+        if self.pos_params is None:
+            self._init_params()
+
         # Plot the inital guess in purple
         plots = self.plot_pos()
         plt.plot(plots[0,:], plots[1,:], color='purple')
@@ -345,6 +355,7 @@ class Trajectory:
         else:
             tf = ( -(v0+vf)/2. + sqrt( ((v0+vf)/2.)*((v0+vf)/2.) + a0*sf/3. ) ) / (a0/6.)
 
+        self.vel_params = zeros((4,))
         self.vel_params[0] = v0
         self.vel_params[1] = a0
         self.vel_params[2] = (3*(vf-v0) - 2*a0*tf) / tf**2
@@ -357,11 +368,18 @@ class Trajectory:
 if __name__ == "__main__":
 
     # TODO: Non-zero theta0 seems to break it
-    vs0 = VehicleState(0,0,0,0,  14, 0)
-    vsf = VehicleState(10,10,0,0, 0, 0)
+    vs0 = VehicleState(0,0,0,0,  14,0)
+    vsf = VehicleState(10,10,-pi/2,0, 0,0)
 
-    traj = Trajectory(vs0, vsf)
-    
+    vsc = VehicleState(10,10,0,0, 0,0)
+
+    traj_guess = Trajectory(vs0, vsc)
+    if traj_guess.valid:
+        plots = traj_guess.plot_pos()
+        plt.plot(plots[0,:], plots[1,:], color='green')
+        plt.show()
+
+    traj = Trajectory(vs0, vsf, init_guess=traj_guess)
     if traj.valid:
         plots = traj.plot_pos()
         plt.plot(plots[0,:], plots[1,:], color='green')
