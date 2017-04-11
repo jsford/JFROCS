@@ -47,13 +47,40 @@ class Trajectory:
         self.pos_params = zeros((4,))
         self.vel_params = zeros((4,))
         self.NUM_POINTS = NUM_POINTS
+        self.valid = False
+        
+        # Generate a trajectory from vs0 to vsf 
+        self.generate_trajectory()
+
+    def generate_trajectory(self):
+        self.valid = self._generate_pos_profile()
+
+        if self.valid:
+            self._generate_vel_profile()
+
+    def plot_vel(self, PLOT_POINTS=100):
+
+        plot_t  = linspace(0, self.tf, PLOT_POINTS).reshape((PLOT_POINTS, ))
+        plot_v  = zeros((PLOT_POINTS, ))
+        plot_a  = zeros((PLOT_POINTS, ))
+
+        vp = self.vel_params
+
+        i = 0
+        for t in plot_t:
+            plot_v[i] = polyval(vp, t)
+            plot_a[i] = polyval(array([2*vp[1], 3*vp[2], 4*vp[3]]), t)
+            i += 1 
+            
+        return vstack((plot_t, plot_v, plot_a))
+
 
     # This function returns a 4xPLOT_POINTS array
     # where each column is an [x,y,theta,k]' coordinate
     # representing a point along the trajectory described
     # by q.
     # Note: q = [sf, p]
-    def plot_state(self, PLOT_POINTS=1000):
+    def plot_pos(self, PLOT_POINTS=100):
 
         # For convenience
         p  = self.pos_params
@@ -105,7 +132,7 @@ class Trajectory:
     # This function does the forward dynamics to find the state
     # as a function of the coefficient vector p and the arclength s
     # Note: q = [sf, p]
-    def get_state(self):
+    def _get_state(self):
         temp_vs = VehicleState(0,0,0,0, -1,-1)
 
         # For convenience
@@ -152,7 +179,7 @@ class Trajectory:
 
     # Estimate the arclength and polynomial coefficients required to 
     # get from x0 = [0,0,0,0] to xf
-    def init_params(self):
+    def _init_params(self):
         
         # Convenient renaming
         t0 = self.vs0.theta; tf = self.vsf.theta;
@@ -173,7 +200,7 @@ class Trajectory:
 
     # If x0 and x1 represent identical vehicle states, return True. 
     # Else, return False.
-    def same_state(self, x0, x1):
+    def _same_state(self, x0, x1):
         if  ( (abs(x0[0]-x1[0]) <= 0.001) and 
               (abs(x0[1]-x1[1]) <= 0.001) and
               (abs( (x0[2]-x1[2]) % (2*pi) ) <=  0.01) and
@@ -181,7 +208,7 @@ class Trajectory:
         else:
             return False
 
-    def calc_Jacobian(self):
+    def _calc_Jacobian(self):
         j = zeros((4,4))                   # This will become the Jacobian
 
         # For convenience
@@ -238,7 +265,7 @@ class Trajectory:
 
         return j
 
-    def generate_pos_profile(self, backstep=True):
+    def _generate_pos_profile(self, backstep=True):
 
         # Normalize the final heading to [-pi, pi]
         theta1 = (self.vsf.theta+2*pi) % (2*pi)
@@ -249,25 +276,25 @@ class Trajectory:
             self.vsf.theta = theta2
 
         # Generate an initial guess for the correct parameters
-        self.init_params()
+        self._init_params()
         
         # Plot the inital guess in purple
-        plots = self.plot_state()
+        plots = self.plot_pos()
         plt.plot(plots[0,:], plots[1,:], color='purple')
 
         # Find out what vehicle state results with the initial parameter guess
-        temp_vs = self.get_state()
+        temp_vs = self._get_state()
         # See how far from the goal we are
         last_dist = linalg.norm(self.vsf.posvec()-temp_vs.posvec())
 
         # Iterate until we converge to the goal or run out the iteration clock
         iteration = 0
-        while not self.same_state(temp_vs.posvec(), self.vsf.posvec()):
+        while not self._same_state(temp_vs.posvec(), self.vsf.posvec()):
             if(iteration >= 20):
                 disp('Reached Iteration limit. Stopping.')
                 return False
 
-            jacobi = self.calc_Jacobian() 
+            jacobi = self._calc_Jacobian() 
 
             param = self.vsf.posvec()-temp_vs.posvec()
             delta = dot(linalg.inv(jacobi), param)
@@ -279,7 +306,7 @@ class Trajectory:
             self.pos_params[2] += delta[2]       # p2
             self.pos_params[3] += delta[3]       # p3
 
-            temp_vs = self.get_state()
+            temp_vs = self._get_state()
 
             # See Section 5. of RootFindingMethods.pdf for a discussion of 
             # backstepping line search. Basically, if you overshot the goal, 
@@ -298,7 +325,7 @@ class Trajectory:
                         self.pos_params[3] -= delta[3]       # p3
 
                         backstep_count += 1
-                        temp_vs = self.get_state()
+                        temp_vs = self._get_state()
                     else:
                         break
 
@@ -307,27 +334,43 @@ class Trajectory:
 
         return True 
 
+    def _generate_vel_profile(self):
+        v0 = self.vs0.v
+        a0 = self.vs0.a
+        vf = self.vsf.v
+        sf = self.sf
+
+        if( a0 == 0 and (v0+vf) != 0 ):
+            tf = 2*sf / (v0+vf)
+        else:
+            tf = ( -(v0+vf)/2. + sqrt( ((v0+vf)/2.)*((v0+vf)/2.) + a0*sf/3. ) ) / (a0/6.)
+
+        self.vel_params[0] = v0
+        self.vel_params[1] = a0
+        self.vel_params[2] = (3*(vf-v0) - 2*a0*tf) / tf**2
+        self.vel_params[3] = (2*(v0-vf) + 1*a0*tf) / tf**3
+        self.tf = tf
+
+        return
+
     
 if __name__ == "__main__":
 
     # TODO: Non-zero theta0 seems to break it
-    vs0 = VehicleState(0,0,0,0, 8,-1)
-    vsf = VehicleState(1,1,0,0, 4, 0)
+    vs0 = VehicleState(0,0,0,0,  14, 0)
+    vsf = VehicleState(10,10,0,0, 0, 0)
 
     traj = Trajectory(vs0, vsf)
-
-    success = traj.generate_pos_profile()
     
-    print traj.get_state().posvec()
+    if traj.valid:
+        plots = traj.plot_pos()
+        plt.plot(plots[0,:], plots[1,:], color='green')
+        plt.show()
 
-    if success:
-        plots = traj.plot_state()
-        plt.plot(plots[0,:], plots[1,:], color='red')
-        print plots[0,-1], plots[1,-1]
-
-        plt.xlim(-2, 2)
-        plt.ylim(-2, 2)
-        sns.despine()
+        plots = traj.plot_vel()
+        plt.plot(plots[0,:], plots[1,:], color='purple', label='velocity')
+        plt.plot(plots[0,:], plots[2,:], color='blue', label='acceleration')
+        plt.legend()
         plt.show()
 
     else:
