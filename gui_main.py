@@ -8,16 +8,14 @@ import time
 import random
 import sys
 
-from src import *
+from src import world
+from src import draw
 
 
 class JFROCS_gui:
     def __init__(self, width, height):
 
-        # Init the vehicle
-        self.vehicle = vehicle.Vehicle('ego', './resources/car_small.png', pos=(0,0))
-        # Init the obstacle list
-        self.obstacles = []
+        self.world = world.World()
 
         # Init the TK Window
         self.top = Tk()
@@ -67,7 +65,7 @@ class JFROCS_gui:
     # Calls the planner and reschedules itself
     def execute(self):
         tic = time.clock()
-        self.vehicle.step()
+        self.world.step()
         toc = time.clock()
 
         self.freq_disp.delete('1.0', END)
@@ -85,8 +83,7 @@ class JFROCS_gui:
         canvas_h = self.canvas.winfo_height()
         if (canvas_w == 0 and canvas_h == 0): return
 
-        # Render the vehicle
-        self.vehicle.render(self.canvas)
+        self.world.render(self.canvas)
 
     # Click and drag the canvas using the mouse
     def move_start(self, event):

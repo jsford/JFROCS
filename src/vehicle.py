@@ -17,25 +17,9 @@ class Vehicle:
         self.texture = Image.open(texture_fname) 
         self.lightweight = lightweight
 
-        self.lcm = lcm.LCM()
-        self.kinematics_sub = self.lcm.subscribe("POSITIONPOSE", self.handle_positionpose_msg)
-
-
         # Static variables for render function
         self.render_old_zl = -1
         self.render_old_theta = float('nan')
-    
-    def handle_positionpose_msg(self, channel, data):
-        msg = positionpose_t.decode(data)
-        self.pos = (msg.east_m, msg.north_m)
-        self.theta = msg.yaw_rad - 3.1415926535/2.0
-
-    # Check for a kinematics_t or position_pose message and update the vehicle state
-    def step(self):
-        timeout = 0.01
-        rfds, wfds, efds = select.select([self.lcm.fileno()], [], [], timeout)
-        if rfds:
-            self.lcm.handle()
 
     def render(self, canvas):
         zl = canvas.zl
