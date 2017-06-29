@@ -1,0 +1,42 @@
+package exlcm;
+// MAL 2016-08-11
+
+struct positionpose_t
+{
+//  common elements
+    int16_t  entity_type;           // enum for data entity type, make it const?
+    int8_t   version_n;             // version number of data entity type
+    boolean  valid_f;               // whether author thinks entity is currently valid
+    int64_t  ref_n;                 // cookie used between user code and plumbing code
+    double   timestamp_sec;         // when authored (entire data structure, some sub-groups of data have their own timestamps)
+
+// PositionPose elements
+ 
+// Current best available position and pose estimate coordinates
+    double  pos_pose_timestamp_sec; // the time coordinate for the "best" estimate 
+    double  latitude_deg;           // Global WGS84 latitude coordinate, of vehicle center
+    double  longitude_deg;          // Same for longitude
+    float   altitude_m;             // Same for altitude, at the tire contact plane, positive for upwards
+    float   yaw_rad;                // orientation, zero is facing East, +PI/2 is facing North, usually kept between -PI and +PI (positive direction counter clockwise from top)
+    float   heading_deg;            // also orientation, but zero is facing north, +90 is facing east, usually kept between 0 and 360 (positive diretion clockwise from top)
+    float   pitch_rad;              // relative to level horizontal, nose down is positive?
+    float   roll_rad;               // relative to level horizontal, left side up is positive?
+    
+// Local ground-fixed position coordinates (relative to current Maplet)
+    int16_t maplet_iteration_n;     // which maplet the local coordinates are calculated against  
+    double  ref_latitude_deg;       // copy of maplet's origin coordinates
+    double  ref_longitude_deg;      // ...
+    float   ref_altitude_m;         // ...
+    float   east_m;                 // vehicle center relative to the ref_* (Maplet origin) coordinates
+    float   north_m;                // ...
+    float   up_m;                   // ...
+
+// Status elements
+    int16_t position_pose_source;   // how the "best" position estimate was computed, see positionpose_source_enum
+    int16_t heading_trusted;        // 1 = heading trustworthy, 0 if not
+    float   position_uncert_m;      // half of max of width & length of GPS (and other?) uncertainty circle
+    float   hdop;                   // horizontal dilution of precision (GPS quality metric), < 2.0 is fairly good
+    int16_t gps_fix_type;           // see gps_fix_type enum (number will indicate whether gps receiver is in Trimble RTX corrected mode, etc.)
+    int16_t filter_flags;           // 
+    int16_t alarm_flags;            // 
+}

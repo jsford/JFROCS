@@ -1,0 +1,40 @@
+package exlcm;
+
+struct obstacle_t {
+	int16_t entity_type;
+	int8_t version_n;    
+	int8_t valid_f;                     // whether author thinks entity is currently valid
+    	int64_t  ref_n;                 // cookie used between user code and plumbing code
+    	double   timestamp_sec;         // when authored (entire data structure, some sub-groups of data have their own timestamps)
+
+	int8_t rolling_count; //will be same for each time frame
+	int8_t num_of_msg; //the total number of message will be transmitted in a burst, usually it will be a fix number, e.g. 40 or 64 in different frames
+	int8_t msg_index_number; //message sequence number, 0: first message, num_of_msg-1: the last message in a burst transmission
+
+    	int32_t id;
+    	int8_t quality;
+	int8_t objtype;
+    	float width_m;                  // bounding box size
+    	float length_m;                 // ...
+    	float height_m;                 // ...
+    	float x_m;                      // center of bounding box
+    	float y_m;                      // center of bounding box
+	float velocity_mps;
+    	float phi_rad;
+	float omega_rps;
+	float closest_x_m;
+	float closest_y_m;
+	int32_t sensorsource_flags; //0:LRR, 1:SRR,2:LUX,3:LIDAR,4:FCM,5:LGE,6:SURCAM,7:LONCAM,8:SURROUNDVISION
+	int8_t dynamic_property;
+	int8_t rel_lane;
+	int16_t tracking_cycles;
+	float long_accel_mpss;
+	float rel_vel_mps;
+	float rel_phi_rad;
+	float rel_omega_rps;
+	int16_t convex_hull_npts;
+    stixel_t convex_hull_point[convex_hull_npts]; // max 32
+	int16_t stixel_npts;
+	stixel_t stixel_point[stixel_npts];           //max 132?
+}    
+     

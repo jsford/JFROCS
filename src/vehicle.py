@@ -3,6 +3,11 @@ from PIL import Image, ImageTk
 from math import *
 from draw import *
 
+import lcm
+from LCM.exlcm import *
+import select
+
+
 class Vehicle:
     def __init__(self, name, texture_fname, pos=(0,0), theta=0, width_m=1.75, lightweight=False):
         self.name = name
@@ -12,17 +17,26 @@ class Vehicle:
         self.texture = Image.open(texture_fname) 
         self.lightweight = lightweight
 
+        self.lcm = lcm.LCM()
+        self.kinematics_sub = self.lcm.subscribe("POSITIONPOSE", self.handle_positionpose_msg)
+
 
         # Static variables for render function
         self.render_old_zl = -1
         self.render_old_theta = float('nan')
     
-    # Call the planner and update the car's position and heading here
+    def handle_positionpose_msg(self, channel, data):
+        msg = positionpose_t.decode(data)
+        self.pos = (msg.east_m, msg.north_m)
+        self.theta = msg.yaw_rad - 3.1415926535/2.0
+
+    # Check for a kinematics_t or position_pose message and update the vehicle state
     def step(self):
-        for i in range(1, 100000):
-            x = i/134134.0
-        self.theta += 5*pi/180.0 
-        
+        timeout = 0.01
+        rfds, wfds, efds = select.select([self.lcm.fileno()], [], [], timeout)
+        if rfds:
+            self.lcm.handle()
+
     def render(self, canvas):
         zl = canvas.zl
         canvas.delete(self.name)

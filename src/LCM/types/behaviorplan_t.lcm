@@ -1,0 +1,28 @@
+package exlcm;
+
+
+struct behaviorplan_t
+{
+	int16_t entity_type;            //
+	int8_t version_n;               //
+	int8_t valid_f;                 //
+	double timestamp_sec;           //
+	int64_t ref_n;                  //
+	int16_t master_state;           //enum
+	int16_t state_goal;             //enum
+	int16_t active_maneuver;        //enum
+	int16_t behavior_type;          //Added in July 2016
+	int16_t left_lane_intention;    //enum
+	int16_t right_lane_intention;   //enum
+	float lane_change_zone_start_m;
+	float lane_change_zone_end_m;
+	float speed_target_mps;         // Important: Achieve this speed
+	float speed_target_distance_m;  // Important: at this point. If negative, disregard.
+	float lateral_accel_lim_mpss;
+	float longitudinal_accel_lim_mpss;
+	float longitudinal_decel_lim_mpss;
+	boolean trajectory_rejected_by_controller;
+	boolean cib_active_f;
+	boolean manual_override_f;
+	boolean reroute_needed_f;	
+}

@@ -1,0 +1,31 @@
+//LastUpdated:07/12/2016; Message Size:1282B
+package exlcm;
+
+struct scenario_t 
+{
+
+int16_t entity_type;
+int8_t version_n;
+int8_t valid_f;
+double timestamp_sec;
+int64_t ref_n;
+int16_t current_path_step_n;
+int64_t current_planned_path_laneseg_uid;
+int16_t lane_usage_n;
+
+boolean lane_change_is_active_f;
+boolean merge_is_active_f;
+boolean turn_is_active_f;
+boolean yielding_is_active_f;
+
+int16_t left_boundary_point_count;
+int16_t right_boundary_point_count;
+int16_t center_point_count;
+
+boundarypoint_t left_boundary_point[left_boundary_point_count];// Max 40 points
+boundarypoint_t right_boundary_point[right_boundary_point_count];// Max 40 points 
+boundarypoint_t center_point[center_point_count];// Max 40 points
+int16_t default_trajectory_point_count;
+trajectorypoint_t default_trajectory_point[default_trajectory_point_count];// Max 40 points
+}
+

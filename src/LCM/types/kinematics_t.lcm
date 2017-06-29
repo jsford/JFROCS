@@ -1,0 +1,27 @@
+package exlcm;
+// MAL 2016-03-17
+
+struct kinematics_t
+{
+//  common elements
+    int16_t  entity_type;           // enum for data entity type, make it const?
+    int8_t   version_n;             // version number of data entity type
+    boolean  valid_f;               // whether author thinks entity is currently valid
+    int64_t  ref_n;                 // cookie used between user code and plumbing code
+    double   timestamp_sec;         // when authored (entire data structure, some sub-groups of data have their own timestamps)
+
+// IMU Data elements
+
+    float    speed_mps;             // component of velocity vector in vehicle's forward direction (X), in meters/sec
+    float    yaw_rad;               // Yaw (azimuth) orientation, zero if vehicle pointing toward absolute East, +pi/2 if pointing to absolute North
+    double   odometer_m;            // How far the vehicle has traveled in the forward direction (X)
+    int8_t   moving_fwd_f;          // 1 = yes moving forward or stationary, 0 = reverse motion
+    int8_t   traction_good_f;       // 1 = yes traction is good, 0 = no, vehicle slip detected recently
+    float    lat_accel_mpss;        // lateral acceleration (positive if toward vehicle's left side)
+    float    lon_accel_mpss;        // longitudinal acceleration (positive toward forward direction)       
+    float    vert_accel_mpss;       // vertical acceleration (positive if toward local up)
+    float    yawrate_rps;           // Rate of angular change, radians per second, positive is spinning to vehicle's left
+    float    pitchrate_rps;         // Rate of angular change, radians per second, positive is pitching downward?
+    float    rollrate_rps;          // Rate of angular change, radians per second, positive is rolling left side higher
+    float    turning_radius_m;      // Positive when turning center to left of vehicle forward direction
+}

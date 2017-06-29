@@ -1,0 +1,18 @@
+package exlcm;
+
+struct trajectoryplan_t 
+{
+//  common elements
+    int16_t  entity_type;           // enum for data entity type, make it const?
+    int8_t   version_n;             // version number of data entity type
+    boolean  valid_f;               // whether author thinks entity is currently valid
+    int64_t  ref_n;                 // cookie used between user code and plumbing code
+    double   timestamp_sec;         // when authored (entire data structure, some sub-groups of data have their own timestamps)    
+    double position_timestamp_sec;   // timestamp when vehicle center position eas considered valid
+
+    // trajectory elements    
+
+    int16_t  valid_waypoint_count;   // number of valid trajectory points 	
+    trajectorywaypoint_t waypoint[70];	  // 0.1 seconds apart from eachother
+}
+

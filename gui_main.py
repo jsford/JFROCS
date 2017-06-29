@@ -12,14 +12,16 @@ from src import *
 
 
 class JFROCS_gui:
-    def __init__(self, width, height, rndf_fname):
+    def __init__(self, width, height):
 
-        # Init the vehicle(s)
-        self.vehicle = vehicle.Vehicle('ego', 'resources/car_small.png', pos=(0,0))
+        # Init the vehicle
+        self.vehicle = vehicle.Vehicle('ego', './resources/car_small.png', pos=(0,0))
+        # Init the obstacle list
+        self.obstacles = []
 
         # Init the TK Window
         self.top = Tk()
-        self.top.title("Motion Planner Visualization")
+        self.top.title("Motion Planner Visualizer")
         self.width = width
         self.height = height
 
@@ -28,32 +30,10 @@ class JFROCS_gui:
         
         self.top.configure(background=draw.CHARCOAL)
 
-        # Create frame for buttons
-        self.button_frame = Frame(self.top, width = 100, height = 200, bg=draw.CHARCOAL)
-        self.button_frame.grid(row=1, column=0, pady = (150,0), sticky='nsew')
-
-        # Add Start Button
-        self.start_button = Button(self.button_frame, text = "Start", command = self.start_callback,
-                                   background=draw.PASTEL_GREEN, borderwidth=0, highlightthickness=0)
-        self.start_button.pack(pady=(0,5))
-        self.start_button.config( height=1, width=4);
-
-        # Add Pause Button
-        self.pause_button = Button(self.button_frame, text = "Pause", command = self.pause_callback,
-                                   background=draw.SKY_BLUE, borderwidth=0, highlightthickness=0)
-        self.pause_button.pack(pady=5)
-        self.pause_button.config( height=1, width=4);
-
-        # Add Stop Button
-        self.stop_button = Button(self.button_frame, text = "Stop", command = self.stop_callback,
-                                  background=draw.PASTEL_RED, borderwidth=0, highlightthickness=0)
-        self.stop_button.pack(pady=(5,0))
-        self.stop_button.config( height=1, width=4);
-
         # Add Canvas
         self.canvas = Canvas(self.top, width=814, height=440,
                              background=draw.LIGHT_GREY, borderwidth=0, highlightthickness=0)
-        self.canvas.grid(row=1, column=1, columnspan=1, rowspan=2, pady=(30, 10), padx=(10,30),
+        self.canvas.grid(row=1, column=1, columnspan=1, rowspan=2, pady=(30, 30), padx=(30,30),
                          ipadx=30, ipady=30, sticky='nsew')
         self.canvas.bind("<ButtonPress-1>", self.move_start)
         self.canvas.bind("<B1-Motion>", self.move_move)
@@ -72,28 +52,8 @@ class JFROCS_gui:
         # Add Cursor Coord. Display
         self.mouse_coord_disp = Text(self.top, height=1, width=20, borderwidth=0, highlightthickness=0,
                               background=draw.LIGHT_GREY)
-        self.mouse_coord_disp.grid(row=1, column=1, sticky='se', pady=(0,10), padx=(0,30))
-        
+        self.mouse_coord_disp.grid(row=1, column=1, sticky='se', pady=(0,30), padx=(0,30))
         self.canvas.bind("<Motion>", self.mouse_move)
-
-        # Add text display box
-        self.text_out = Text(self.top, height=10, width=116, borderwidth=0, highlightthickness=0,
-                             background=draw.LIGHT_GREY)
-        self.text_out.insert('3.0', 'Jordan Ford Racing Operator Control Station\n', 'WHITE')
-        self.text_out.tag_config("WHITE", foreground='white')
-        self.text_out.grid(row=3, column=1, columnspan=1, rowspan=2, padx=(10,30), pady=(0,30), sticky='ew')
-
-        # Create frame for graphs
-        #self.graph_frame = Frame(self.top, width=200, height=600, bg=CHARCOAL)
-        #self.graph_frame.grid(row=1, column=2, rowspan=4, pady=30, padx=(0,30), sticky='nsew')
-
-        # Add Jeep Logo (Just for fun!)
-        jeep_logo = Image.open("resources/jeep_logo.png")
-        jeep_logo  = jeep_logo.resize((100,100), Image.ANTIALIAS)
-        jeep_logo = ImageTk.PhotoImage(jeep_logo)
-        self.logo = Label(self.top, image=jeep_logo, borderwidth=0)
-        self.logo.image = jeep_logo
-        self.logo.grid(row=4,column=0,padx=(10,0))
 
         # Handle resizing
         self.top.grid_rowconfigure(1, weight=2)
@@ -144,7 +104,6 @@ class JFROCS_gui:
                                                +format(draw.pix2m(my),'.2f')+")", "STYLE")
         self.mouse_coord_disp.tag_config("STYLE", foreground='white', justify='right')
         
-
     # Zoom using mouse scrollwheel 
     def zoomerP(self,event):
         MAX_ZOOM = 3
@@ -169,26 +128,11 @@ class JFROCS_gui:
 
         self.canvas.old_zl = self.canvas.zl
         self.canvas.zl /= 1.1 
-    
-    def start_callback(self):
-        pass
-    def pause_callback(self):
-        pass
-    def stop_callback(self):
-        pass
 
 
 if __name__ == "__main__":
 
-    if len(sys.argv) == 2:
-        rndf_fname = sys.argv[1]
-    elif len(sys.argv) == 1:
-        rndf_fname = "scenarios/SchenleyNonStopClockwise/RNDF.txt"
-    else:
-        print "Usage: ./gui_main <rndf>"
-        exit()
-    
-    jfrocs_gui = JFROCS_gui(960, 700, rndf_fname)
+    jfrocs_gui = JFROCS_gui(960, 700)
     jfrocs_gui.mainloop() 
 
 
