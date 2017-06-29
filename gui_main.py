@@ -1,67 +1,58 @@
 #!/usr/bin/python
 
 from Tkinter import *
+from PIL import Image, ImageTk
 import tkMessageBox as messagebox
 from math import *
 import time
 import random
 import sys
 
-from draw_funcs import *
-from  planner import *
-from vehicle import *
+from src import *
 
 
 class JFROCS_gui:
     def __init__(self, width, height, rndf_fname):
-        # Init the RoadWorldModel
-        self.rwm = RNDF(rndf_fname)
 
         # Init the vehicle(s)
-        v1 = Vehicle("ego", self.rwm, pos=(0,0))
-        v2 = Vehicle("bonehead", self.rwm, pos=(100,0), theta=pi/4)
+        self.vehicle = vehicle.Vehicle('ego', 'resources/car_small.png', pos=(0,0))
 
-        self.vehicles = [v1, v2]
-
-        # Load car model
-        self.car_original = Image.open("car_small.png")
-      
         # Init the TK Window
         self.top = Tk()
-        self.top.title("Jordan Ford Racing")
+        self.top.title("Motion Planner Visualization")
         self.width = width
         self.height = height
 
         win_size_str = str(width) + "x" + str(height)
         self.top.geometry(win_size_str)
         
-        self.top.configure(background=CHARCOAL)
+        self.top.configure(background=draw.CHARCOAL)
 
         # Create frame for buttons
-        self.button_frame = Frame(self.top, width = 100, height = 200, bg=CHARCOAL)
+        self.button_frame = Frame(self.top, width = 100, height = 200, bg=draw.CHARCOAL)
         self.button_frame.grid(row=1, column=0, pady = (150,0), sticky='nsew')
 
         # Add Start Button
         self.start_button = Button(self.button_frame, text = "Start", command = self.start_callback,
-                                   background=PASTEL_GREEN, borderwidth=0, highlightthickness=0)
+                                   background=draw.PASTEL_GREEN, borderwidth=0, highlightthickness=0)
         self.start_button.pack(pady=(0,5))
         self.start_button.config( height=1, width=4);
 
         # Add Pause Button
         self.pause_button = Button(self.button_frame, text = "Pause", command = self.pause_callback,
-                                   background=SKY_BLUE, borderwidth=0, highlightthickness=0)
+                                   background=draw.SKY_BLUE, borderwidth=0, highlightthickness=0)
         self.pause_button.pack(pady=5)
         self.pause_button.config( height=1, width=4);
 
         # Add Stop Button
         self.stop_button = Button(self.button_frame, text = "Stop", command = self.stop_callback,
-                                  background=PASTEL_RED, borderwidth=0, highlightthickness=0)
+                                  background=draw.PASTEL_RED, borderwidth=0, highlightthickness=0)
         self.stop_button.pack(pady=(5,0))
         self.stop_button.config( height=1, width=4);
 
         # Add Canvas
         self.canvas = Canvas(self.top, width=814, height=440,
-                             background=LIGHT_GREY, borderwidth=0, highlightthickness=0)
+                             background=draw.LIGHT_GREY, borderwidth=0, highlightthickness=0)
         self.canvas.grid(row=1, column=1, columnspan=1, rowspan=2, pady=(30, 10), padx=(10,30),
                          ipadx=30, ipady=30, sticky='nsew')
         self.canvas.bind("<ButtonPress-1>", self.move_start)
@@ -75,19 +66,19 @@ class JFROCS_gui:
 
         # Add Freq. Display
         self.freq_disp = Text(self.top, height=1, width=7, borderwidth=0, highlightthickness=0,
-                              background=LIGHT_GREY)
+                              background=draw.LIGHT_GREY)
         self.freq_disp.grid(row=1, column=1, sticky='ne', pady=(30,0), padx=(0,30))
 
         # Add Cursor Coord. Display
         self.mouse_coord_disp = Text(self.top, height=1, width=20, borderwidth=0, highlightthickness=0,
-                              background=LIGHT_GREY)
+                              background=draw.LIGHT_GREY)
         self.mouse_coord_disp.grid(row=1, column=1, sticky='se', pady=(0,10), padx=(0,30))
         
         self.canvas.bind("<Motion>", self.mouse_move)
 
         # Add text display box
         self.text_out = Text(self.top, height=10, width=116, borderwidth=0, highlightthickness=0,
-                             background=LIGHT_GREY)
+                             background=draw.LIGHT_GREY)
         self.text_out.insert('3.0', 'Jordan Ford Racing Operator Control Station\n', 'WHITE')
         self.text_out.tag_config("WHITE", foreground='white')
         self.text_out.grid(row=3, column=1, columnspan=1, rowspan=2, padx=(10,30), pady=(0,30), sticky='ew')
@@ -97,7 +88,7 @@ class JFROCS_gui:
         #self.graph_frame.grid(row=1, column=2, rowspan=4, pady=30, padx=(0,30), sticky='nsew')
 
         # Add Jeep Logo (Just for fun!)
-        jeep_logo = Image.open("jeep_logo.png")
+        jeep_logo = Image.open("resources/jeep_logo.png")
         jeep_logo  = jeep_logo.resize((100,100), Image.ANTIALIAS)
         jeep_logo = ImageTk.PhotoImage(jeep_logo)
         self.logo = Label(self.top, image=jeep_logo, borderwidth=0)
@@ -116,12 +107,11 @@ class JFROCS_gui:
     # Calls the planner and reschedules itself
     def execute(self):
         tic = time.clock()
-        for v in self.vehicles:
-            v.step()
+        self.vehicle.step()
         toc = time.clock()
 
         self.freq_disp.delete('1.0', END)
-        self.freq_disp.insert('1.0', format(1.0/(toc-tic), '.0f')+" Hz\n", "STYLE")
+        self.freq_disp.insert('1.0', format(1.0/(max(toc-tic, 0.01)), '.0f')+" Hz\n", "STYLE")
         self.freq_disp.tag_config("STYLE", foreground='white', justify='right')
 
         self.render()
@@ -135,14 +125,8 @@ class JFROCS_gui:
         canvas_h = self.canvas.winfo_height()
         if (canvas_w == 0 and canvas_h == 0): return
 
-        # Render the rwm
-        self.rwm.render(self.canvas)
-
-        # Render the vehicles
-        #for v in self.vehicles:
-        #    v.render(self.canvas)
-        self.vehicles[0].render(self.canvas)
-        self.vehicles[1].render(self.canvas)
+        # Render the vehicle
+        self.vehicle.render(self.canvas)
 
     # Click and drag the canvas using the mouse
     def move_start(self, event):
@@ -152,12 +136,12 @@ class JFROCS_gui:
 
     # Update the current mouse coordinates on the canvas
     def mouse_move(self, event):
-        mx = screen2world_x(self.canvas, self.canvas.canvasx(event.x))
-        my = screen2world_y(self.canvas, self.canvas.canvasy(event.y))
+        mx = draw.screen2world_x(self.canvas, self.canvas.canvasx(event.x))
+        my = draw.screen2world_y(self.canvas, self.canvas.canvasy(event.y))
 
         self.mouse_coord_disp.delete('1.0', END)
-        self.mouse_coord_disp.insert('1.0', "("+format(pix2m(mx),'.2f')+", "
-                                               +format(pix2m(my),'.2f')+")", "STYLE")
+        self.mouse_coord_disp.insert('1.0', "("+format(draw.pix2m(mx),'.2f')+", "
+                                               +format(draw.pix2m(my),'.2f')+")", "STYLE")
         self.mouse_coord_disp.tag_config("STYLE", foreground='white', justify='right')
         
 

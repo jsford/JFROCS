@@ -1,4 +1,4 @@
-from draw_funcs import *
+from draw import *
 
 class Obstacle(object):
     def __init__(self, cp, color='red'):
