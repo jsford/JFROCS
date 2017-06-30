@@ -1,124 +1,62 @@
-#!/usr/bin/python
+#! /usr/bin/python
 
-from Tkinter import *
-from PIL import Image, ImageTk
-import tkMessageBox as messagebox
-from math import *
-import time
-import random
-import sys
+import pygame
+from pygame.locals import *
 
-from src import world
+from OpenGL.GL import *
+from OpenGL.GLU import *
+
 from src import draw
+from src import world
 
+display = (1280, 854)
 
-class JFROCS_gui:
-    def __init__(self, width, height):
+zoom = 50
+min_z = 1
+max_z = 100.0
 
-        self.world = world.World()
+def initGL():
+    # fovy, aspect, znear, zfar
+    gluPerspective(45, (display[0]/display[1]), min_z, max_z+1)
+    glClearColor(*draw.LIGHT_GREY)
 
-        # Init the TK Window
-        self.top = Tk()
-        self.top.title("Motion Planner Visualizer")
-        self.width = width
-        self.height = height
+def main():
+    global zoom
 
-        win_size_str = str(width) + "x" + str(height)
-        self.top.geometry(win_size_str)
-        
-        self.top.configure(background=draw.CHARCOAL)
+    pygame.init()
+    pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
+    initGL()
 
-        # Add Canvas
-        self.canvas = Canvas(self.top, width=814, height=440,
-                             background=draw.LIGHT_GREY, borderwidth=0, highlightthickness=0)
-        self.canvas.grid(row=1, column=1, columnspan=1, rowspan=2, pady=(30, 30), padx=(30,30),
-                         ipadx=30, ipady=30, sticky='nsew')
-        self.canvas.bind("<ButtonPress-1>", self.move_start)
-        self.canvas.bind("<B1-Motion>", self.move_move)
-        self.canvas.bind("<Button-4>", self.zoomerM)
-        self.canvas.bind("<Button-5>", self.zoomerP)
-        self.canvas.origin = (814/2, 440/2)
-        self.canvas.old_zl = 0.0
-        self.canvas.zl = 1.0
-        self.canvas.zoom_center = (self.canvas.winfo_width()/2, self.canvas.winfo_height()/2)
+    planner_world = world.World()
 
-        # Add Cursor Coord. Display
-        self.mouse_coord_disp = Text(self.top, height=1, width=20, borderwidth=0, highlightthickness=0,
-                              background=draw.LIGHT_GREY)
-        self.mouse_coord_disp.grid(row=1, column=1, sticky='se', pady=(0,30), padx=(0,30))
-        self.canvas.bind("<Motion>", self.mouse_move)
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 4:
+                    zoom *= 1.1 
+                    if zoom > max_z:
+                        zoom = max_z
+                if event.button == 5:
+                    zoom /= 1.1
+                    if zoom < min_z:
+                        zoom = min_z
+                    
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
 
-        # Handle resizing
-        self.top.grid_rowconfigure(1, weight=2)
-        self.top.grid_columnconfigure(1, weight=2)
+        glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 
-    # Run the tk mainloop.
-    def mainloop(self):
-        self.top.after(0, self.execute)
-        self.top.mainloop();
+        glPushMatrix()
+        glTranslatef(0.0, 0.0, -zoom)
 
-    # Calls the planner and reschedules itself
-    def execute(self):
+        planner_world.process()
+        planner_world.render() 
 
-        self.world.step()
-        self.render()
+        glPopMatrix()
 
-        self.top.after(1, self.execute)
+        pygame.display.flip()
+        pygame.time.wait(10)
 
-    # Is called by the planner to draw the world 
-    def render(self):
-        # Get canvas dimensions. Quit if it's 0x0
-        canvas_w = self.canvas.winfo_width()
-        canvas_h = self.canvas.winfo_height()
-        if (canvas_w == 0 and canvas_h == 0): return
-
-        self.world.render(self.canvas)
-
-    # Click and drag the canvas using the mouse
-    def move_start(self, event):
-        self.canvas.scan_mark(event.x, event.y)
-    def move_move(self, event):
-        self.canvas.scan_dragto(event.x, event.y, gain=1)
-
-    # Update the current mouse coordinates on the canvas
-    def mouse_move(self, event):
-        mx = draw.screen2world_x(self.canvas, self.canvas.canvasx(event.x))
-        my = draw.screen2world_y(self.canvas, self.canvas.canvasy(event.y))
-
-        self.mouse_coord_disp.delete('1.0', END)
-        self.mouse_coord_disp.insert('1.0', "("+format(draw.pix2m(mx),'.2f')+", "
-                                               +format(draw.pix2m(my),'.2f')+")", "STYLE")
-        self.mouse_coord_disp.tag_config("STYLE", foreground='white', justify='right')
-        
-    # Zoom using mouse scrollwheel 
-    def zoomerP(self,event):
-        MAX_ZOOM = 3
-        if (self.canvas.zl >= MAX_ZOOM): self.canvas.zl = MAX_ZOOM; return;
-
-        (mx, my) = (self.canvas.canvasx(event.x), self.canvas.canvasy(event.y))
-        # Move the origin to a new point calculated from the zoom center
-        self.canvas.origin = (self.canvas.origin[0] - (mx-self.canvas.origin[0])*0.1,
-                              self.canvas.origin[1] - (my-self.canvas.origin[1])*0.1)
-
-        self.canvas.old_zl = self.canvas.zl
-        self.canvas.zl *= 1.1
-
-    def zoomerM(self,event):
-        MIN_ZOOM = 0.01 
-        if (self.canvas.zl <= MIN_ZOOM): self.canvas.zl = MIN_ZOOM; return;
-
-        (mx, my) = (self.canvas.canvasx(event.x), self.canvas.canvasy(event.y))
-        # Move the origin to a new point calculated from the zoom center
-        self.canvas.origin = (mx - (mx-self.canvas.origin[0])/1.1,
-                              my - (my-self.canvas.origin[1])/1.1)
-
-        self.canvas.old_zl = self.canvas.zl
-        self.canvas.zl /= 1.1 
-
-
-if __name__ == "__main__":
-
-    jfrocs_gui = JFROCS_gui(960, 700)
-    jfrocs_gui.mainloop() 
-
-
+if __name__ == '__main__':
+    main()
