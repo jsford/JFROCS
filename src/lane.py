@@ -28,28 +28,25 @@ class Lane:
         self.render_line(self.left, PASTEL_RED)
         self.render_line(self.center, SKY_BLUE)
         self.render_line(self.right, PASTEL_RED)
-        self.render_line(self.traj, PASTEL_YELLOW)
+        #self.render_line(self.traj, PASTEL_YELLOW)
 
     def render_line(self, line, color=SKY_BLUE, tag='line'):
 
         if len(line) > 0:
 
-            glPushMatrix()
             glColor(*color)
 
-            old_pt = (line[0].x_cm/100.0, line[0].y_cm/100.0)
+            old_pt = (line[0].x_cm/100.0, -line[0].y_cm/100.0)
             for b in range(1, len(line)):
             
                 pt = (line[b].x_cm/100.0,
-                      line[b].y_cm/100.0)
+                      -line[b].y_cm/100.0)
 
+                # X,Y are switched so that 0 deg rotation
+                # is North (up the screen)
                 glBegin(GL_LINE_STRIP)
-                glVertex2f(old_pt[0], old_pt[1])
-                glVertex2f(pt[0], pt[1])
+                glVertex2f(old_pt[1], old_pt[0])
+                glVertex2f(pt[1], pt[0])
                 glEnd()
 
                 old_pt = pt
-
-            glPopMatrix()
-                
-

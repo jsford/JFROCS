@@ -13,7 +13,7 @@ class Vehicle:
 
     def get_pos(self):
         return self.pos
-
+    
     def get_heading(self):
         return self.theta_rad
 
@@ -22,11 +22,11 @@ class Vehicle:
         # Make the car twice as long as it is wide
         (hw, hh) = (self.width_m/2.0, self.width_m)
 
-        p1 = ( hw,  hh)
-        p2 = (-hw,  hh)
-        p3 = (-hw, -hh)
-        p4 = ( hw, -hh)
-        p5 = (  0,  hh)
+        p1 = ( hw,  hh)     # Top right
+        p2 = (-hw,  hh)     # Top left
+        p3 = (-hw, -hh)     # Bottom right
+        p4 = ( hw, -hh)     # Bottom left)
+        p5 = (  0,  hh)     # Top Middle
 
         glColor4f(*PASTEL_BLUE)
     
@@ -42,8 +42,7 @@ class Vehicle:
         glVertex2f(*p3)     # Bottom left
         glVertex2f(*p4)     # Bottom right
         glVertex2f(*p5)     # Top middle
-        
         glEnd()
-
+        
         return
 

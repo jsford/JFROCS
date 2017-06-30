@@ -13,11 +13,11 @@ display = (1280, 854)
 
 zoom = 50
 min_z = 1
-max_z = 100.0
+max_z = 500.0
 
 def initGL():
     # fovy, aspect, znear, zfar
-    gluPerspective(45, (display[0]/display[1]), min_z, max_z+1)
+    gluPerspective(45, display[0]/float(display[1]), min_z, max_z+1)
     glClearColor(*draw.LIGHT_GREY)
 
 def main():
@@ -25,6 +25,7 @@ def main():
 
     pygame.init()
     pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
+    pygame.display.set_caption("Motion Planning")
     initGL()
 
     planner_world = world.World()
@@ -51,7 +52,7 @@ def main():
         glTranslatef(0.0, 0.0, -zoom)
 
         planner_world.process()
-        planner_world.render() 
+        planner_world.render(-zoom) 
 
         glPopMatrix()
 
