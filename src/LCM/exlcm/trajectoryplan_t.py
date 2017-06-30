@@ -22,7 +22,7 @@ class trajectoryplan_t(object):
         self.timestamp_sec = 0.0
         self.position_timestamp_sec = 0.0
         self.valid_waypoint_count = 0
-        self.waypoint = [ exlcm.trajectorywaypoint_t() for dim0 in range(70) ]
+        self.waypoint = [ trajectorywaypoint_t() for dim0 in range(70) ]
 
     def encode(self):
         buf = BytesIO()
@@ -33,7 +33,7 @@ class trajectoryplan_t(object):
     def _encode_one(self, buf):
         buf.write(struct.pack(">hbbqddh", self.entity_type, self.version_n, self.valid_f, self.ref_n, self.timestamp_sec, self.position_timestamp_sec, self.valid_waypoint_count))
         for i0 in range(70):
-            assert self.waypoint[i0]._get_packed_fingerprint() == exlcm.trajectorywaypoint_t._get_packed_fingerprint()
+            assert self.waypoint[i0]._get_packed_fingerprint() == trajectorywaypoint_t._get_packed_fingerprint()
             self.waypoint[i0]._encode_one(buf)
 
     def decode(data):
@@ -53,7 +53,7 @@ class trajectoryplan_t(object):
         self.ref_n, self.timestamp_sec, self.position_timestamp_sec, self.valid_waypoint_count = struct.unpack(">qddh", buf.read(26))
         self.waypoint = []
         for i0 in range(70):
-            self.waypoint.append(exlcm.trajectorywaypoint_t._decode_one(buf))
+            self.waypoint.append(trajectorywaypoint_t._decode_one(buf))
         return self
     _decode_one = staticmethod(_decode_one)
 
@@ -61,7 +61,7 @@ class trajectoryplan_t(object):
     def _get_hash_recursive(parents):
         if trajectoryplan_t in parents: return 0
         newparents = parents + [trajectoryplan_t]
-        tmphash = (0xc94196a1b86d7dc4+ exlcm.trajectorywaypoint_t._get_hash_recursive(newparents)) & 0xffffffffffffffff
+        tmphash = (0xc94196a1b86d7dc4+ trajectorywaypoint_t._get_hash_recursive(newparents)) & 0xffffffffffffffff
         tmphash  = (((tmphash<<1)&0xffffffffffffffff)  + (tmphash>>63)) & 0xffffffffffffffff
         return tmphash
     _get_hash_recursive = staticmethod(_get_hash_recursive)

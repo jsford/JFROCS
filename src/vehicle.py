@@ -3,11 +3,6 @@ from PIL import Image, ImageTk
 from math import *
 from draw import *
 
-import lcm
-from LCM.exlcm import *
-import select
-
-
 class Vehicle:
     def __init__(self, name, texture_fname, pos=(0,0), theta=0, width_m=1.75, lightweight=False):
         self.name = name

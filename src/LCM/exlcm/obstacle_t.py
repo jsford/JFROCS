@@ -58,11 +58,11 @@ class obstacle_t(object):
     def _encode_one(self, buf):
         buf.write(struct.pack(">hbbqdbbbibbffffffffffibbhffffh", self.entity_type, self.version_n, self.valid_f, self.ref_n, self.timestamp_sec, self.rolling_count, self.num_of_msg, self.msg_index_number, self.id, self.quality, self.objtype, self.width_m, self.length_m, self.height_m, self.x_m, self.y_m, self.velocity_mps, self.phi_rad, self.omega_rps, self.closest_x_m, self.closest_y_m, self.sensorsource_flags, self.dynamic_property, self.rel_lane, self.tracking_cycles, self.long_accel_mpss, self.rel_vel_mps, self.rel_phi_rad, self.rel_omega_rps, self.convex_hull_npts))
         for i0 in range(self.convex_hull_npts):
-            assert self.convex_hull_point[i0]._get_packed_fingerprint() == exlcm.stixel_t._get_packed_fingerprint()
+            assert self.convex_hull_point[i0]._get_packed_fingerprint() == stixel_t._get_packed_fingerprint()
             self.convex_hull_point[i0]._encode_one(buf)
         buf.write(struct.pack(">h", self.stixel_npts))
         for i0 in range(self.stixel_npts):
-            assert self.stixel_point[i0]._get_packed_fingerprint() == exlcm.stixel_t._get_packed_fingerprint()
+            assert self.stixel_point[i0]._get_packed_fingerprint() == stixel_t._get_packed_fingerprint()
             self.stixel_point[i0]._encode_one(buf)
 
     def decode(data):
@@ -80,11 +80,11 @@ class obstacle_t(object):
         self.entity_type, self.version_n, self.valid_f, self.ref_n, self.timestamp_sec, self.rolling_count, self.num_of_msg, self.msg_index_number, self.id, self.quality, self.objtype, self.width_m, self.length_m, self.height_m, self.x_m, self.y_m, self.velocity_mps, self.phi_rad, self.omega_rps, self.closest_x_m, self.closest_y_m, self.sensorsource_flags, self.dynamic_property, self.rel_lane, self.tracking_cycles, self.long_accel_mpss, self.rel_vel_mps, self.rel_phi_rad, self.rel_omega_rps, self.convex_hull_npts = struct.unpack(">hbbqdbbbibbffffffffffibbhffffh", buf.read(95))
         self.convex_hull_point = []
         for i0 in range(self.convex_hull_npts):
-            self.convex_hull_point.append(exlcm.stixel_t._decode_one(buf))
+            self.convex_hull_point.append(stixel_t._decode_one(buf))
         self.stixel_npts = struct.unpack(">h", buf.read(2))[0]
         self.stixel_point = []
         for i0 in range(self.stixel_npts):
-            self.stixel_point.append(exlcm.stixel_t._decode_one(buf))
+            self.stixel_point.append(stixel_t._decode_one(buf))
         return self
     _decode_one = staticmethod(_decode_one)
 
@@ -92,7 +92,7 @@ class obstacle_t(object):
     def _get_hash_recursive(parents):
         if obstacle_t in parents: return 0
         newparents = parents + [obstacle_t]
-        tmphash = (0x326add9236ac2a99+ exlcm.stixel_t._get_hash_recursive(newparents)+ exlcm.stixel_t._get_hash_recursive(newparents)) & 0xffffffffffffffff
+        tmphash = (0x326add9236ac2a99+ stixel_t._get_hash_recursive(newparents)+ stixel_t._get_hash_recursive(newparents)) & 0xffffffffffffffff
         tmphash  = (((tmphash<<1)&0xffffffffffffffff)  + (tmphash>>63)) & 0xffffffffffffffff
         return tmphash
     _get_hash_recursive = staticmethod(_get_hash_recursive)

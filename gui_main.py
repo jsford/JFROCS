@@ -42,11 +42,6 @@ class JFROCS_gui:
         self.canvas.zl = 1.0
         self.canvas.zoom_center = (self.canvas.winfo_width()/2, self.canvas.winfo_height()/2)
 
-        # Add Freq. Display
-        self.freq_disp = Text(self.top, height=1, width=7, borderwidth=0, highlightthickness=0,
-                              background=draw.LIGHT_GREY)
-        self.freq_disp.grid(row=1, column=1, sticky='ne', pady=(30,0), padx=(0,30))
-
         # Add Cursor Coord. Display
         self.mouse_coord_disp = Text(self.top, height=1, width=20, borderwidth=0, highlightthickness=0,
                               background=draw.LIGHT_GREY)
@@ -64,17 +59,11 @@ class JFROCS_gui:
 
     # Calls the planner and reschedules itself
     def execute(self):
-        tic = time.clock()
+
         self.world.step()
-        toc = time.clock()
-
-        self.freq_disp.delete('1.0', END)
-        self.freq_disp.insert('1.0', format(1.0/(max(toc-tic, 0.01)), '.0f')+" Hz\n", "STYLE")
-        self.freq_disp.tag_config("STYLE", foreground='white', justify='right')
-
         self.render()
 
-        self.top.after(20, self.execute)
+        self.top.after(1, self.execute)
 
     # Is called by the planner to draw the world 
     def render(self):

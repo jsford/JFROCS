@@ -9,9 +9,9 @@ except ImportError:
     from io import BytesIO
 import struct
 
-import trajectorypoint_t
+from trajectorypoint_t import *
 
-import boundarypoint_t
+from boundarypoint_t import *
 
 class scenario_t(object):
     __slots__ = ["entity_type", "version_n", "valid_f", "timestamp_sec", "ref_n", "current_path_step_n", "current_planned_path_laneseg_uid", "lane_usage_n", "lane_change_is_active_f", "merge_is_active_f", "turn_is_active_f", "yielding_is_active_f", "left_boundary_point_count", "right_boundary_point_count", "center_point_count", "left_boundary_point", "right_boundary_point", "center_point", "default_trajectory_point_count", "default_trajectory_point"]
@@ -47,17 +47,17 @@ class scenario_t(object):
     def _encode_one(self, buf):
         buf.write(struct.pack(">hbbdqhqhbbbbhhh", self.entity_type, self.version_n, self.valid_f, self.timestamp_sec, self.ref_n, self.current_path_step_n, self.current_planned_path_laneseg_uid, self.lane_usage_n, self.lane_change_is_active_f, self.merge_is_active_f, self.turn_is_active_f, self.yielding_is_active_f, self.left_boundary_point_count, self.right_boundary_point_count, self.center_point_count))
         for i0 in range(self.left_boundary_point_count):
-            assert self.left_boundary_point[i0]._get_packed_fingerprint() == exlcm.boundarypoint_t._get_packed_fingerprint()
+            assert self.left_boundary_point[i0]._get_packed_fingerprint() == boundarypoint_t._get_packed_fingerprint()
             self.left_boundary_point[i0]._encode_one(buf)
         for i0 in range(self.right_boundary_point_count):
-            assert self.right_boundary_point[i0]._get_packed_fingerprint() == exlcm.boundarypoint_t._get_packed_fingerprint()
+            assert self.right_boundary_point[i0]._get_packed_fingerprint() == boundarypoint_t._get_packed_fingerprint()
             self.right_boundary_point[i0]._encode_one(buf)
         for i0 in range(self.center_point_count):
-            assert self.center_point[i0]._get_packed_fingerprint() == exlcm.boundarypoint_t._get_packed_fingerprint()
+            assert self.center_point[i0]._get_packed_fingerprint() == boundarypoint_t._get_packed_fingerprint()
             self.center_point[i0]._encode_one(buf)
         buf.write(struct.pack(">h", self.default_trajectory_point_count))
         for i0 in range(self.default_trajectory_point_count):
-            assert self.default_trajectory_point[i0]._get_packed_fingerprint() == exlcm.trajectorypoint_t._get_packed_fingerprint()
+            assert self.default_trajectory_point[i0]._get_packed_fingerprint() == trajectorypoint_t._get_packed_fingerprint()
             self.default_trajectory_point[i0]._encode_one(buf)
 
     def decode(data):
@@ -80,17 +80,17 @@ class scenario_t(object):
         self.left_boundary_point_count, self.right_boundary_point_count, self.center_point_count = struct.unpack(">hhh", buf.read(6))
         self.left_boundary_point = []
         for i0 in range(self.left_boundary_point_count):
-            self.left_boundary_point.append(exlcm.boundarypoint_t._decode_one(buf))
+            self.left_boundary_point.append(boundarypoint_t._decode_one(buf))
         self.right_boundary_point = []
         for i0 in range(self.right_boundary_point_count):
-            self.right_boundary_point.append(exlcm.boundarypoint_t._decode_one(buf))
+            self.right_boundary_point.append(boundarypoint_t._decode_one(buf))
         self.center_point = []
         for i0 in range(self.center_point_count):
-            self.center_point.append(exlcm.boundarypoint_t._decode_one(buf))
+            self.center_point.append(boundarypoint_t._decode_one(buf))
         self.default_trajectory_point_count = struct.unpack(">h", buf.read(2))[0]
         self.default_trajectory_point = []
         for i0 in range(self.default_trajectory_point_count):
-            self.default_trajectory_point.append(exlcm.trajectorypoint_t._decode_one(buf))
+            self.default_trajectory_point.append(trajectorypoint_t._decode_one(buf))
         return self
     _decode_one = staticmethod(_decode_one)
 
@@ -98,7 +98,7 @@ class scenario_t(object):
     def _get_hash_recursive(parents):
         if scenario_t in parents: return 0
         newparents = parents + [scenario_t]
-        tmphash = (0x5b7922952d6bc543+ exlcm.boundarypoint_t._get_hash_recursive(newparents)+ exlcm.boundarypoint_t._get_hash_recursive(newparents)+ exlcm.boundarypoint_t._get_hash_recursive(newparents)+ exlcm.trajectorypoint_t._get_hash_recursive(newparents)) & 0xffffffffffffffff
+        tmphash = (0x5b7922952d6bc543+ boundarypoint_t._get_hash_recursive(newparents)+ boundarypoint_t._get_hash_recursive(newparents)+ boundarypoint_t._get_hash_recursive(newparents)+ trajectorypoint_t._get_hash_recursive(newparents)) & 0xffffffffffffffff
         tmphash  = (((tmphash<<1)&0xffffffffffffffff)  + (tmphash>>63)) & 0xffffffffffffffff
         return tmphash
     _get_hash_recursive = staticmethod(_get_hash_recursive)
